@@ -1,179 +1,134 @@
 import streamlit as st
-
-import streamlit as st
 from datetime import datetime
 
-st.set_page_config(page_title="Nursing Calculator", page_icon="🩺", layout="centered")
+st.set_page_config(page_title="🩺 Nursing Calculator", page_icon="🩺", layout="wide")
 st.title("🩺 Nursing Calculator App")
 st.markdown("A collection of essential nursing calculators.")
 
-# --- Create Tabs ---
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
-    "💊 Drug Dosage", 
-    "🧒 Pediatric Fluids Requirement", 
-    "⚖️ BMI", 
-    "🌞 Neonatal Jaundice",
-    "🍼 Corrected Age",
-    "🍼 Neonate Feeds",
-    "💉 Drug Compatibility",
-    "📊 Vital Signs",
-    "🚰 Urine Output"
-])
+# Initialize session state for navigation
+if "page" not in st.session_state:
+    st.session_state.page = "home"
 
-# --- Tab 1: Pediatric Dose Verification & Dispensing ---
-with tab1:
-    st.subheader("💊 Pediatric Dose Verification & Dispensing Calculator")
-    
-    # --- Patient Info ---
-    st.markdown("<div style='background-color:#E3F2FD; padding:10px; border-radius:10px;'>"
-                "<h4>🧍 Patient Info</h4></div>", unsafe_allow_html=True)
+# --- Homepage with clickable cards ---
+def show_home():
+    st.subheader("Select a Calculator:")
+    col1, col2, col3, col4, col5 = st.columns(5)
+    col6, col7, col8, col9, col10 = st.columns(5)
+
+    calculators = [
+        ("💊 Drug Dosage Verification", "drug_verification"),
+        ("🧴 Dispensing Calculator", "dispensing"),
+        ("🧒 Pediatric Fluids Requirement", "fluids"),
+        ("⚖️ BMI", "bmi"),
+        ("🌞 Neonatal Jaundice", "jaundice"),
+        ("🍼 Corrected Age", "corrected_age"),
+        ("🍼 Neonate Feeds", "neonate_feeds"),
+        ("💉 Drug Compatibility", "compatibility"),
+        ("📊 Vital Signs", "vitals"),
+        ("🚰 Urine Output", "urine_output"),
+    ]
+
+    columns = [col1, col2, col3, col4, col5, col6, col7, col8, col9, col10]
+    for idx, (name, key) in enumerate(calculators):
+        if columns[idx].button(name):
+            st.session_state.page = key
+
+# --- Back button ---
+def back_to_home():
+    if st.button("🏠 Back to Home"):
+        st.session_state.page = "home"
+
+# --- Main App Navigation ---
+if st.session_state.page == "home":
+    show_home()
+
+# ------------------------------
+# 1. Drug Dosage Verification
+# ------------------------------
+elif st.session_state.page == "drug_verification":
+    st.subheader("💊 Pediatric Dose Verification Calculator")
+    back_to_home()
     weight = st.number_input("Enter patient weight (kg):", min_value=0.0, step=0.1, format="%.1f")
-    
-    # --- Medication Info ---
-    st.markdown("<div style='background-color:#BBDEFB; padding:10px; border-radius:10px;'>"
-                "<h4>💊 Medication Info</h4></div>", unsafe_allow_html=True)
-    
     route_selection = st.selectbox("Select Route:", ["PO (Per oral)", "IV (Intravenous)"])
     route = "PO" if route_selection == "PO (Per oral)" else "IV"
-    
+
     medications = {
         "PO": {
-            "Antipyretics": {
-                "Paracetamol": {"min_dose_per_kg": 10, "max_dose_per_kg": 15, "unit": "mg"},
-                "Ibuprofen": {"min_dose_per_kg": 5, "max_dose_per_kg": 10, "unit": "mg"},
-            },
-            "Antibiotics": {
-                "Amoxicillin": {"min_dose_per_kg": 20, "max_dose_per_kg": 40, "unit": "mg"},
-                "Azithromycin": {"min_dose_per_kg": 10, "max_dose_per_kg": 12, "unit": "mg"},
-            }
+            "Antipyretics": {"Paracetamol":{"min_dose_per_kg":10,"max_dose_per_kg":15,"unit":"mg"}},
+            "Antibiotics": {"Amoxicillin":{"min_dose_per_kg":20,"max_dose_per_kg":40,"unit":"mg"}}
         },
         "IV": {
-            "Antibiotics": {
-                "Ceftriaxone": {"min_dose_per_kg": 50, "max_dose_per_kg": 75, "unit": "mg"},
-                "Vancomycin": {"min_dose_per_kg": 10, "max_dose_per_kg": 15, "unit": "mg"},
-            },
-            "Analgesics": {
-                "Morphine": {"min_dose_per_kg": 0.05, "max_dose_per_kg": 0.2, "unit": "mg"},
-                "Fentanyl": {"min_dose_per_kg": 0.001, "max_dose_per_kg": 0.003, "unit": "mg"},
-            }
+            "Antibiotics": {"Ceftriaxone":{"min_dose_per_kg":50,"max_dose_per_kg":75,"unit":"mg"}},
+            "Analgesics": {"Morphine":{"min_dose_per_kg":0.05,"max_dose_per_kg":0.2,"unit":"mg"}}
         }
     }
-    
+
     classification = st.selectbox("Select Classification:", list(medications[route].keys()))
     med = st.selectbox("Select Medication:", list(medications[route][classification].keys()))
     unit = medications[route][classification][med]["unit"]
-    
-    # --- Ordered Dose & Frequency ---
-    ordered_dose = st.number_input(f"Enter ordered dose per administration ({unit}):", min_value=0.0, step=0.1, format="%.2f")
+    ordered_dose = st.number_input(f"Enter ordered dose per administration ({unit}):", min_value=0.0, step=0.1)
     frequency = st.number_input("Enter frequency (times per day):", min_value=1, step=1, value=1)
-    
+
     if st.button("Check Dose"):
         med_info = medications[route][classification][med]
-        min_per_kg = med_info["min_dose_per_kg"]
-        max_per_kg = med_info["max_dose_per_kg"]
-        
-        # Calculations
         dose_per_kg = ordered_dose / weight if weight > 0 else 0
         daily_total = ordered_dose * frequency
         daily_per_kg = daily_total / weight if weight > 0 else 0
-        
-        # Display
         st.info(
-            f"📏 **Recommended per dose:** {min_per_kg} – {max_per_kg} {unit}/kg\n"
-            f"💊 **Ordered per dose:** {dose_per_kg:.2f} {unit}/kg\n"
-            f"🗓 **Ordered daily total:** {daily_per_kg:.2f} {unit}/kg/day"
+            f"📏 Recommended per dose: {med_info['min_dose_per_kg']}–{med_info['max_dose_per_kg']} {unit}/kg\n"
+            f"💊 Ordered per dose: {dose_per_kg:.2f} {unit}/kg\n"
+            f"🗓 Ordered daily total: {daily_per_kg:.2f} {unit}/kg/day"
         )
-        
-        if weight <= 0:
-            st.warning("⚠️ Please enter a valid patient weight to verify dose.")
-        elif dose_per_kg < min_per_kg:
-            st.warning("⚠️ Ordered dose is **below** recommended per-dose range")
-        elif dose_per_kg > max_per_kg:
-            st.warning("⚠️ Ordered dose is **above** recommended per-dose range")
-        else:
-            st.success("✅ Ordered dose is within recommended range")
-    
-    # --- Dispensing Calculation ---
-    st.markdown("<div style='background-color:#C8E6C9; padding:10px; border-radius:10px;'>"
-                "<h4>🧴 Dispensing Calculator</h4></div>", unsafe_allow_html=True)
-    
-    disp_ordered_dose = st.number_input(f"Enter ordered dose ({unit}):", min_value=0.0, step=0.1, format="%.2f", key="disp_dose")
-    concentration = st.number_input(f"Enter concentration of medication ({unit}/ml):", min_value=0.0, step=0.1, format="%.2f")
-    
+
+# ------------------------------
+# 2. Dispensing Calculator
+# ------------------------------
+elif st.session_state.page == "dispensing":
+    st.subheader("🧴 Dispensing Calculator")
+    back_to_home()
+    unit = st.text_input("Medication unit (e.g., mg):", value="mg")
+    disp_ordered_dose = st.number_input(f"Enter ordered dose ({unit}):", min_value=0.0, step=0.1)
+    concentration = st.number_input(f"Enter concentration of medication ({unit}/ml):", min_value=0.0, step=0.1)
     if st.button("Calculate Volume to Dispense"):
         if concentration > 0:
-            volume = disp_ordered_dose / concentration
-            st.success(f"➡️ Dispense: {volume:.2f} ml per dose")
+            st.success(f"➡️ Dispense: {disp_ordered_dose/concentration:.2f} ml per dose")
         else:
             st.warning("⚠️ Please enter a valid concentration")
 
-# --- Tab 2: Pediatric Fluids Requirement ---
-with tab2:
-    st.subheader("🧒 Pediatric Fluids Requirement (Holliday–Segar Method)")
-
-    weight_fluid = st.number_input(
-        "Enter child's weight (kg):", 
-        min_value=0.0, 
-        step=0.1, 
-        format="%.1f", 
-        key="weight_fluid"
-    )
-
+# ------------------------------
+# 3. Pediatric Fluids Requirement
+# ------------------------------
+elif st.session_state.page == "fluids":
+    st.subheader("🧒 Pediatric Fluids Requirement")
+    back_to_home()
+    weight_fluid = st.number_input("Enter child's weight (kg):", min_value=0.0, step=0.1)
     def calculate_fluids(weight):
-        if weight <= 0:
-            return 0
-        elif weight <= 10:
-            return weight * 100
-        elif weight <= 20:
-            return (10 * 100) + (weight - 10) * 50
-        else:
-            return (10 * 100) + (10 * 50) + (weight - 20) * 20
-
-    if st.button("Calculate Fluids Requirement", key="calc_fluids"):
+        if weight <= 10: return weight*100
+        elif weight <= 20: return 1000 + (weight-10)*50
+        else: return 1500 + (weight-20)*20
+    if st.button("Calculate Fluids Requirement"):
         fluids = calculate_fluids(weight_fluid)
-        hourly = fluids / 24 if fluids > 0 else 0
+        st.success(f"Daily: {fluids:.0f} ml/day | Hourly: {fluids/24:.0f} ml/hr")
 
-        st.success(
-            f"💧 **Daily Maintenance Fluids Requirement:** {fluids:.0f} ml/day\n\n"
-            f"⏱️ **Hourly Rate:** {hourly:.0f} ml/hr"
-        )
-
-        st.caption(
-            "👉 Holliday–Segar Method:\n"
-            "- 100 ml/kg/day for the first 10 kg\n"
-            "- 50 ml/kg/day for the next 10 kg (10–20 kg)\n"
-            "- 20 ml/kg/day for each kg above 20 kg"
-        )
-
-    # Side note for age restriction
-    st.info("ℹ️ This calculation applies only to children **older than 28 days** (infants > 1 month).")
-
-# --- Tab 3: BMI Calculator ---
-with tab3:
+# ------------------------------
+# 4. BMI
+# ------------------------------
+elif st.session_state.page == "bmi":
     st.subheader("⚖️ BMI Calculator")
-    height_bmi = st.number_input("Enter height (cm):", min_value=0.0, step=0.1, key="height_bmi")
-    weight_bmi = st.number_input("Enter weight (kg):", min_value=0.0, step=0.1, key="weight_bmi")
+    back_to_home()
+    height_bmi = st.number_input("Height (cm):", min_value=0.0, step=0.1)
+    weight_bmi = st.number_input("Weight (kg):", min_value=0.0, step=0.1)
+    if st.button("Calculate BMI"):
+        if height_bmi>0:
+            bmi = weight_bmi/((height_bmi/100)**2)
+            st.success(f"BMI: {bmi:.1f}")
 
-    if st.button("Calculate BMI", key="calc_bmi"):
-        if height_bmi > 0:
-            bmi = weight_bmi / ((height_bmi / 100) ** 2)
-            st.success(f"Your BMI: {bmi:.1f}")
-            if bmi < 18.5:
-                st.info("Underweight")
-            elif 18.5 <= bmi < 24.9:
-                st.success("Normal weight")
-            elif 25 <= bmi < 29.9:
-                st.warning("Overweight")
-            else:
-                st.error("Obese")
-        else:
-            st.error("Height must be greater than 0.")
-
-
-# --- Tab 4: Neonatal Jaundice ---
-# --- Tab 4: Neonatal Jaundice ---
-with tab4:
-    st.subheader("🌞 Neonatal Jaundice Guidelines")
+# ------------------------------
+# 5. Neonatal Jaundice
+# ------------------------------
+elif st.session_state.page == "jaundice":
+    st.subheader("🌞 Neonatal Jaundice")
+    back_to_home()
     dob = st.date_input("Date of Birth")
     time_of_birth_str = st.text_input("Time of Birth (HH:MM, 24-hour format):", value="00:00")
 
@@ -295,10 +250,13 @@ with tab4:
                     unsafe_allow_html=True
                 )
 
-# --- Tab 5: Corrected Age ---
-with tab5:
-    st.subheader("🍼 Corrected Age / Post Menstrual Age (Preterm Infants)")
 
+# ------------------------------
+# 6. Corrected Age
+# ------------------------------
+elif st.session_state.page == "corrected_age":
+    st.subheader("🍼 Corrected Age / Post Menstrual Age (Preterm Infants)")
+    back_to_home()
     # Date of birth (preterm)
     dob_preterm = st.date_input("Date of Birth (Preterm)", key="dob_preterm")
 
@@ -353,9 +311,13 @@ with tab5:
                 "PMA = gestational age at birth + chronological age."
             )
 
-# --- Tab 6: Neonate Feeds ---
-with tab6:
+
+# ------------------------------
+# 7. Neonate Feeds
+# ------------------------------
+elif st.session_state.page == "neonate_feeds":
     st.subheader("🍼 Neonate Feeds / IV Fluids Calculator")
+    back_to_home()
     weight_neonate = st.number_input("Enter neonate weight (kg):", min_value=0.0, step=0.01, key="ft_weight")
     day_of_life = st.number_input("Enter Day of Life:", min_value=1, max_value=28, step=1, key="ft_day")
     feed_interval = st.radio("Feeding Interval:", ["2-hourly", "3-hourly"], key="ft_interval")
@@ -373,8 +335,13 @@ with tab6:
         st.info(f"Feed Volume per Feed ({feed_interval}): {feed_per_time:.0f} ml")
         st.warning(f"IV Fluids Volume: {iv_fluids:.0f} ml/day")
 
-# --- Tab 7: Drug Compatibility ---
-with tab7:
+
+# ------------------------------
+# 8. Drug Compatibility
+# ------------------------------
+elif st.session_state.page == "compatibility":
+    st.subheader("💉 Drug Compatibility")
+    back_to_home()
     st.subheader("💉 Pediatric Y-Site Drug Compatibility Checker")
     drugs = ["Acetaminophen (Paracetamol)", "Acyclovir", "Amikacin", "Amoxicillin/Clavulanate (Co-amoxiclav)", "Ampicillin", "Ampicillin/Sulbactam (Unasyn)"]
 
@@ -401,8 +368,14 @@ with tab7:
                 st.success(f"✅ {drug1} + {drug2}: {result}")
             else:
                 st.warning(f"⚠️ {drug1} + {drug2}: {result}")
-                
-with tab8:
+               
+
+# ------------------------------
+# 9. Vital Signs
+# ------------------------------
+elif st.session_state.page == "vitals":
+    st.subheader("📊 Vital Signs Reference")
+    back_to_home()
     st.subheader("📋 Vital Signs Checker")
     st.markdown(
         "Key in age and vital signs to check if they are within normal ranges. "
@@ -486,8 +459,12 @@ with tab8:
     else:
         st.info("ℹ️ SBP not checked for this age")
 
-# --- Tab 9: Urine Output ---
-with tab9:
+# ------------------------------
+# 10. Urine Output
+# ------------------------------
+elif st.session_state.page == "urine_output":
+    st.subheader("🚰 Urine Output Calculator")
+    back_to_home()
     st.subheader("🚰 Urine Output Calculator")
 
     age_group = st.radio("Select Age Group:", ["Neonate (<28 days)", "Pediatric (≥28 days)"])

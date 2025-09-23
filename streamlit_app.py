@@ -48,37 +48,83 @@ if st.session_state.page == "home":
 elif st.session_state.page == "drug_verification":
     st.subheader("💊 Pediatric Dose Verification Calculator")
     back_to_home()
+
+    # --- Patient Info ---
     weight = st.number_input("Enter patient weight (kg):", min_value=0.0, step=0.1, format="%.1f")
+
+    # --- Route Selection ---
     route_selection = st.selectbox("Select Route:", ["PO (Per oral)", "IV (Intravenous)"])
     route = "PO" if route_selection == "PO (Per oral)" else "IV"
 
+    # --- Medications Dictionary ---
     medications = {
         "PO": {
-            "Antipyretics": {"Paracetamol":{"min_dose_per_kg":10,"max_dose_per_kg":15,"unit":"mg"}},
-            "Antibiotics": {"Amoxicillin":{"min_dose_per_kg":20,"max_dose_per_kg":40,"unit":"mg"}}
+            "Antipyretics": {
+                "Paracetamol": {"min_dose_per_kg": 10, "max_dose_per_kg": 15, "unit": "mg"},
+                "Ibuprofen": {"min_dose_per_kg": 5, "max_dose_per_kg": 10, "unit": "mg"}
+            },
+            "Antibiotics": {
+                "Amoxicillin": {"min_dose_per_kg": 20, "max_dose_per_kg": 40, "unit": "mg"}
+            }
         },
         "IV": {
-            "Antibiotics": {"Ceftriaxone":{"min_dose_per_kg":50,"max_dose_per_kg":75,"unit":"mg"}},
-            "Analgesics": {"Morphine":{"min_dose_per_kg":0.05,"max_dose_per_kg":0.2,"unit":"mg"}}
+            "Antibiotics": {
+                "Ceftriaxone": {"min_dose_per_kg": 50, "max_dose_per_kg": 75, "unit": "mg"}
+            },
+            "Analgesics": {
+                "Morphine": {"min_dose_per_kg": 0.05, "max_dose_per_kg": 0.2, "unit": "mg"}
+            }
         }
     }
 
+    # --- Medication Selection ---
     classification = st.selectbox("Select Classification:", list(medications[route].keys()))
     med = st.selectbox("Select Medication:", list(medications[route][classification].keys()))
     unit = medications[route][classification][med]["unit"]
-    ordered_dose = st.number_input(f"Enter ordered dose per administration ({unit}):", min_value=0.0, step=0.1)
+
+    # --- Ordered Dose & Frequency ---
+    ordered_dose = st.number_input(f"Enter ordered dose per administration ({unit}):", min_value=0.0, step=0.1, format="%.2f")
     frequency = st.number_input("Enter frequency (times per day):", min_value=1, step=1, value=1)
 
+    # --- Dose Verification ---
     if st.button("Check Dose"):
-        med_info = medications[route][classification][med]
-        dose_per_kg = ordered_dose / weight if weight > 0 else 0
-        daily_total = ordered_dose * frequency
-        daily_per_kg = daily_total / weight if weight > 0 else 0
-        st.info(
-            f"📏 Recommended per dose: {med_info['min_dose_per_kg']}–{med_info['max_dose_per_kg']} {unit}/kg\n"
-            f"💊 Ordered per dose: {dose_per_kg:.2f} {unit}/kg\n"
-            f"🗓 Ordered daily total: {daily_per_kg:.2f} {unit}/kg/day"
-        )
+        if weight <= 0:
+            st.warning("⚠️ Please enter a valid patient weight to verify dose.")
+        else:
+            med_info = medications[route][classification][med]
+            min_per_kg = med_info["min_dose_per_kg"]
+            max_per_kg = med_info["max_dose_per_kg"]
+
+            # Calculations
+            dose_per_kg = ordered_dose / weight
+            daily_total = ordered_dose * frequency
+            daily_per_kg = daily_total / weight
+
+            # Display Results
+            st.info(
+                f"📏 Recommended per dose: {min_per_kg} – {max_per_kg} {unit}/kg\n"
+                f"💊 Ordered per dose: {dose_per_kg:.2f} {unit}/kg\n"
+                f"🗓 Ordered daily total: {daily_per_kg:.2f} {unit}/kg/day"
+            )
+
+            # Verification Alerts
+            warnings = []
+            if dose_per_kg < min_per_kg:
+                warnings.append(f"Ordered dose is **below** recommended per-dose range ({min_per_kg}-{max_per_kg} {unit}/kg)")
+            elif dose_per_kg > max_per_kg:
+                warnings.append(f"Ordered dose is **above** recommended per-dose range ({min_per_kg}-{max_per_kg} {unit}/kg)")
+            else:
+                st.success("✅ Ordered dose is within recommended range")
+
+            # Static Age Reminders
+            if med == "Paracetamol":
+                warnings.append("⚠️ Reminder: Paracetamol is recommended for children > 3 months of age")
+            elif med == "Ibuprofen":
+                warnings.append("⚠️ Reminder: Ibuprofen is recommended for children > 6 months of age")
+
+            # Display warnings in red highlight
+            for w in warnings:
+                st.markdown(f"<div style='background-color:#FFCDD2; padding:10px; border-radius:5px;'><strong>⚠️ {w}</strong></div>", unsafe_allow_html=True)
 
 # ------------------------------
 # 2. Dispensing Calculator
@@ -86,14 +132,25 @@ elif st.session_state.page == "drug_verification":
 elif st.session_state.page == "dispensing":
     st.subheader("🧴 Dispensing Calculator")
     back_to_home()
+
+    # --- Inputs ---
     unit = st.text_input("Medication unit (e.g., mg):", value="mg")
     disp_ordered_dose = st.number_input(f"Enter ordered dose ({unit}):", min_value=0.0, step=0.1)
-    concentration = st.number_input(f"Enter concentration of medication ({unit}/ml):", min_value=0.0, step=0.1)
+    
+    st.markdown("### Medication Concentration")
+    med_amount = st.number_input(f"Enter medication strength ({unit}):", min_value=0.0, step=0.1, help="e.g., 250 mg")  # mg
+    med_volume = st.number_input("Enter volume of solution (ml):", min_value=0.0, step=0.1, help="e.g., 5 ml")
+
     if st.button("Calculate Volume to Dispense"):
-        if concentration > 0:
-            st.success(f"➡️ Dispense: {disp_ordered_dose/concentration:.2f} ml per dose")
+        if med_amount > 0 and med_volume > 0:
+            # Calculate concentration per ml
+            concentration_per_ml = med_amount / med_volume
+            volume_to_dispense = disp_ordered_dose / concentration_per_ml
+            st.success(f"➡️ Dispense: {volume_to_dispense:.2f} ml per dose")
+            st.info(f"(Based on {med_amount} {unit} per {med_volume} ml, concentration = {concentration_per_ml:.2f} {unit}/ml)")
         else:
-            st.warning("⚠️ Please enter a valid concentration")
+            st.warning("⚠️ Please enter valid medication strength and volume")
+
 
 # ------------------------------
 # 3. Pediatric Fluids Requirement

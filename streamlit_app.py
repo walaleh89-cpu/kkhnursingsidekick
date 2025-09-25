@@ -199,17 +199,27 @@ elif st.session_state.page == "jaundice":
     except Exception:
         st.warning("Please enter time in HH:MM format, e.g., 14:30.")
 
-    st.markdown("**Select Risk Factors:**")
+    # --- Updated High-Risk Criteria ---
+    st.markdown("**Select Risk Factors (High-Risk Criteria):**")
     risk_factors = st.multiselect(
         "Check all that apply:",
         [
-            "Gestational age < 38 weeks",
-            "Hemolysis (ABO/Rh incompatibility)",
-            "G6PD deficiency",
-            "Previous sibling required phototherapy",
-            "Significant clinical illness"
+            "Visible jaundice within 24 hours of age",
+            "G6PD deficiency & other hemolytic conditions",
+            "ABO incompatibility",
+            "Rhesus incompatibility",
+            "Rapidly rising serum bilirubin (>103 µmol/L per day)",
+            "Late preterm (35–36 weeks)",
+            "Asphyxia (Apgar ≤ 5 at 1 and 5 minutes)",
+            "Family history of severe NNJ in siblings needing exchange transfusion",
+            "Inadequate breastfeeding plus weight loss ≥ 10%",
+            "Infants with birth weight 2000–2500 g",
+            "Mother's blood group and antibody titers unknown",
+            "Exclusive breastfeeding with ≥10% weight loss before regaining birth weight"
         ]
     )
+
+    # --- Auto Risk Detection ---
     auto_risk = "High-Risk" if len(risk_factors) > 0 else "Normal-Risk"
     selected_risk = st.radio(
         "Infant Risk Category (can override):",
@@ -306,7 +316,6 @@ elif st.session_state.page == "jaundice":
                     f"<div style='background-color:{color}; padding:15px; border-radius:10px; font-weight:bold; text-align:center;'>{message}</div>",
                     unsafe_allow_html=True
                 )
-
 
 # ------------------------------
 # 6. Corrected Age

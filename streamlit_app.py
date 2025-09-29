@@ -9,15 +9,16 @@ st.markdown("A collection of essential nursing calculators.")
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
-# --- Homepage with clickable cards ---
+# Initialize sync state for ordered dose
+if "sync_ordered_dose" not in st.session_state:
+    st.session_state.sync_ordered_dose = 0.0
+
 def show_home():
     st.subheader("Select a Calculator:")
-    col1, col2, col3, col4, col5 = st.columns(5)
-    col6, col7, col8, col9, col10 = st.columns(5)
+    st.markdown("👉 **Double-click** a button to navigate to the calculator.")
 
     calculators = [
-        ("💊 Drug Dosage Verification", "drug_verification"),
-        ("🧴 Dispensing Calculator", "dispensing"),
+        ("💊 Dosage Verification / Dispensing", "dosage_dispensing"),
         ("🧒 Pediatric Fluids Requirement", "fluids"),
         ("⚖️ BMI", "bmi"),
         ("🌞 Neonatal Jaundice", "jaundice"),
@@ -28,10 +29,13 @@ def show_home():
         ("🚰 Urine Output", "urine_output"),
     ]
 
-    columns = [col1, col2, col3, col4, col5, col6, col7, col8, col9, col10]
-    for idx, (name, key) in enumerate(calculators):
-        if columns[idx].button(name):
-            st.session_state.page = key
+    # Display in rows of 5
+    for i in range(0, len(calculators), 5):
+        cols = st.columns(5)
+        for col, (name, key) in zip(cols, calculators[i:i+5]):
+            if col.button(name, use_container_width=True):
+                st.session_state.page = key
+
 
 # --- Back button ---
 def back_to_home():
@@ -43,18 +47,28 @@ if st.session_state.page == "home":
     show_home()
 
 # ------------------------------
-# 1. Drug Dosage Verification
+# Combined Dosage Verification + Dispensing Calculator
 # ------------------------------
-elif st.session_state.page == "drug_verification":
-    st.subheader("💊 Pediatric Dose Verification Calculator")
+elif st.session_state.page == "dosage_dispensing":
+    st.subheader("💊 Dosage Verification / Dispensing Calculator")
     back_to_home()
 
-    # --- Patient Info ---
-    weight = st.number_input("Enter patient weight (kg):", min_value=0.0, step=0.1, format="%.1f")
+    # --- Initialize defaults ---
+    for key in ["dose_weight", "frequency", "disp_unit", "disp_med_amount", "disp_med_volume"]:
+        if key not in st.session_state:
+            st.session_state[key] = ""
 
-    # --- Route Selection ---
-    route_selection = st.selectbox("Select Route:", ["PO (Per oral)", "IV (Intravenous)"])
-    route = "PO" if route_selection == "PO (Per oral)" else "IV"
+    # --- Clear All ---
+    if st.button("Clear All", key="clear_all"):
+        st.session_state["dose_weight"] = ""
+        st.session_state["frequency"] = ""
+        st.session_state["disp_unit"] = ""
+        st.session_state["disp_med_amount"] = ""
+        st.session_state["disp_med_volume"] = ""
+        st.session_state["ordered_dose_admin"] = 0.0
+        st.session_state["ordered_dose_dispense"] = 0.0
+        st.session_state["sync_ordered_dose"] = 0.0
+        st.rerun()
 
     # --- Medications Dictionary ---
     medications = {
@@ -77,95 +91,170 @@ elif st.session_state.page == "drug_verification":
         }
     }
 
-    # --- Medication Selection ---
+    # ---------------- Drug Dosage Verification ----------------
+    st.markdown("### 💊 Drug Dosage Verification")
+
+    weight = st.text_input("Enter patient weight (kg):", key="dose_weight", placeholder="e.g., 12.5")
+
+    route_selection = st.selectbox("Select Route:", ["PO (Per oral)", "IV (Intravenous)"])
+    route = "PO" if route_selection == "PO (Per oral)" else "IV"
+
     classification = st.selectbox("Select Classification:", list(medications[route].keys()))
     med = st.selectbox("Select Medication:", list(medications[route][classification].keys()))
     unit = medications[route][classification][med]["unit"]
 
-    # --- Ordered Dose & Frequency ---
-    ordered_dose = st.number_input(f"Enter ordered dose per administration ({unit}):", min_value=0.0, step=0.1, format="%.2f")
-    frequency = st.number_input("Enter frequency (times per day):", min_value=1, step=1, value=1)
+    ordered_dose_admin = st.number_input(
+        f"Enter ordered dose per administration ({unit}):",
+        min_value=0.0, step=0.1,
+        value=st.session_state.get("sync_ordered_dose", 0.0),
+        key="ordered_dose_admin"
+    )
 
-    # --- Dose Verification ---
+    # Sync to shared session state
+    if ordered_dose_admin != st.session_state.sync_ordered_dose:
+        st.session_state.sync_ordered_dose = ordered_dose_admin
+        st.session_state["ordered_dose_dispense"] = ordered_dose_admin
+
+    frequency = st.text_input("Enter frequency (times per day):", key="frequency", placeholder="e.g., 3")
+
     if st.button("Check Dose"):
-        if weight <= 0:
-            st.warning("⚠️ Please enter a valid patient weight to verify dose.")
-        else:
+        try:
+            weight_val = float(weight)
+            ordered_val = float(ordered_dose_admin)
+            freq_val = int(frequency)
+
             med_info = medications[route][classification][med]
             min_per_kg = med_info["min_dose_per_kg"]
             max_per_kg = med_info["max_dose_per_kg"]
 
-            # Calculations
-            dose_per_kg = ordered_dose / weight
-            daily_total = ordered_dose * frequency
-            daily_per_kg = daily_total / weight
+            dose_per_kg = ordered_val / weight_val
+            daily_total = ordered_val * freq_val
+            daily_per_kg = daily_total / weight_val
 
-            # Display Results
             st.info(
                 f"📏 Recommended per dose: {min_per_kg} – {max_per_kg} {unit}/kg\n"
                 f"💊 Ordered per dose: {dose_per_kg:.2f} {unit}/kg\n"
                 f"🗓 Ordered daily total: {daily_per_kg:.2f} {unit}/kg/day"
             )
 
-            # Verification Alerts
             warnings = []
             if dose_per_kg < min_per_kg:
-                warnings.append(f"Ordered dose is **below** recommended per-dose range ({min_per_kg}-{max_per_kg} {unit}/kg)")
+                warnings.append(f"Ordered dose is **below** recommended range ({min_per_kg}-{max_per_kg} {unit}/kg)")
             elif dose_per_kg > max_per_kg:
-                warnings.append(f"Ordered dose is **above** recommended per-dose range ({min_per_kg}-{max_per_kg} {unit}/kg)")
+                warnings.append(f"Ordered dose is **above** recommended range ({min_per_kg}-{max_per_kg} {unit}/kg)")
             else:
                 st.success("✅ Ordered dose is within recommended range")
 
-            # Static Age Reminders
             if med == "Paracetamol":
                 warnings.append("⚠️ Reminder: Paracetamol is recommended for children > 3 months of age")
             elif med == "Ibuprofen":
                 warnings.append("⚠️ Reminder: Ibuprofen is recommended for children > 6 months of age")
 
-            # Display warnings in red highlight
             for w in warnings:
-                st.markdown(f"<div style='background-color:#FFCDD2; padding:10px; border-radius:5px;'><strong>⚠️ {w}</strong></div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"<div style='background-color:#FFCDD2; padding:10px; border-radius:5px;'>"
+                    f"<strong>⚠️ {w}</strong></div>",
+                    unsafe_allow_html=True
+                )
 
-# ------------------------------
-# 2. Dispensing Calculator
-# ------------------------------
-elif st.session_state.page == "dispensing":
-    st.subheader("🧴 Dispensing Calculator")
-    back_to_home()
+        except ValueError:
+            st.warning("⚠️ Please enter valid numeric values for weight, dose, and frequency.")
 
-    # --- Inputs ---
-    unit = st.text_input("Medication unit (e.g., mg):", value="mg")
-    disp_ordered_dose = st.number_input(f"Enter ordered dose ({unit}):", min_value=0.0, step=0.1)
-    
+    # ---------------- Dispensing Calculator ----------------
+    st.markdown("### 🧴 Dispensing Calculator")
+
+    unit_disp = st.text_input("Medication unit (e.g., mg):", key="disp_unit", placeholder="mg")
+
+    ordered_dose_dispense = st.number_input(
+        f"Enter ordered dose ({unit_disp}):",
+        min_value=0.0, step=0.1,
+        value=st.session_state.get("sync_ordered_dose", 0.0),
+        key="ordered_dose_dispense"
+    )
+
+    # Two-way sync
+    if ordered_dose_dispense != st.session_state.sync_ordered_dose:
+        st.session_state.sync_ordered_dose = ordered_dose_dispense
+        st.session_state["ordered_dose_admin"] = ordered_dose_dispense
+
     st.markdown("### Medication Concentration")
-    med_amount = st.number_input(f"Enter medication strength ({unit}):", min_value=0.0, step=0.1, help="e.g., 250 mg")  # mg
-    med_volume = st.number_input("Enter volume of solution (ml):", min_value=0.0, step=0.1, help="e.g., 5 ml")
+    med_amount = st.text_input(f"Enter medication strength ({unit_disp}):", key="disp_med_amount", placeholder="e.g., 250")
+    med_volume = st.text_input("Enter volume of solution (ml):", key="disp_med_volume", placeholder="e.g., 5")
 
     if st.button("Calculate Volume to Dispense"):
-        if med_amount > 0 and med_volume > 0:
-            # Calculate concentration per ml
-            concentration_per_ml = med_amount / med_volume
-            volume_to_dispense = disp_ordered_dose / concentration_per_ml
-            st.success(f"➡️ Dispense: {volume_to_dispense:.2f} ml per dose")
-            st.info(f"(Based on {med_amount} {unit} per {med_volume} ml, concentration = {concentration_per_ml:.2f} {unit}/ml)")
-        else:
-            st.warning("⚠️ Please enter valid medication strength and volume")
+        try:
+            ordered_val = float(ordered_dose_dispense)
+            med_amount_val = float(med_amount)
+            med_volume_val = float(med_volume)
 
+            if med_amount_val > 0 and med_volume_val > 0:
+                concentration_per_ml = med_amount_val / med_volume_val
+                volume_to_dispense = ordered_val / concentration_per_ml
+                st.success(f"➡️ Dispense: {volume_to_dispense:.2f} ml per dose")
+                st.info(f"(Based on {med_amount_val} {unit_disp} per {med_volume_val} ml, "
+                        f"concentration = {concentration_per_ml:.2f} {unit_disp}/ml)")
+            else:
+                st.warning("⚠️ Please enter valid medication strength and volume.")
+        except ValueError:
+            st.warning("⚠️ Please enter numeric values for dose, strength, and volume.")
 
-# ------------------------------
-# 3. Pediatric Fluids Requirement
 # ------------------------------
 elif st.session_state.page == "fluids":
     st.subheader("🧒 Pediatric Fluids Requirement")
     back_to_home()
-    weight_fluid = st.number_input("Enter child's weight (kg):", min_value=0.0, step=0.1)
-    def calculate_fluids(weight):
-        if weight <= 10: return weight*100
-        elif weight <= 20: return 1000 + (weight-10)*50
-        else: return 1500 + (weight-20)*20
-    if st.button("Calculate Fluids Requirement"):
-        fluids = calculate_fluids(weight_fluid)
-        st.success(f"Daily: {fluids:.0f} ml/day | Hourly: {fluids/24:.0f} ml/hr")
+
+    # --- Initialize defaults ---
+    if "fluids_weight" not in st.session_state:
+        st.session_state["fluids_weight"] = ""
+
+    # --- Clear All ---
+    if st.button("Clear All", key="clear_fluids"):
+        st.session_state["fluids_weight"] = ""
+        st.rerun()
+
+    # --- Input ---
+    weight_fluid = st.text_input("Enter child's weight (kg):", key="fluids_weight", placeholder="e.g., 12.5")
+
+    # --- Rehydration option (always visible) ---
+    option = st.radio(
+        "Include Rehydration?",
+        ["Maintenance Only", "Maintenance + 3% Rehydration", "Maintenance + 5% Rehydration"],
+        index=0,
+        key="rehydration_option"
+    )
+
+    # --- Calculation ---
+    if st.button("Calculate Fluids Requirement", key="calc_fluids"):
+        try:
+            weight_val = float(weight_fluid)
+
+            def calculate_fluids(weight):
+                if weight <= 10:
+                    return weight * 100
+                elif weight <= 20:
+                    return 1000 + (weight - 10) * 50
+                else:
+                    return 1500 + (weight - 20) * 20
+
+            maintenance = calculate_fluids(weight_val)
+
+            # Rehydration
+            rehydration_3 = weight_val * 30   # 3%
+            rehydration_5 = weight_val * 50   # 5%
+
+            # Apply selection
+            if option == "Maintenance Only":
+                total = maintenance
+            elif option == "Maintenance + 3% Rehydration":
+                total = maintenance + rehydration_3
+            elif option == "Maintenance + 5% Rehydration":
+                total = maintenance + rehydration_5
+
+            # ✅ Only show final result
+            st.success(f"✅ Total Fluids: {total:.0f} ml/day | {total/24:.0f} ml/hr")
+
+        except ValueError:
+            st.warning("⚠️ Please enter a valid numeric weight.")
 
 # ------------------------------
 # 4. BMI
@@ -378,28 +467,54 @@ elif st.session_state.page == "corrected_age":
             )
 
 
-# ------------------------------
-# 7. Neonate Feeds
-# ------------------------------
+#7. Neonate feeds 
+#------------------------------
 elif st.session_state.page == "neonate_feeds":
     st.subheader("🍼 Neonate Feeds / IV Fluids Calculator")
     back_to_home()
-    weight_neonate = st.number_input("Enter neonate weight (kg):", min_value=0.0, step=0.01, key="ft_weight")
-    day_of_life = st.number_input("Enter Day of Life:", min_value=1, max_value=28, step=1, key="ft_day")
-    feed_interval = st.radio("Feeding Interval:", ["2-hourly", "3-hourly"], key="ft_interval")
 
+    # --- Inputs with blank defaults ---
+    weight_neonate = st.number_input(
+        "Enter neonate weight (kg):",
+        min_value=0.0,
+        step=0.01,
+        value=None,
+        placeholder="Enter weight",
+        key="ft_weight"
+    )
+
+    day_of_life = st.number_input(
+        "Enter Day of Life:",
+        min_value=1,
+        step=1,
+        value=None,
+        placeholder="Enter day",
+        key="ft_day"
+    )
+
+    feed_interval = st.radio(
+        "Feeding Interval:",
+        ["2-hourly", "3-hourly"],
+        index=None,   # 👈 no default selection
+        key="ft_interval"
+    )
+
+    # Feed ml/kg/day by day (default from day 4 onwards is 150 ml/kg/day)
     feed_dict = {1: 60, 2: 90, 3: 120}
-    feed_ml_per_kg = feed_dict.get(day_of_life, 150)
+    feed_ml_per_kg = feed_dict.get(day_of_life, 150) if day_of_life else None
 
     if st.button("Calculate Feeds", key="calc_feeds"):
-        total_feed = weight_neonate * feed_ml_per_kg
-        feeds_per_day = 12 if feed_interval == "2-hourly" else 8
-        feed_per_time = total_feed / feeds_per_day
-        iv_fluids = weight_neonate * 100
+        if weight_neonate is not None and day_of_life is not None and feed_interval is not None:
+            total_feed = weight_neonate * feed_ml_per_kg
+            feeds_per_day = 12 if feed_interval == "2-hourly" else 8
+            feed_per_time = total_feed / feeds_per_day
+            iv_fluids = weight_neonate * 100
 
-        st.success(f"Total Feed Volume: {total_feed:.0f} ml/day")
-        st.info(f"Feed Volume per Feed ({feed_interval}): {feed_per_time:.0f} ml")
-        st.warning(f"IV Fluids Volume: {iv_fluids:.0f} ml/day")
+            st.success(f"Total Feed Volume: {total_feed:.0f} ml/day")
+            st.info(f"Feed Volume per Feed ({feed_interval}): {feed_per_time:.0f} ml")
+            st.warning(f"IV Fluids Volume: {iv_fluids:.0f} ml/day")
+        else:
+            st.warning("⚠️ Please enter all inputs before calculating.")
 
 
 # ------------------------------
@@ -434,9 +549,7 @@ elif st.session_state.page == "compatibility":
                 st.success(f"✅ {drug1} + {drug2}: {result}")
             else:
                 st.warning(f"⚠️ {drug1} + {drug2}: {result}")
-               
 
-# ------------------------------
 # 9. Vital Signs
 # ------------------------------
 elif st.session_state.page == "vitals":
@@ -448,24 +561,53 @@ elif st.session_state.page == "vitals":
         "If the patient has fever, heart rate compensation is applied: **+10 bpm for every 1 °C above 37.0 °C**."
     )
 
-    # Age input
-    age_unit = st.radio("Age unit:", ["Months (<1 yr)", "Years (≥1 yr)"])
+    # --- Age input ---
+    age_unit = st.radio("Age unit:", ["Months (<1 yr)", "Years (≥1 yr)"], index=None)
+
+    age_months, age_years = None, None
     if age_unit == "Months (<1 yr)":
-        age_months = st.number_input("Age (months):", min_value=0, step=1, value=0, format="%d")
-        age_months = int(age_months)
-        age_years = age_months / 12
-    else:
-        age_years = st.number_input("Age (years):", min_value=1, step=1, value=1, format="%d")
-        age_years = int(age_years)
-        age_months = age_years * 12
+        age_months = st.number_input(
+            "Age (months):",
+            min_value=0,
+            step=1,
+            value=None,
+            placeholder="Enter months",
+            format="%d"
+        )
+        if age_months is not None:
+            age_years = age_months / 12
+    elif age_unit == "Years (≥1 yr)":
+        age_years = st.number_input(
+            "Age (years):",
+            min_value=1,
+            step=1,
+            value=None,
+            placeholder="Enter years",
+            format="%d"
+        )
+        if age_years is not None:
+            age_months = age_years * 12
 
-    # Vital signs input
-    hr = st.number_input("Heart Rate (bpm):", min_value=0, step=1, format="%d")
-    rr = st.number_input("Respiratory Rate (breaths/min):", min_value=0, step=1, format="%d")
-    sbp = st.number_input("Systolic BP (mmHg, optional):", min_value=0, step=1, format="%d")
-    temp = st.number_input("Temperature (°C, optional):", min_value=30.0, max_value=45.0, step=0.1, format="%.1f")
+    # --- Vital signs input ---
+    hr = st.number_input("Heart Rate (bpm):", min_value=0, step=1, value=None, placeholder="Enter HR", format="%d")
+    rr = st.number_input("Respiratory Rate (breaths/min):", min_value=0, step=1, value=None, placeholder="Enter RR", format="%d")
+    sbp = st.number_input("Systolic BP (mmHg, optional):", min_value=0, step=1, value=None, placeholder="Enter SBP", format="%d")
 
-    # Define normal ranges
+    # --- Fever question ---
+    fever = st.radio("Is there a fever? (Temperature >= 38°C)", ["No", "Yes"], index=0)
+    temp = None
+    if fever == "Yes":
+        temp = st.number_input(
+            "Enter Temperature (°C):",
+            min_value=38.0,
+            max_value=45.0,
+            step=0.1,
+            value=None,
+            placeholder="Enter Temp",
+            format="%.1f"
+        )
+
+    # --- Define normal ranges ---
     ranges = [
         (0, 3/12, (90, 180), (30, 60)),       # <3 months
         (3/12, 6/12, (80, 160), (30, 60)),    # 3–6 months
@@ -477,29 +619,31 @@ elif st.session_state.page == "vitals":
     ]
 
     hr_range, rr_range = None, None
-    for (low, high, hr_r, rr_r) in ranges:
-        if low <= age_years < high:
-            hr_range, rr_range = hr_r, rr_r
-            break
+    if age_years is not None:
+        for (low, high, hr_r, rr_r) in ranges:
+            if low <= age_years < high:
+                hr_range, rr_range = hr_r, rr_r
+                break
 
-    # SBP minimum for <10 years
+    # --- SBP range ---
     sbp_range = None
-    if age_years < 10:
-        sbp_min = (age_years * 2) + 70
-        sbp_range = (sbp_min, 120)  # arbitrary upper reference
-    else:
-        sbp_range = (90, 120)
+    if age_years is not None:
+        if age_years < 10:
+            sbp_min = (age_years * 2) + 70
+            sbp_range = (sbp_min, 120)
+        else:
+            sbp_range = (90, 120)
 
-    # Adjust HR for fever
+    # --- Adjust HR for fever ---
     adjusted_hr = hr
-    if temp and temp > 37.0:
+    if temp is not None and hr is not None and temp > 37.0:
         compensation = int((temp - 37.0) * 10)
         adjusted_hr = hr - compensation
         st.info(f"Fever compensation applied: -{compensation} bpm "
                 f"(HR adjusted to {adjusted_hr} bpm for analysis).")
 
-    # Results
-    if hr_range:
+    # --- Results ---
+    if hr_range and hr is not None:
         if adjusted_hr < hr_range[0]:
             st.error(f"⚠️ Bradycardia: HR {hr} (adjusted {adjusted_hr}) below normal ({hr_range[0]}–{hr_range[1]})")
         elif adjusted_hr > hr_range[1]:
@@ -507,7 +651,7 @@ elif st.session_state.page == "vitals":
         else:
             st.success(f"✅ HR {hr} (adjusted {adjusted_hr}) within normal range ({hr_range[0]}–{hr_range[1]})")
 
-    if rr_range:
+    if rr_range and rr is not None:
         if rr < rr_range[0]:
             st.error(f"⚠️ Bradypnea: RR {rr} below normal ({rr_range[0]}–{rr_range[1]})")
         elif rr > rr_range[1]:
@@ -515,7 +659,7 @@ elif st.session_state.page == "vitals":
         else:
             st.success(f"✅ RR {rr} within normal range ({rr_range[0]}–{rr_range[1]})")
 
-    if sbp:
+    if sbp is not None and sbp_range:
         if sbp < sbp_range[0]:
             st.error(f"⚠️ Hypotension: SBP {sbp} below minimum ({sbp_range[0]})")
         elif sbp > sbp_range[1]:
@@ -525,32 +669,61 @@ elif st.session_state.page == "vitals":
     else:
         st.info("ℹ️ SBP not checked for this age")
 
-# ------------------------------
 # 10. Urine Output
-# ------------------------------
+#----------------------------------------------
 elif st.session_state.page == "urine_output":
     st.subheader("🚰 Urine Output Calculator")
     back_to_home()
     st.subheader("🚰 Urine Output Calculator")
 
-    age_group = st.radio("Select Age Group:", ["Neonate (<28 days)", "Pediatric (≥28 days)"])
-    weight_uo = st.number_input("Enter weight (kg):", min_value=0.0, step=0.1, key="uo_weight")
-    urine_24h = st.number_input("Enter total urine in 24 hours (ml):", min_value=0.0, step=1.0, key="uo_24h")
+    # --- Initialize defaults ---
+    if "uo_weight" not in st.session_state:
+        st.session_state["uo_weight"] = ""
+    if "uo_24h" not in st.session_state:
+        st.session_state["uo_24h"] = ""
+    if "uo_age_group" not in st.session_state:
+        st.session_state["uo_age_group"] = None
 
+    # --- Clear All ---
+    if st.button("Clear All", key="clear_uo"):
+        st.session_state["uo_weight"] = ""
+        st.session_state["uo_24h"] = ""
+        st.session_state["uo_age_group"] = None
+        st.rerun()
+
+    # --- Inputs ---
+    age_group = st.radio(
+        "Select Age Group:",
+        ["Neonate (<28 days)", "Pediatric (≥28 days)"],
+        index=0 if st.session_state["uo_age_group"] == "Neonate (<28 days)"
+              else 1 if st.session_state["uo_age_group"] == "Pediatric (≥28 days)"
+              else None,
+        key="uo_age_group"
+    )
+
+    weight_uo = st.text_input("Enter weight (kg):", key="uo_weight", placeholder="e.g., 3.2")
+    urine_24h = st.text_input("Enter total urine in 24 hours (ml):", key="uo_24h", placeholder="e.g., 150")
+
+    # --- Calculation ---
     if st.button("Calculate Urine Output", key="calc_uo"):
-        if weight_uo > 0:
-            uo_mlkg_hr = urine_24h / weight_uo / 24
-            st.info(f"Urine Output: {uo_mlkg_hr:.2f} ml/kg/hr")
+        try:
+            weight_val = float(weight_uo)
+            urine_val = float(urine_24h)
+            if weight_val > 0:
+                uo_mlkg_hr = urine_val / weight_val / 24
+                st.info(f"Urine Output: {uo_mlkg_hr:.2f} ml/kg/hr")
 
-            if age_group == "Neonate (<28 days)":
-                if uo_mlkg_hr > 0.5:
-                    st.success("✅ Within normal limits for neonates (>0.5 ml/kg/hr)")
-                else:
-                    st.error("⚠️ Low urine output for neonates (<0.5 ml/kg/hr)")
+                if age_group == "Neonate (<28 days)":
+                    if uo_mlkg_hr > 0.5:
+                        st.success("✅ Within normal limits for neonates (>0.5 ml/kg/hr)")
+                    else:
+                        st.error("⚠️ Low urine output for neonates (<0.5 ml/kg/hr)")
+                elif age_group == "Pediatric (≥28 days)":
+                    if uo_mlkg_hr > 1:
+                        st.success("✅ Within normal limits for pediatrics (>1 ml/kg/hr)")
+                    else:
+                        st.error("⚠️ Low urine output for pediatrics (<1 ml/kg/hr)")
             else:
-                if uo_mlkg_hr > 1:
-                    st.success("✅ Within normal limits for pediatrics (>1 ml/kg/hr)")
-                else:
-                    st.error("⚠️ Low urine output for pediatrics (<1 ml/kg/hr)")
-        else:
-            st.warning("Please enter a valid weight.")
+                st.warning("⚠️ Please enter a valid weight.")
+        except ValueError:
+            st.warning("⚠️ Please enter numeric values for weight and urine volume.")

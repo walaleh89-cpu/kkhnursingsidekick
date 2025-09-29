@@ -15,7 +15,21 @@ if "sync_ordered_dose" not in st.session_state:
 
 def show_home():
     st.subheader("Select a Calculator:")
-    st.markdown("👉 **Double-click** a button to navigate to the calculator.")
+    st.markdown(
+    """
+    <div style="font-size:20px; font-weight:bold; color:red; text-align:center; animation: blinker 1.5s linear infinite;">
+        👉 Double-click a button to navigate to the calculator.
+    </div>
+
+    <style>
+    @keyframes blinker {
+      50% { opacity: 0; }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
     calculators = [
         ("💊 Dosage Verification / Dispensing", "dosage_dispensing"),

@@ -18,7 +18,7 @@ def show_home():
     st.markdown(
     """
     <div style="font-size:20px; font-weight:bold; color:red; text-align:center; animation: blinker 1.5s linear infinite;">
-        👉 Double-click a button to navigate to the calculator.
+        👉 Click to navigate to the calculator.
     </div>
 
     <style>
@@ -47,14 +47,19 @@ def show_home():
     for i in range(0, len(calculators), 5):
         cols = st.columns(5)
         for col, (name, key) in zip(cols, calculators[i:i+5]):
-            if col.button(name, use_container_width=True):
+            clicked = col.button(name, key=key, use_container_width=True)
+            if clicked: 
                 st.session_state.page = key
+                st.rerun()
+            ##if col.button(name, use_container_width=True):
+                ##st.session_state.page = key
 
 
 # --- Back button ---
 def back_to_home():
     if st.button("🏠 Back to Home"):
         st.session_state.page = "home"
+        st.rerun()
 
 # --- Main App Navigation ---
 if st.session_state.page == "home":

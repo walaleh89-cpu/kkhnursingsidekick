@@ -1,5 +1,4 @@
 
-
 import streamlit as st
 from datetime import datetime
 
@@ -77,118 +76,176 @@ if st.session_state.page == "home":
     show_home()
 
 # ------------------------------
-# Combined Dosage Verification + Dispensing Calculator
+# Dosage Verification Page
 # ------------------------------
-elif st.session_state.page == "dosage_dispensing":
+if st.session_state.page == "dosage_dispensing":
     st.subheader("💊 Dosage Verification / Dispensing Calculator")
     back_to_home()
 
-    # --- Initialize defaults ---
-    for key in ["dose_weight", "frequency", "disp_unit", "disp_med_amount", "disp_med_volume"]:
-        if key not in st.session_state:
-            st.session_state[key] = ""
-
-    # --- Clear All ---
-    if st.button("Clear All", key="clear_all"):
-        st.session_state["dose_weight"] = ""
-        st.session_state["frequency"] = ""
-        st.session_state["disp_unit"] = ""
-        st.session_state["disp_med_amount"] = ""
-        st.session_state["disp_med_volume"] = ""
-        st.session_state["ordered_dose_admin"] = 0.0
-        st.session_state["ordered_dose_dispense"] = 0.0
-        st.session_state["sync_ordered_dose"] = 0.0
-        st.rerun()
-
-    # --- Medications Dictionary ---
+    # ------------------------------
+    # Medication Data
+    # ------------------------------
     medications = {
         "PO": {
-            "Antipyretics": {
-                "Paracetamol": {"min_dose_per_kg": 10, "max_dose_per_kg": 15, "unit": "mg"},
-                "Ibuprofen": {"min_dose_per_kg": 5, "max_dose_per_kg": 10, "unit": "mg"}
-            },
             "Antibiotics": {
-                "Amoxicillin": {"min_dose_per_kg": 20, "max_dose_per_kg": 40, "unit": "mg"}
+                "Amoxicillin": {"unit":"mg","usual":[50,50],"high":[80,90],"max_day":4000},
+                "Amoxicillin-Clavulanate (Augmentin)": {"unit":"mg","usual":[50,50],"high":[80,90],"max_day":4000},
+                "Cephalexin": {"unit":"mg","usual":[25,50],"severe":[100,150],"max_day":6000},
+                "Ciprofloxacin": {"unit":"mg","usual":[20,30],"severe":[40,40],"max_dose":750,"max_day":1500},
+                "Clarithromycin": {"unit":"mg","usual":[15,15],"max_dose":500,"max_day":1000},
+                "Cloxacillin": {"unit":"mg","usual":[50,100],"max_dose":1000,"max_day":6000},
+                "Metronidazole": {"unit":"mg","usual":[20,50],"max_day":2250},
+                "Vancomycin (C. difficile)": {"unit":"mg","usual":[10,10],"max_dose":500,"max_day":2000}
+            },
+            "Antivirals": {
+                "Acyclovir": {"unit":"mg","usual":[80,80],"max_dose":800,"max_day":4000},
+                "Oseltamivir": {"unit":"mg","max_dose":75}
+            },
+            "Others": {
+                "Omeprazole": {
+                    "unit":"mg",
+                    "usual":[0.8,0.8],
+                    "max_dose":40,
+                    "notes":"Give 30 minutes before meals for best effect."
+                },
+                "Nifedipine": {
+                    "unit":"mg",
+                    "usual":[1,2],
+                    "max_dose":10,
+                    "max_day":120,
+                    "notes":"Also max 3 mg/kg/day."
+                },
+                "Aspirin (Antiplatelet)": {
+                    "unit":"mg",
+                    "usual":[1,5],
+                    "notes":"Once daily antiplatelet dosing."
+                },
+                "Aspirin (Anti-inflammatory)": {
+                    "unit":"mg",
+                    "usual":[80,100],
+                    "notes":"Divide Q6–8H."
+                },
+                "Prednisolone": {
+                    "unit":"mg",
+                    "usual":[1,2],
+                    "max_day":60
+                },
+                "Sodium Valproate": {
+                    "unit":"mg",
+                    "usual":[10,15],
+                    "severe":[60,60],
+                    "notes":"Given BD or TDS."
+                },
+                "Salbutamol MDI": {
+                    "unit":"puffs",
+                    "notes":"0.2–0.3 puffs/kg/dose (min 2, max 8 puffs)."
+                },
+                "Salbutamol Nebuliser (0.5%)": {
+                    "unit":"mL",
+                    "notes":"0.03 mL/kg/dose, max 2 mL."
+                }
             }
         },
-        "IV": {
+        "IV / IM": {
             "Antibiotics": {
-                "Ceftriaxone": {"min_dose_per_kg": 50, "max_dose_per_kg": 75, "unit": "mg"}
+                "Cefazolin": {"unit":"mg","usual":[25,50],"severe":[100,150],"max_day":12000},
+                "Ceftriaxone": {"unit":"mg","usual":[50,75],"severe":[100,100],"max_dose":2000,"max_day":4000},
+                "Cloxacillin": {"unit":"mg","usual":[100,100],"severe":[200,300],"max_dose":2000,"max_day":12000},
+                "Gentamicin": {"unit":"mg","usual":[5,7.5]},
+                "Metronidazole": {"unit":"mg","usual":[22.5,40],"max_day":4000},
+                "Vancomycin": {"unit":"mg","usual":[30,60],"max_dose":500,"max_day":2000}
             },
-            "Analgesics": {
-                "Morphine": {"min_dose_per_kg": 0.05, "max_dose_per_kg": 0.2, "unit": "mg"}
+            "Antivirals": {
+                "Acyclovir": {"unit":"mg","usual":[30,30]}
+            },
+            "Others": {
+                "Omeprazole": {
+                    "unit":"mg",
+                    "usual":[1,1],
+                    "max_dose":40
+                },
+                "Hydrocortisone": {
+                    "unit":"mg",
+                    "usual":[16,16],
+                    "max_dose":100,
+                    "max_day":400
+                }
             }
         }
     }
 
-    # ---------------- Drug Dosage Verification ----------------
-    st.markdown("### 💊 Drug Dosage Verification")
+    # ------------------------------
+    # Inputs
+    # ------------------------------
+    weight = st.number_input("Patient weight (kg)", min_value=0.1, step=0.1)
 
-    weight = st.text_input("Enter patient weight (kg):", key="dose_weight", placeholder="e.g., 12.5")
+    route = st.selectbox("Route", list(medications.keys()))
+    category = st.selectbox("Category", list(medications[route].keys()))
+    med = st.selectbox("Medication", list(medications[route][category].keys()))
+    med_info = medications[route][category][med]
 
-    route_selection = st.selectbox("Select Route:", ["PO (Per oral)", "IV (Intravenous)"])
-    route = "PO" if route_selection == "PO (Per oral)" else "IV"
+    severity = st.radio("Severity", ["Usual / Mild–Moderate", "Severe"], horizontal=True)
 
-    classification = st.selectbox("Select Classification:", list(medications[route].keys()))
-    med = st.selectbox("Select Medication:", list(medications[route][classification].keys()))
-    unit = medications[route][classification][med]["unit"]
-
-    ordered_dose_admin = st.number_input(
-        f"Enter ordered dose per administration ({unit}):",
-        min_value=0.0, step=0.1,
-        value=st.session_state.get("sync_ordered_dose", 0.0),
-        key="ordered_dose_admin"
+    dose = st.number_input(
+        f"Ordered dose per administration ({med_info['unit']})",
+        min_value=0.0,
+        step=0.1
     )
 
-    # Sync to shared session state
-    if ordered_dose_admin != st.session_state.sync_ordered_dose:
-        st.session_state.sync_ordered_dose = ordered_dose_admin
-        st.session_state["ordered_dose_dispense"] = ordered_dose_admin
+    freq_map = {"Q24H":1,"Q12H":2,"Q8H":3,"Q6H":4}
+    freq_label = st.selectbox("Frequency", list(freq_map.keys()))
+    freq = freq_map[freq_label]
 
-    frequency = st.text_input("Enter frequency (times per day):", key="frequency", placeholder="e.g., 3")
+    # ------------------------------
+    # Side-by-side Display
+    # ------------------------------
+    st.markdown("### ⚖️ Recommended vs Ordered Dose")
 
+    key = "severe" if severity == "Severe" and "severe" in med_info else "usual"
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("#### 📘 Recommended")
+        if key in med_info:
+            low, high = med_info[key]
+            st.write(f"**mg/kg/day:** {low}–{high}")
+            st.write(f"**mg/day:** {(low*weight):.1f}–{(high*weight):.1f}")
+            st.write(f"**mg/dose:** {(low*weight/freq):.1f}–{(high*weight/freq):.1f}")
+        if "notes" in med_info:
+            st.info(med_info["notes"])
+
+    with col2:
+        st.markdown("#### 📊 Ordered")
+        daily = dose * freq
+        st.write(f"**mg/kg/day:** {(daily/weight):.2f}")
+        st.write(f"**mg/day:** {daily:.1f}")
+        st.write(f"**mg/dose:** {dose:.1f}")
+
+    # ------------------------------
+    # Safety Check
+    # ------------------------------
     if st.button("Check Dose"):
-        try:
-            weight_val = float(weight)
-            ordered_val = float(ordered_dose_admin)
-            freq_val = int(frequency)
+        warnings = []
 
-            med_info = medications[route][classification][med]
-            min_per_kg = med_info["min_dose_per_kg"]
-            max_per_kg = med_info["max_dose_per_kg"]
+        if key in med_info:
+            low, high = med_info[key]
+            if daily/weight < low:
+                warnings.append("Below recommended range")
+            if daily/weight > high:
+                warnings.append("Above recommended range")
 
-            dose_per_kg = ordered_val / weight_val
-            daily_total = ordered_val * freq_val
-            daily_per_kg = daily_total / weight_val
+        if "max_day" in med_info and daily > med_info["max_day"]:
+            warnings.append("Exceeds maximum daily dose")
 
-            st.info(
-                f"📏 Recommended per dose: {min_per_kg} – {max_per_kg} {unit}/kg\n"
-                f"💊 Ordered per dose: {dose_per_kg:.2f} {unit}/kg\n"
-                f"🗓 Ordered daily total: {daily_per_kg:.2f} {unit}/kg/day"
-            )
+        if "max_dose" in med_info and dose > med_info["max_dose"]:
+            warnings.append("Exceeds maximum per dose")
 
-            warnings = []
-            if dose_per_kg < min_per_kg:
-                warnings.append(f"Ordered dose is **below** recommended range ({min_per_kg}-{max_per_kg} {unit}/kg)")
-            elif dose_per_kg > max_per_kg:
-                warnings.append(f"Ordered dose is **above** recommended range ({min_per_kg}-{max_per_kg} {unit}/kg)")
-            else:
-                st.success("✅ Ordered dose is within recommended range")
-
-            if med == "Paracetamol":
-                warnings.append("⚠️ Reminder: Paracetamol is recommended for children > 3 months of age")
-            elif med == "Ibuprofen":
-                warnings.append("⚠️ Reminder: Ibuprofen is recommended for children > 6 months of age")
-
+        if warnings:
             for w in warnings:
-                st.markdown(
-                    f"<div style='background-color:#FFCDD2; padding:10px; border-radius:5px;'>"
-                    f"<strong>⚠️ {w}</strong></div>",
-                    unsafe_allow_html=True
-                )
-
-        except ValueError:
-            st.warning("⚠️ Please enter valid numeric values for weight, dose, and frequency.")
+                st.error(f"⚠️ {w}")
+        else:
+            st.success("✅ Ordered dose within recommended limits")
 
     # ---------------- Dispensing Calculator ----------------
     st.markdown("### 🧴 Dispensing Calculator")
@@ -701,7 +758,7 @@ elif st.session_state.page == "vitals":
             sbp_range = (90, 120)
 
     # --- Adjust HR for fever ---
-    adjusted_hr = hr
+    adjusted_hr = hr 
     if temp is not None and hr is not None and temp > 37.0:
         compensation = int((temp - 37.0) * 10)
         adjusted_hr = hr - compensation

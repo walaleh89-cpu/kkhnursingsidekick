@@ -1,5 +1,3 @@
-Old 8/4/26 
-
 
 import streamlit as st
 from datetime import datetime

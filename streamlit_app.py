@@ -1,8 +1,22 @@
-
 import streamlit as st
+import streamlit.components.v1 as components
 from datetime import datetime
 
 st.set_page_config(page_title="🩺 Nursing Calculator", page_icon="🩺", layout="wide")
+
+# Google Analytics tracking
+GA_ID = "G-TGK05BHBSJ" 
+
+components.html(f"""
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+  gtag('config', '{GA_ID}');
+</script>
+""", height=0)
+
 st.title("🩺 Nursing Calculator App")
 
 # Polished hospital-style ownership footer

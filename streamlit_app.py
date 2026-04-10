@@ -1,6 +1,9 @@
 
 import streamlit as st
 from datetime import datetime
+import pytz
+from antibiotics_data import antibiotics_data
+from others_data import others_data
 
 st.set_page_config(page_title="🩺 Nursing Calculator", page_icon="🩺", layout="wide")
 st.title("🩺 Nursing Calculator App")
@@ -81,6 +84,7 @@ if st.session_state.page == "home":
 if st.session_state.page == "dosage_dispensing":
     st.subheader("💊 Dosage Verification / Dispensing Calculator")
     back_to_home()
+
 
     # ------------------------------
     # Medication Data
@@ -174,15 +178,109 @@ if st.session_state.page == "dosage_dispensing":
         }
     }
 
-    # ------------------------------
+      # ------------------------------
     # Inputs
     # ------------------------------
     weight = st.number_input("Patient weight (kg)", min_value=0.1, step=0.1)
 
-    route = st.selectbox("Route", list(medications.keys()))
-    category = st.selectbox("Category", list(medications[route].keys()))
-    med = st.selectbox("Medication", list(medications[route][category].keys()))
-    med_info = medications[route][category][med]
+    med_group = st.radio(
+        "Medication group",
+        ["Antibiotics", "Others"],
+        horizontal=True
+    )
+
+    if med_group == "Antibiotics":
+        system = st.radio(
+            "Diagnosis by system",
+            list(antibiotics_data.keys()),
+            horizontal=True
+        )
+
+        med_search = st.text_input(
+            "Search antibiotic",
+            placeholder="Type antibiotic name..."
+        ).strip()
+
+        available_meds = sorted(antibiotics_data.get(system, {}).keys())
+
+        if med_search:
+            filtered_meds = [
+                med_name for med_name in available_meds
+                if med_search.lower() in med_name.lower()
+            ]
+        else:
+            filtered_meds = available_meds
+
+        if not filtered_meds:
+            st.warning("No antibiotic found for this system.")
+        else:
+            med = st.selectbox("Medication", filtered_meds)
+
+            med_options = antibiotics_data[system][med]
+
+            # If only 1 option → auto select
+            if len(med_options) == 1:
+                selected_option = med_options[0]
+            else:
+                option_labels = [opt["route"] for opt in med_options]
+
+                selected_label = st.radio(
+                    "Choose route",
+                    option_labels,
+                    horizontal=True
+                )
+
+                selected_option = med_options[option_labels.index(selected_label)]
+
+            # Show selected info
+            st.markdown(f"**Route:** {selected_option['route']}")
+            st.markdown(f"**Unit:** {selected_option['unit']}")
+            
+            med_info = selected_option
+    elif med_group == "Others":
+        med_search = st.text_input(
+            "Search medication",
+            placeholder="Type medication name..."
+        ).strip()
+
+        available_meds = sorted(others_data.keys())
+
+        if med_search:
+            filtered_meds = [
+                med_name for med_name in available_meds
+                if med_search.lower() in med_name.lower()
+            ]
+        else:
+            filtered_meds = available_meds
+
+        if not filtered_meds:
+            st.warning("No medication found.")
+        else:
+            med = st.selectbox("Medication", filtered_meds)
+
+            med_options = others_data[med]
+
+            if len(med_options) == 1:
+                selected_option = med_options[0]
+            else:
+                option_labels = [opt["route"] for opt in med_options]
+
+                selected_label = st.radio(
+                    "Choose route",
+                    option_labels,
+                    horizontal=True
+                )
+
+                selected_option = med_options[option_labels.index(selected_label)]
+
+            st.markdown(f"**Route:** {selected_option['route']}")
+            st.markdown(f"**Unit:** {selected_option['unit']}")
+
+            med_info = selected_option
+
+    if med_group == "Antibiotics" and 'med_info' not in locals():
+        st.warning("Please select a medication first.")
+        st.stop()        
 
     severity = st.radio("Severity", ["Usual / Mild–Moderate", "Severe"], horizontal=True)
 
@@ -285,6 +383,8 @@ if st.session_state.page == "dosage_dispensing":
         except ValueError:
             st.warning("⚠️ Please enter numeric values for dose, strength, and volume.")
 
+# ------------------------------
+#2 Pediatric Fluids Requirement
 # ------------------------------
 elif st.session_state.page == "fluids":
     st.subheader("🧒 Pediatric Fluids Requirement")

@@ -8,7 +8,6 @@ from others_data import others_data
 st.set_page_config(page_title="🩺 Nursing Calculator", page_icon="🩺", layout="wide")
 st.title("🩺 Nursing Calculator App")
 
-# Polished hospital-style ownership footer
 st.markdown(
     "<p style='font-size:14px; color:gray; text-align:center; margin-top:-10px;'>"
     "© Property of KK Women’s and Children’s Hospital APN Office"
@@ -18,31 +17,21 @@ st.markdown(
 
 st.markdown("A collection of essential nursing calculators.")
 
-# Initialize session state for navigation
+# ------------------------------
+# SESSION STATE
+# ------------------------------
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
-# Initialize sync state for ordered dose
 if "sync_ordered_dose" not in st.session_state:
     st.session_state.sync_ordered_dose = 0.0
 
+
+# ------------------------------
+# HOME PAGE
+# ------------------------------
 def show_home():
     st.subheader("Select a Calculator:")
-    st.markdown(
-    """
-    <div style="font-size:20px; font-weight:bold; color:red; text-align:center; animation: blinker 1.5s linear infinite;">
-        👉 Click to navigate to the calculator.
-    </div>
-
-    <style>
-    @keyframes blinker {
-      50% { opacity: 0; }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 
     calculators = [
         ("💊 Dosage Verification / Dispensing", "dosage_dispensing"),
@@ -56,129 +45,36 @@ def show_home():
         ("🚰 Urine Output", "urine_output"),
     ]
 
-    # Display in rows of 5
     for i in range(0, len(calculators), 5):
         cols = st.columns(5)
         for col, (name, key) in zip(cols, calculators[i:i+5]):
-            clicked = col.button(name, key=key, use_container_width=True)
-            if clicked: 
+            if col.button(name, key=key):
                 st.session_state.page = key
                 st.rerun()
-            ##if col.button(name, use_container_width=True):
-                ##st.session_state.page = key
 
 
-# --- Back button ---
 def back_to_home():
     if st.button("🏠 Back to Home"):
         st.session_state.page = "home"
         st.rerun()
 
-# --- Main App Navigation ---
+
+# ------------------------------
+# NAVIGATION
+# ------------------------------
 if st.session_state.page == "home":
     show_home()
 
-# ------------------------------
-# Dosage Verification Page
-# ------------------------------
-if st.session_state.page == "dosage_dispensing":
+
+# ==========================================================
+# 💊 DOSAGE PAGE (FIXED - FULLY SCOPED)
+# ==========================================================
+elif st.session_state.page == "dosage_dispensing":
+
     st.subheader("💊 Dosage Verification / Dispensing Calculator")
     back_to_home()
 
-
     # ------------------------------
-    # Medication Data
-    # ------------------------------
-    medications = {
-        "PO": {
-            "Antibiotics": {
-                "Amoxicillin": {"unit":"mg","usual":[50,50],"high":[80,90],"max_day":4000},
-                "Amoxicillin-Clavulanate (Augmentin)": {"unit":"mg","usual":[50,50],"high":[80,90],"max_day":4000},
-                "Cephalexin": {"unit":"mg","usual":[25,50],"severe":[100,150],"max_day":6000},
-                "Ciprofloxacin": {"unit":"mg","usual":[20,30],"severe":[40,40],"max_dose":750,"max_day":1500},
-                "Clarithromycin": {"unit":"mg","usual":[15,15],"max_dose":500,"max_day":1000},
-                "Cloxacillin": {"unit":"mg","usual":[50,100],"max_dose":1000,"max_day":6000},
-                "Metronidazole": {"unit":"mg","usual":[20,50],"max_day":2250},
-                "Vancomycin (C. difficile)": {"unit":"mg","usual":[10,10],"max_dose":500,"max_day":2000}
-            },
-            "Antivirals": {
-                "Acyclovir": {"unit":"mg","usual":[80,80],"max_dose":800,"max_day":4000},
-                "Oseltamivir": {"unit":"mg","max_dose":75}
-            },
-            "Others": {
-                "Omeprazole": {
-                    "unit":"mg",
-                    "usual":[0.8,0.8],
-                    "max_dose":40,
-                    "notes":"Give 30 minutes before meals for best effect."
-                },
-                "Nifedipine": {
-                    "unit":"mg",
-                    "usual":[1,2],
-                    "max_dose":10,
-                    "max_day":120,
-                    "notes":"Also max 3 mg/kg/day."
-                },
-                "Aspirin (Antiplatelet)": {
-                    "unit":"mg",
-                    "usual":[1,5],
-                    "notes":"Once daily antiplatelet dosing."
-                },
-                "Aspirin (Anti-inflammatory)": {
-                    "unit":"mg",
-                    "usual":[80,100],
-                    "notes":"Divide Q6–8H."
-                },
-                "Prednisolone": {
-                    "unit":"mg",
-                    "usual":[1,2],
-                    "max_day":60
-                },
-                "Sodium Valproate": {
-                    "unit":"mg",
-                    "usual":[10,15],
-                    "severe":[60,60],
-                    "notes":"Given BD or TDS."
-                },
-                "Salbutamol MDI": {
-                    "unit":"puffs",
-                    "notes":"0.2–0.3 puffs/kg/dose (min 2, max 8 puffs)."
-                },
-                "Salbutamol Nebuliser (0.5%)": {
-                    "unit":"mL",
-                    "notes":"0.03 mL/kg/dose, max 2 mL."
-                }
-            }
-        },
-        "IV / IM": {
-            "Antibiotics": {
-                "Cefazolin": {"unit":"mg","usual":[25,50],"severe":[100,150],"max_day":12000},
-                "Ceftriaxone": {"unit":"mg","usual":[50,75],"severe":[100,100],"max_dose":2000,"max_day":4000},
-                "Cloxacillin": {"unit":"mg","usual":[100,100],"severe":[200,300],"max_dose":2000,"max_day":12000},
-                "Gentamicin": {"unit":"mg","usual":[5,7.5]},
-                "Metronidazole": {"unit":"mg","usual":[22.5,40],"max_day":4000},
-                "Vancomycin": {"unit":"mg","usual":[30,60],"max_dose":500,"max_day":2000}
-            },
-            "Antivirals": {
-                "Acyclovir": {"unit":"mg","usual":[30,30]}
-            },
-            "Others": {
-                "Omeprazole": {
-                    "unit":"mg",
-                    "usual":[1,1],
-                    "max_dose":40
-                },
-                "Hydrocortisone": {
-                    "unit":"mg",
-                    "usual":[16,16],
-                    "max_dose":100,
-                    "max_day":400
-                }
-            }
-        }
-    }
-
-      # ------------------------------
     # Inputs
     # ------------------------------
     weight = st.number_input("Patient weight (kg)", min_value=0.1, step=0.1)
@@ -189,141 +85,108 @@ if st.session_state.page == "dosage_dispensing":
         horizontal=True
     )
 
-    if med_group == "Antibiotics":
-        system = st.radio(
-            "Diagnosis by system",
-            list(antibiotics_data.keys()),
-            horizontal=True
-        )
+    med_info = None
 
-        med_search = st.text_input(
-            "Search antibiotic",
-            placeholder="Type antibiotic name..."
-        ).strip()
+    # ---------------- ANTIBIOTICS ----------------
+    if med_group == "Antibiotics":
+        system = st.radio("Diagnosis by system", list(antibiotics_data.keys()), horizontal=True)
+
+        med_search = st.text_input("Search antibiotic").strip()
 
         available_meds = sorted(antibiotics_data.get(system, {}).keys())
 
-        if med_search:
-            filtered_meds = [
-                med_name for med_name in available_meds
-                if med_search.lower() in med_name.lower()
-            ]
-        else:
-            filtered_meds = available_meds
+        filtered_meds = [
+            m for m in available_meds
+            if med_search.lower() in m.lower()
+        ] if med_search else available_meds
 
         if not filtered_meds:
-            st.warning("No antibiotic found for this system.")
+            st.warning("No antibiotic found.")
+            st.stop()
+
+        med = st.selectbox("Medication", filtered_meds)
+        med_options = antibiotics_data[system][med]
+
+        if len(med_options) == 1:
+            selected_option = med_options[0]
         else:
-            med = st.selectbox("Medication", filtered_meds)
+            option_labels = [opt["route"] for opt in med_options]
+            selected_label = st.radio("Choose route", option_labels, horizontal=True)
+            selected_option = med_options[option_labels.index(selected_label)]
 
-            med_options = antibiotics_data[system][med]
+        med_info = selected_option
 
-            # If only 1 option → auto select
-            if len(med_options) == 1:
-                selected_option = med_options[0]
-            else:
-                option_labels = [opt["route"] for opt in med_options]
-
-                selected_label = st.radio(
-                    "Choose route",
-                    option_labels,
-                    horizontal=True
-                )
-
-                selected_option = med_options[option_labels.index(selected_label)]
-
-            # Show selected info
-            st.markdown(f"**Route:** {selected_option['route']}")
-            st.markdown(f"**Unit:** {selected_option['unit']}")
-            
-            med_info = selected_option
-    elif med_group == "Others":
-        med_search = st.text_input(
-            "Search medication",
-            placeholder="Type medication name..."
-        ).strip()
+    # ---------------- OTHERS ----------------
+    else:
+        med_search = st.text_input("Search medication").strip()
 
         available_meds = sorted(others_data.keys())
 
-        if med_search:
-            filtered_meds = [
-                med_name for med_name in available_meds
-                if med_search.lower() in med_name.lower()
-            ]
-        else:
-            filtered_meds = available_meds
+        filtered_meds = [
+            m for m in available_meds
+            if med_search.lower() in m.lower()
+        ] if med_search else available_meds
 
         if not filtered_meds:
             st.warning("No medication found.")
+            st.stop()
+
+        med = st.selectbox("Medication", filtered_meds)
+        med_options = others_data[med]
+
+        if len(med_options) == 1:
+            selected_option = med_options[0]
         else:
-            med = st.selectbox("Medication", filtered_meds)
+            option_labels = [opt["route"] for opt in med_options]
+            selected_label = st.radio("Choose route", option_labels, horizontal=True)
+            selected_option = med_options[option_labels.index(selected_label)]
 
-            med_options = others_data[med]
+        med_info = selected_option
 
-            if len(med_options) == 1:
-                selected_option = med_options[0]
-            else:
-                option_labels = [opt["route"] for opt in med_options]
+    if med_info is None:
+        st.stop()
 
-                selected_label = st.radio(
-                    "Choose route",
-                    option_labels,
-                    horizontal=True
-                )
+    st.markdown(f"**Route:** {med_info['route']}")
+    st.markdown(f"**Unit:** {med_info['unit']}")
 
-                selected_option = med_options[option_labels.index(selected_label)]
-
-            st.markdown(f"**Route:** {selected_option['route']}")
-            st.markdown(f"**Unit:** {selected_option['unit']}")
-
-            med_info = selected_option
-
-    if med_group == "Antibiotics" and 'med_info' not in locals():
-        st.warning("Please select a medication first.")
-        st.stop()        
-
-    severity = st.radio("Severity", ["Usual / Mild–Moderate", "Severe"], horizontal=True)
-
+    # ------------------------------
+    # Dose Inputs
+    # ------------------------------
     dose = st.number_input(
-        f"Ordered dose per administration ({med_info['unit']})",
+        f"Ordered dose ({med_info['unit']})",
         min_value=0.0,
         step=0.1
     )
 
-    freq_map = {"Q24H":1,"Q12H":2,"Q8H":3,"Q6H":4}
-    freq_label = st.selectbox("Frequency", list(freq_map.keys()))
-    freq = freq_map[freq_label]
+    freq_map = {"Q24H":1, "Q12H":2, "Q8H":3, "Q6H":4}
+    freq = freq_map[st.selectbox("Frequency", list(freq_map.keys()))]
 
     # ------------------------------
-    # Side-by-side Display
+    # MAIN BUTTON
     # ------------------------------
-    st.markdown("### ⚖️ Recommended vs Ordered Dose")
+    if st.button("Check Dose", key="check_dose_main"):
 
-    key = "severe" if severity == "Severe" and "severe" in med_info else "usual"
+        st.markdown("### ⚖️ Recommended vs Ordered Dose")
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("#### 📘 Recommended")
-        if key in med_info:
-            low, high = med_info[key]
-            st.write(f"**mg/kg/day:** {low}–{high}")
-            st.write(f"**mg/day:** {(low*weight):.1f}–{(high*weight):.1f}")
-            st.write(f"**mg/dose:** {(low*weight/freq):.1f}–{(high*weight/freq):.1f}")
-        if "notes" in med_info:
-            st.info(med_info["notes"])
-
-    with col2:
-        st.markdown("#### 📊 Ordered")
+        key = "usual"
         daily = dose * freq
-        st.write(f"**mg/kg/day:** {(daily/weight):.2f}")
-        st.write(f"**mg/day:** {daily:.1f}")
-        st.write(f"**mg/dose:** {dose:.1f}")
 
-    # ------------------------------
-    # Safety Check
-    # ------------------------------
-    if st.button("Check Dose"):
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("#### 📘 Recommended")
+
+            if key in med_info:
+                low, high = med_info[key]
+                st.write(f"{low}–{high} mg/kg/day")
+                st.write(f"{(low*weight/freq):.1f}–{(high*weight/freq):.1f} mg/dose")
+
+        with col2:
+            st.markdown("#### 📊 Ordered")
+            st.write(f"{(daily/weight):.2f} mg/kg/day")
+            st.write(f"{dose:.1f} mg/dose")
+
+        # ---------------- Safety ----------------
         warnings = []
 
         if key in med_info:
@@ -334,54 +197,46 @@ if st.session_state.page == "dosage_dispensing":
                 warnings.append("Above recommended range")
 
         if "max_day" in med_info and daily > med_info["max_day"]:
-            warnings.append("Exceeds maximum daily dose")
+            warnings.append("Exceeds max daily dose")
 
         if "max_dose" in med_info and dose > med_info["max_dose"]:
-            warnings.append("Exceeds maximum per dose")
+            warnings.append("Exceeds max per dose")
 
-        if warnings:
-            for w in warnings:
-                st.error(f"⚠️ {w}")
-        else:
-            st.success("✅ Ordered dose within recommended limits")
+        for w in warnings:
+            st.warning(w)
 
-    # ---------------- Dispensing Calculator ----------------
+    # ------------------------------
+    # DISPENSING CALCULATOR (SAFE OUTSIDE BUTTON)
+    # ------------------------------
     st.markdown("### 🧴 Dispensing Calculator")
 
-    unit_disp = st.text_input("Medication unit (e.g., mg):", key="disp_unit", placeholder="mg")
+    unit_disp = st.text_input("Medication unit (e.g. mg):", key="disp_unit")
 
     ordered_dose_dispense = st.number_input(
-        f"Enter ordered dose ({unit_disp}):",
-        min_value=0.0, step=0.1,
-        value=st.session_state.get("sync_ordered_dose", 0.0),
+        "Enter ordered dose",
+        min_value=0.0,
+        step=0.1,
         key="ordered_dose_dispense"
     )
 
-    # Two-way sync
-    if ordered_dose_dispense != st.session_state.sync_ordered_dose:
-        st.session_state.sync_ordered_dose = ordered_dose_dispense
-        st.session_state["ordered_dose_admin"] = ordered_dose_dispense
+    med_amount = st.text_input("Strength", key="disp_med_amount")
+    med_volume = st.text_input("Volume (ml)", key="disp_med_volume")
 
-    st.markdown("### Medication Concentration")
-    med_amount = st.text_input(f"Enter medication strength ({unit_disp}):", key="disp_med_amount", placeholder="e.g., 250")
-    med_volume = st.text_input("Enter volume of solution (ml):", key="disp_med_volume", placeholder="e.g., 5")
+    if st.button("Calculate Volume", key="calc_dispense"):
 
-    if st.button("Calculate Volume to Dispense"):
         try:
             ordered_val = float(ordered_dose_dispense)
             med_amount_val = float(med_amount)
             med_volume_val = float(med_volume)
 
-            if med_amount_val > 0 and med_volume_val > 0:
-                concentration_per_ml = med_amount_val / med_volume_val
-                volume_to_dispense = ordered_val / concentration_per_ml
-                st.success(f"➡️ Dispense: {volume_to_dispense:.2f} ml per dose")
-                st.info(f"(Based on {med_amount_val} {unit_disp} per {med_volume_val} ml, "
-                        f"concentration = {concentration_per_ml:.2f} {unit_disp}/ml)")
-            else:
-                st.warning("⚠️ Please enter valid medication strength and volume.")
-        except ValueError:
-            st.warning("⚠️ Please enter numeric values for dose, strength, and volume.")
+            conc = med_amount_val / med_volume_val
+            volume = ordered_val / conc
+
+            st.success(f"➡️ Dispense: {volume:.2f} ml")
+
+        except:
+            st.warning("Invalid input")
+
 
 # ------------------------------
 #2 Pediatric Fluids Requirement

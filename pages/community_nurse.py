@@ -24,7 +24,6 @@ def run_community_nurse_page():
 
     dob = st.date_input("Date of Birth", key="cn_dob")
 
-    # Manual time input (HH:MM)
     tob_str = st.text_input(
         "Time of Birth (HH:MM)",
         placeholder="e.g. 14:35",
@@ -52,8 +51,10 @@ def run_community_nurse_page():
             st.error("⚠️ Invalid Time of Birth format. Please use HH:MM (e.g. 09:45)")
 
     # =========================
-    # CALCULATION BLOCK
+    # HOURS OF LIFE CALCULATION
     # =========================
+    hours_of_life = None
+
     if dob and tob and current_date and current_time:
 
         birth_datetime = datetime.combine(dob, tob)
@@ -63,77 +64,81 @@ def run_community_nurse_page():
 
         if hours_of_life < 0:
             st.error("⚠️ Current date/time is before birth date/time.")
+            hours_of_life = None
         else:
             st.success(f"✅ Hours of Life: **{hours_of_life:.1f} hours**")
 
-            st.markdown("---")
+    else:
+        st.info("ℹ️ Enter valid DOB and Time of Birth to calculate hours of life.")
 
-            # =========================
-            # 2. WEIGHT LOSS CALCULATOR
-            # =========================
-            st.markdown("## ⚖️ Weight Loss Calculator")
+    st.markdown("---")
 
-            birthweight = st.number_input(
-                "Birth Weight (g)",
-                min_value=0.0,
-                step=1.0,
-                key="birthweight"
-            )
+    # =========================
+    # 2. WEIGHT LOSS CALCULATOR
+    # =========================
+    st.markdown("## ⚖️ Weight Loss Calculator")
 
-            current_weight = st.number_input(
-                "Current Weight (g)",
-                min_value=0.0,
-                step=1.0,
-                key="current_weight"
-            )
+    birthweight = st.number_input(
+        "Birth Weight (g)",
+        min_value=0,
+        step=1,
+        format="%d",
+        key="birthweight"
+    )
 
-            if birthweight > 0 and current_weight > 0:
+    current_weight = st.number_input(
+        "Current Weight (g)",
+        min_value=0,
+        step=1,
+        format="%d",
+        key="current_weight"
+    )
 
-                weight_loss_percent = (
-                    (birthweight - current_weight)
-                    / birthweight
-                ) * 100
+    if birthweight > 0 and current_weight > 0:
 
-                # ✅ NEW LOGIC: No weight loss case
-                if weight_loss_percent <= 0:
-                    st.success("✅ No weight loss")
+        weight_loss_percent = (
+            (birthweight - current_weight)
+            / birthweight
+        ) * 100
 
-                elif weight_loss_percent > 10:
-                    st.error(
-                        f"🚨 Weight Loss: **{weight_loss_percent:.1f}%**"
-                    )
+        if weight_loss_percent <= 0:
+            st.success("✅ No weight loss")
 
-                else:
-                    st.success(
-                        f"✅ Weight Loss: **{weight_loss_percent:.1f}%**"
-                    )
+        elif weight_loss_percent > 10:
+            st.error(f"🚨 Weight Loss: **{weight_loss_percent:.1f}%**")
 
-            st.markdown("---")
+        else:
+            st.success(f"✅ Weight Loss: **{weight_loss_percent:.1f}%**")
 
-            # =========================
-            # 3. NEONATE FEED GUIDE
-            # =========================
-            st.markdown("## 🍼 Neonate Feed Guide")
+    st.markdown("---")
 
-            if hours_of_life < 24:
-                feed_recommendation = "10 mL/feed"
+    # =========================
+    # 3. NEONATE FEED GUIDE
+    # =========================
+    st.markdown("## 🍼 Neonate Feed Guide")
 
-            elif 24 <= hours_of_life < 48:
-                feed_recommendation = "10–15 mL/feed"
+    if hours_of_life is not None:
 
-            elif 48 <= hours_of_life < 72:
-                feed_recommendation = "15–30 mL/feed"
+        if hours_of_life < 24:
+            feed_recommendation = "10 mL/feed"
 
-            elif 72 <= hours_of_life < 96:
-                feed_recommendation = "30–60 mL/feed"
+        elif 24 <= hours_of_life < 48:
+            feed_recommendation = "10–15 mL/feed"
 
-            else:
-                feed_recommendation = "Refer to institutional feeding guidelines"
+        elif 48 <= hours_of_life < 72:
+            feed_recommendation = "15–30 mL/feed"
 
-            st.info(
-                f"Recommended Feed Volume: **{feed_recommendation}**"
-            )
+        elif 72 <= hours_of_life < 96:
+            feed_recommendation = "30–60 mL/feed"
 
-            st.caption(
-                "Guideline applicable to all term well babies ≥37 weeks gestation."
-            )
+        else:
+            feed_recommendation = "Refer to institutional feeding guidelines"
+
+        st.info(f"Recommended Feed Volume: **{feed_recommendation}**")
+
+    else:
+        st.warning("⚠️ Enter valid DOB and Time of Birth to show feed guidance.")
+
+    st.caption(
+        "Guideline applicable to all term well babies ≥37 weeks gestation."
+    )

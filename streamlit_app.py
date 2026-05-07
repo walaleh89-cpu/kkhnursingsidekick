@@ -10,6 +10,7 @@ from pages.neonate_feeds import run_neonate_feeds_page
 from pages.compatibility import run_compatibility_page
 from pages.vitals import run_vitals_page
 from pages.urine_output import run_urine_output_page
+from pages.community_nurse import run_community_nurse_page
 
 
 st.set_page_config(page_title="🩺 Nursing Calculator", page_icon="🩺", layout="wide")
@@ -50,6 +51,7 @@ def show_home():
         ("💉 Drug Compatibility", "compatibility"),
         ("📊 Vital Signs", "vitals"),
         ("🚰 Urine Output", "urine_output"),
+        ("👩‍⚕️ Community Nurse", "community_nurse"),
     ]
 
     for i in range(0, len(calculators), 5):
@@ -123,3 +125,8 @@ elif st.session_state.page == "vitals":
 #----------------------------------------------
 elif st.session_state.page == "urine_output":
     run_urine_output_page()
+
+# 11. Community Nurse 
+# ---------------------------------------------
+elif st.session_state.page == "community_nurse":
+    run_community_nurse_page()    

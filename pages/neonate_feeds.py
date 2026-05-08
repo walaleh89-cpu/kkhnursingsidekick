@@ -7,7 +7,11 @@ def run_neonate_feeds_page():
     if st.button("🏠 Back to Home"):
         st.session_state.page = "home"
         st.rerun()
-        # --- Inputs with blank defaults ---
+
+    # =========================
+    # INPUTS
+    # =========================
+
     weight_neonate = st.number_input(
         "Enter neonate weight (kg):",
         min_value=0.0,
@@ -17,35 +21,91 @@ def run_neonate_feeds_page():
         key="ft_weight"
     )
 
-    day_of_life = st.number_input(
-        "Enter Day of Life:",
-        min_value=1,
-        step=1,
-        value=None,
-        placeholder="Enter day",
+    # Day of life dropdown
+    day_options = [
+        "Day 1 of life",
+        "Day 2 of life",
+        "Day 3 of life",
+        "Day 4–28 of life"
+    ]
+
+    day_selection = st.selectbox(
+        "Select Day of Life:",
+        options=day_options,
+        index=None,
+        placeholder="Choose day of life",
         key="ft_day"
     )
 
     feed_interval = st.radio(
         "Feeding Interval:",
         ["2-hourly", "3-hourly"],
-        index=None,   # 👈 no default selection
+        index=None,
         key="ft_interval"
     )
 
-    # Feed ml/kg/day by day (default from day 4 onwards is 150 ml/kg/day)
-    feed_dict = {1: 60, 2: 90, 3: 120}
-    feed_ml_per_kg = feed_dict.get(day_of_life, 150) if day_of_life else None
+    # =========================
+    # FEED VOLUME MAPPING
+    # =========================
+
+    feed_mapping = {
+        "Day 1 of life": 60,
+        "Day 2 of life": 90,
+        "Day 3 of life": 120,
+        "Day 4–28 of life": 150
+    }
+
+    feed_ml_per_kg = (
+        feed_mapping.get(day_selection)
+        if day_selection
+        else None
+    )
+
+    # =========================
+    # CALCULATIONS
+    # =========================
 
     if st.button("Calculate Feeds", key="calc_feeds"):
-        if weight_neonate is not None and day_of_life is not None and feed_interval is not None:
+
+        if (
+            weight_neonate is not None
+            and day_selection is not None
+            and feed_interval is not None
+        ):
+
             total_feed = weight_neonate * feed_ml_per_kg
-            feeds_per_day = 12 if feed_interval == "2-hourly" else 8
+
+            feeds_per_day = (
+                12 if feed_interval == "2-hourly" else 8
+            )
+
             feed_per_time = total_feed / feeds_per_day
+
             iv_fluids = weight_neonate * 100
 
-            st.success(f"Total Feed Volume: {total_feed:.0f} ml/day")
-            st.info(f"Feed Volume per Feed ({feed_interval}): {feed_per_time:.0f} ml")
-            st.warning(f"IV Fluids Volume: {iv_fluids:.0f} ml/day")
+            # =========================
+            # RESULTS
+            # =========================
+
+            st.success(
+                f"Total Feed Volume: {total_feed:.0f} ml/day"
+            )
+
+            st.info(
+                f"Feed Volume per Feed ({feed_interval}): "
+                f"{feed_per_time:.0f} ml"
+            )
+
+            st.warning(
+                f"IV Fluids Volume: {iv_fluids:.0f} ml/day"
+            )
+
+            st.caption(
+                "Note: Neonate feeds and IV fluids can vary "
+                "based on clinical conditions."
+            )
+
         else:
-            st.warning("⚠️ Please enter all inputs before calculating.")    
+            st.warning(
+                "⚠️ Please enter all inputs before calculating."
+            )

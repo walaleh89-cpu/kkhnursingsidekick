@@ -8,7 +8,7 @@ def run_urine_output_page():
         st.rerun()
 
     # =========================
-    # INPUTS (SAFE STREAMLIT TYPES)
+    # INPUTS
     # =========================
 
     age_group = st.radio(
@@ -50,17 +50,34 @@ def run_urine_output_page():
 
             st.info(f"Urine Output: {uo_mlkg_hr:.2f} ml/kg/hr")
 
-            if age_group == "Neonate (<28 days)":
-                if uo_mlkg_hr > 0.5:
-                    st.success("✅ Normal (>0.5 ml/kg/hr)")
-                else:
-                    st.error("⚠️ Low urine output")
+            # =========================
+            # HIGH OUTPUT WARNING
+            # =========================
+            if uo_mlkg_hr > 4:
+                st.warning(
+                    "⚠️ High urine output (>4 ml/kg/hr). "
+                    "Correlate clinically as this may suggest polyuria."
+                )
 
-            else:
-                if uo_mlkg_hr > 1.0:
-                    st.success("✅ Normal (>1 ml/kg/hr)")
-                else:
+            # =========================
+            # NEONATE
+            # =========================
+            if age_group == "Neonate (<28 days)":
+
+                if uo_mlkg_hr < 0.5:
                     st.error("⚠️ Low urine output")
+                else:
+                    st.success("✅ Normal (>0.5 ml/kg/hr)")
+
+            # =========================
+            # PEDIATRIC
+            # =========================
+            else:
+
+                if uo_mlkg_hr < 1.0:
+                    st.error("⚠️ Low urine output")
+                else:
+                    st.success("✅ Normal (>1 ml/kg/hr)")
 
         else:
             st.warning("Please enter valid values.")

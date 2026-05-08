@@ -26,7 +26,7 @@ def run_vitals_page():
             step=1,
             key="vs_months"
         )
-        age_years = age_months / 12 if age_months else None
+        age_years = age_months / 12 if age_months is not None else None
 
     else:
         age_years = st.number_input(
@@ -85,7 +85,7 @@ def run_vitals_page():
 
     if age_years is not None:
         if age_years < 10:
-            sbp_min = (age_years * 2) + 70
+            sbp_min = int((age_years * 2) + 70)
             sbp_range = (sbp_min, 120)
         else:
             sbp_range = (90, 120)
@@ -98,31 +98,60 @@ def run_vitals_page():
     if temp and hr:
         compensation = int((temp - 37.0) * 10)
         adjusted_hr = hr - compensation
-        st.info(f"Fever adjustment: -{compensation} bpm → {adjusted_hr} bpm")
+
+        st.info(
+            f"Fever adjustment: -{compensation} bpm → "
+            f"Adjusted HR = {adjusted_hr} bpm"
+        )
 
     # =========================
     # RESULTS
     # =========================
+
+    st.markdown("---")
+    st.subheader("Results")
+
+    # HEART RATE
     if hr_range and hr:
+
+        st.write(f"**Reference HR Range:** {hr_range[0]}–{hr_range[1]} bpm")
+
         if adjusted_hr < hr_range[0]:
-            st.error(f"Bradycardia (HR {hr})")
+            st.error(f"⚠️ Bradycardia (HR {hr})")
+
         elif adjusted_hr > hr_range[1]:
-            st.error(f"Tachycardia (HR {hr})")
-        else:
-            st.success(f"HR normal ({hr_range[0]}–{hr_range[1]})")
+            st.error(f"⚠️ Tachycardia (HR {hr})")
 
+        else:
+            st.success("✅ HR within normal range")
+
+    # RESPIRATORY RATE
     if rr_range and rr:
-        if rr < rr_range[0]:
-            st.error("Bradypnea")
-        elif rr > rr_range[1]:
-            st.error("Tachypnea")
-        else:
-            st.success("RR normal")
 
-    if sbp_range and sbp:
-        if sbp < sbp_range[0]:
-            st.error("Hypotension")
-        elif sbp > sbp_range[1]:
-            st.error("Hypertension")
+        st.write(f"**Reference RR Range:** {rr_range[0]}–{rr_range[1]} /min")
+
+        if rr < rr_range[0]:
+            st.error("⚠️ Bradypnea")
+
+        elif rr > rr_range[1]:
+            st.error("⚠️ Tachypnea")
+
         else:
-            st.success("BP normal")
+            st.success("✅ RR within normal range")
+
+    # BLOOD PRESSURE
+    if sbp_range and sbp:
+
+        st.write(
+            f"**Reference SBP Range:** "
+            f"{sbp_range[0]}–{sbp_range[1]} mmHg"
+        )
+
+        if sbp < sbp_range[0]:
+            st.error("⚠️ Hypotension")
+
+        elif sbp > sbp_range[1]:
+            st.error("⚠️ Hypertension")
+
+        else:
+            st.success("✅ BP within normal range")

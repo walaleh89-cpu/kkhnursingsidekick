@@ -79,7 +79,7 @@ def run_neonatal_jaundice_page():
         rules = rules_high if risk == "High-Risk" else rules_normal
         for start, end, threshold in rules:
             if start <= hours <= end:
-                return tcb > threshold
+                return tcb >= threshold
         return False
 
     # ===============================

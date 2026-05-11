@@ -141,33 +141,87 @@ def run_dosage_page():
             st.warning(w)
 
     # ------------------------------
-    # DISPENSING CALCULATOR (SAFE OUTSIDE BUTTON)
+    # DISPENSING CALCULATOR
     # ------------------------------
     st.markdown("### 🧴 Dispensing Calculator")
 
-    unit_disp = st.text_input("Medication unit (e.g. mg):", key="disp_unit")
-
-    ordered_dose_dispense = st.number_input(
+    # Ordered dose
+    ordered_dose = st.number_input(
         "Enter ordered dose",
         min_value=0.0,
         step=0.1,
-        key="ordered_dose_dispense"
+        key="ordered_dose"
     )
 
-    med_amount = st.text_input("Strength", key="disp_med_amount")
-    med_volume = st.text_input("Volume (ml)", key="disp_med_volume")
+    # Unit dropdown
+    dose_unit = st.selectbox(
+        "Select unit",
+        ["g", "mg", "mcg", "unit"],
+        key="dose_unit"
+    )
 
-    if st.button("Calculate Volume", key="calc_dispense"):
+    # Medication form
+    med_form = st.radio(
+        "Medication form",
+        ["Solution", "Tablet / Capsule"],
+        key="med_form"
+    )
 
-        try:
-            ordered_val = float(ordered_dose_dispense)
-            med_amount_val = float(med_amount)
-            med_volume_val = float(med_volume)
+    st.markdown("---")
 
-            conc = med_amount_val / med_volume_val
-            volume = ordered_val / conc
+    # =========================
+    # SOLUTION
+    # =========================
+    if med_form == "Solution":
 
-            st.success(f"➡️ Dispense: {volume:.2f} ml")
+        st.markdown("#### 💧 Solution Strength")
 
-        except:
-            st.warning("Invalid input")
+        solution_strength = st.number_input(
+            f"Medication strength ({dose_unit})",
+            min_value=0.0,
+            step=0.1,
+            key="solution_strength"
+        )
+
+        solution_volume = st.number_input(
+            "In how many ml?",
+            min_value=0.1,
+            step=0.1,
+            key="solution_volume"
+        )
+
+        if st.button("Calculate Volume", key="calc_solution"):
+
+            try:
+                concentration = solution_strength / solution_volume
+                required_volume = ordered_dose / concentration
+
+                st.success(f"➡️ Dispense: {required_volume:.2f} ml")
+
+            except:
+                st.warning("Invalid input")
+
+
+    # =========================
+    # TABLET / CAPSULE
+    # =========================
+    else:
+
+        st.markdown("#### 💊 Tablet / Capsule Strength")
+
+        tablet_strength = st.number_input(
+            f"Medication strength per tablet/capsule ({dose_unit})",
+            min_value=0.0,
+            step=0.1,
+            key="tablet_strength"
+        )
+
+        if st.button("Calculate Tablets", key="calc_tablet"):
+
+            try:
+                tablets_needed = ordered_dose / tablet_strength
+
+                st.success(f"➡️ Give: {tablets_needed:.2f} tablet(s) / capsule(s)")
+
+            except:
+                st.warning("Invalid input")

@@ -25,7 +25,7 @@ def run_neonatal_jaundice_page():
         birth_naive = datetime.combine(dob, birth_time)
         birth_datetime = HOSPITAL_TZ.localize(birth_naive)
         current_datetime = datetime.now(HOSPITAL_TZ)
-        hours_of_life = (current_datetime - birth_datetime).total_seconds() / 3600
+        hours_of_life = int((current_datetime - birth_datetime).total_seconds() // 3600)
         st.success(f"✅ Hours of Life: {hours_of_life:.1f} hours")
     except Exception:
         st.warning("Unable to calculate age. Please check date and time inputs.")
@@ -113,6 +113,7 @@ def run_neonatal_jaundice_page():
     # SB EVALUATION ENGINE
     # ===============================
     def evaluate_jaundice(age, sb, on_phototherapy, rules):
+        age = int(age)
         for start, end, stop_pt, single, double, intense, exchange in rules:
             if start <= age <= end:
 

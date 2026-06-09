@@ -11,7 +11,7 @@ from pages.compatibility import run_compatibility_page
 from pages.vitals import run_vitals_page
 from pages.urine_output import run_urine_output_page
 from pages.community_nurse import run_community_nurse_page
-
+from pages.pews import run_pews_page
 
 st.set_page_config(page_title="🩺 Nursing Calculator", page_icon="🩺", layout="wide")
 st.title("🩺 Nursing Calculator App")
@@ -52,6 +52,7 @@ def show_home():
         ("📊 Vital Signs", "vitals"),
         ("🚰 Urine Output", "urine_output"),
         ("👩‍⚕️ Community Nurse", "community_nurse"),
+        ("📊 PEWS Score", "pews"),
     ]
 
     for i in range(0, len(calculators), 5):
@@ -129,4 +130,9 @@ elif st.session_state.page == "urine_output":
 # 11. Community Nurse 
 # ---------------------------------------------
 elif st.session_state.page == "community_nurse":
-    run_community_nurse_page()    
+    run_community_nurse_page() 
+     
+# 12. PEWS 
+#----------------------------------------------
+elif st.session_state.page == "pews":
+    run_pews_page()  

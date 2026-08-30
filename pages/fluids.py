@@ -15,7 +15,11 @@ def run_fluids_page():
 
     option = st.radio(
         "Include Rehydration?",
-        ["Maintenance Only", "Maintenance + 3% Rehydration", "Maintenance + 5% Rehydration"],
+        [
+            "Maintenance Only",
+            "Maintenance + 3% Rehydration",
+            "Maintenance + 5% Rehydration"
+        ],
         index=0,
         key="rehydration_option"
     )
@@ -23,6 +27,10 @@ def run_fluids_page():
     if st.button("Calculate Fluids Requirement", key="calc_fluids"):
         try:
             weight_val = float(weight_fluid)
+
+            if weight_val <= 0:
+                st.warning("Enter a valid weight greater than 0 kg.")
+                return
 
             def calculate_fluids(weight):
                 if weight <= 10:
@@ -33,17 +41,32 @@ def run_fluids_page():
                     return 1500 + (weight - 20) * 20
 
             maintenance = calculate_fluids(weight_val)
+
             rehydration_3 = weight_val * 30
             rehydration_5 = weight_val * 50
 
             if option == "Maintenance Only":
-                total = maintenance
-            elif option == "Maintenance + 3% Rehydration":
-                total = maintenance + rehydration_3
-            else:
-                total = maintenance + rehydration_5
+                calculated_total = maintenance
 
-            st.success(f"{total:.0f} ml/day | {total/24:.0f} ml/hr")
+            elif option == "Maintenance + 3% Rehydration":
+                calculated_total = maintenance + rehydration_3
+
+            else:
+                calculated_total = maintenance + rehydration_5
+
+            # Maximum total fluid cap: 2400 ml/day
+            total = min(calculated_total, 2400)
+
+            st.success(
+                f"{total:.0f} ml/day | {total/24:.0f} ml/hr"
+            )
+
+            # Inform user when the calculated amount exceeds the cap
+            if calculated_total > 2400:
+                st.info(
+                    f"Calculated requirement: {calculated_total:.0f} ml/day. "
+                    f"Maximum fluid volume is capped at 2400 ml/day."
+                )
 
         except ValueError:
             st.warning("Enter valid weight.")

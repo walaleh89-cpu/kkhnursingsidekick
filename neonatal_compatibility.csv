@@ -1,0 +1,1327 @@
+﻿Drug1,Drug2,Compatibility,Code
+TPN (with fats),DAE (without fats),Compatible,C
+TPN (with fats),Aciclovir,Not compatible,X
+TPN (with fats),Adrenaline,No information,NI
+TPN (with fats),Alprostadil (PGE-1),Not compatible,X
+TPN (with fats),Amphotericin (Conventional),Not compatible,X
+TPN (with fats),Amikacin,Compatible,C
+TPN (with fats),Ampicillin,Compatible if ampicillin concentration is less than or equal to 20 mg/mL,Cc
+TPN (with fats),Ampi-sulbac,Compatible,C
+TPN (with fats),Azithromycin,No information,NI
+TPN (with fats),Caffeine citrate,Not compatible,X
+TPN (with fats),Calcium Gluconate,Not compatible,X
+TPN (with fats),Cefazolin,Not compatible,X
+TPN (with fats),Cefepime,Not compatible,X
+TPN (with fats),Cefotaxime,Compatible,C
+TPN (with fats),Ceftazidime,Compatible,C
+TPN (with fats),Chlorpromazine,Compatible,C
+TPN (with fats),Clonidine,No information,NI
+TPN (with fats),Cloxacillin,Compatible,C
+TPN (with fats),Co-trimoxazole,Compatible,C
+TPN (with fats),Dexamethasone,Compatible,C
+TPN (with fats),Dexmedetomidine,Compatible,C
+TPN (with fats),Dobutamine,Compatible,C
+TPN (with fats),Dopamine,Compatible if dopamine concentration is less than 3.2 mg/mL (Neonatology Department consensus),Cd
+TPN (with fats),Erythromycin,Compatible,C
+TPN (with fats),Fentanyl,Compatible,C
+TPN (with fats),Fluconazole,Compatible,C
+TPN (with fats),Frusemide,Not compatible,X
+TPN (with fats),Gentamicin,Not compatible,X
+TPN (with fats),Heparin </= 1unit/mL,Compatible,C
+TPN (with fats),Hydrocortisone,Not compatible,X
+TPN (with fats),Indomethacin,Not compatible,X
+TPN (with fats),"Insulin, Regular",Compatible,C
+TPN (with fats),Ketamine,No information,NI
+TPN (with fats),Magnesium Sulphate,Compatible,C
+TPN (with fats),Meropenem,Not compatible,X
+TPN (with fats),Metronidazole,Not compatible,X
+TPN (with fats),Midazolam,Not compatible,X
+TPN (with fats),Milrinone,Compatible,C
+TPN (with fats),Morphine,Compatible,C
+TPN (with fats),Noradrenaline,Compatible,C
+TPN (with fats),Paracetamol,Compatible,C
+TPN (with fats),Penicllin G Sodium,Compatible,C
+TPN (with fats),Phenobarbitone,Not compatible,X
+TPN (with fats),Phenytoin,Not compatible,X
+TPN (with fats),Phytomenadione (Vitamin K),No information,NI
+TPN (with fats),Piperacillin-tazobactam,Compatible,C
+TPN (with fats),Rocuronium,Not compatible,X
+TPN (with fats),Sodium Acetate,Compatible,C
+TPN (with fats),Sodium bicarbonate,Not compatible,X
+TPN (with fats),Vancomycin,Compatible,C
+TPN (with fats),Vasopressin,No information,NI
+DAE (without fats),Aciclovir,Not compatible,X
+DAE (without fats),Adrenaline,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+DAE (without fats),Alprostadil (PGE-1),Compatible,C
+DAE (without fats),Amphotericin (Conventional),Not compatible,X
+DAE (without fats),Amikacin,Compatible,C
+DAE (without fats),Ampicillin,Compatible if ampicillin concentration is less than or equal to 20 mg/mL,Cc
+DAE (without fats),Ampi-sulbac,Compatible,C
+DAE (without fats),Azithromycin,Compatible,C
+DAE (without fats),Caffeine citrate,Compatible,C
+DAE (without fats),Calcium Gluconate,Not compatible,X
+DAE (without fats),Cefazolin,Not compatible,X
+DAE (without fats),Cefepime,Compatible,C
+DAE (without fats),Cefotaxime,Compatible,C
+DAE (without fats),Ceftazidime,Compatible,C
+DAE (without fats),Chlorpromazine,Compatible,C
+DAE (without fats),Clonidine,No information,NI
+DAE (without fats),Cloxacillin,Compatible,C
+DAE (without fats),Co-trimoxazole,Compatible,C
+DAE (without fats),Dexamethasone,Compatible,C
+DAE (without fats),Dexmedetomidine,Compatible,C
+DAE (without fats),Dobutamine,Compatible,C
+DAE (without fats),Dopamine,Compatible,C
+DAE (without fats),Erythromycin,Compatible,C
+DAE (without fats),Fentanyl,Compatible,C
+DAE (without fats),Fluconazole,Compatible,C
+DAE (without fats),Frusemide,Not compatible,X
+DAE (without fats),Gentamicin,Compatible,C
+DAE (without fats),Heparin </= 1unit/mL,Compatible,C
+DAE (without fats),Hydrocortisone,Compatible,C
+DAE (without fats),Indomethacin,Not compatible,X
+DAE (without fats),"Insulin, Regular",Compatible,C
+DAE (without fats),Ketamine,No information,NI
+DAE (without fats),Magnesium Sulphate,Compatible,C
+DAE (without fats),Meropenem,No information,NI
+DAE (without fats),Metronidazole,Compatible,C
+DAE (without fats),Midazolam,Not compatible,X
+DAE (without fats),Milrinone,Compatible,C
+DAE (without fats),Morphine,Compatible,C
+DAE (without fats),Noradrenaline,Compatible,C
+DAE (without fats),Paracetamol,Compatible,C
+DAE (without fats),Penicllin G Sodium,Compatible,C
+DAE (without fats),Phenobarbitone,Not compatible,X
+DAE (without fats),Phenytoin,Not compatible,X
+DAE (without fats),Phytomenadione (Vitamin K),Compatible,C
+DAE (without fats),Piperacillin-tazobactam,Compatible,C
+DAE (without fats),Rocuronium,Compatible,C
+DAE (without fats),Sodium Acetate,Compatible,C
+DAE (without fats),Sodium bicarbonate,Not compatible,X
+DAE (without fats),Vancomycin,Compatible,C
+DAE (without fats),Vasopressin,Compatible,C
+Aciclovir,Adrenaline,No information,NI
+Aciclovir,Alprostadil (PGE-1),No information,NI
+Aciclovir,Amphotericin (Conventional),Not compatible,X
+Aciclovir,Amikacin,Compatible,C
+Aciclovir,Ampicillin,Compatible,C
+Aciclovir,Ampi-sulbac,Not compatible,X
+Aciclovir,Azithromycin,Compatible,C
+Aciclovir,Caffeine citrate,Not compatible,X
+Aciclovir,Calcium Gluconate,Compatible,C
+Aciclovir,Cefazolin,Compatible,C
+Aciclovir,Cefepime,Not compatible,X
+Aciclovir,Cefotaxime,Compatible,C
+Aciclovir,Ceftazidime,Compatible,C
+Aciclovir,Chlorpromazine,Not compatible,X
+Aciclovir,Clonidine,No information,NI
+Aciclovir,Cloxacillin,Compatible,C
+Aciclovir,Co-trimoxazole,Compatible,C
+Aciclovir,Dexamethasone,Compatible,C
+Aciclovir,Dexmedetomidine,Compatible,C
+Aciclovir,Dobutamine,Not compatible,X
+Aciclovir,Dopamine,Not compatible,X
+Aciclovir,Erythromycin,Compatible,C
+Aciclovir,Fentanyl,Compatible,C
+Aciclovir,Fluconazole,Compatible,C
+Aciclovir,Frusemide,Compatible,C
+Aciclovir,Gentamicin,No information,NI
+Aciclovir,Heparin </= 1unit/mL,Compatible,C
+Aciclovir,Hydrocortisone,Compatible,C
+Aciclovir,Indomethacin,No information,NI
+Aciclovir,"Insulin, Regular",Compatible,C
+Aciclovir,Ketamine,Not compatible,X
+Aciclovir,Magnesium Sulphate,Compatible,C
+Aciclovir,Meropenem,Not compatible,X
+Aciclovir,Metronidazole,Compatible,C
+Aciclovir,Midazolam,Not compatible,X
+Aciclovir,Milrinone,Compatible,C
+Aciclovir,Morphine,Not compatible,X
+Aciclovir,Noradrenaline,No information,NI
+Aciclovir,Paracetamol,Not compatible,X
+Aciclovir,Penicllin G Sodium,No information,NI
+Aciclovir,Phenobarbitone,Compatible,C
+Aciclovir,Phenytoin,Not compatible,X
+Aciclovir,Phytomenadione (Vitamin K),No information,NI
+Aciclovir,Piperacillin-tazobactam,Not compatible,X
+Aciclovir,Rocuronium,Compatible,C
+Aciclovir,Sodium Acetate,Compatible,C
+Aciclovir,Sodium bicarbonate,Compatible,C
+Aciclovir,Vancomycin,Compatible,C
+Aciclovir,Vasopressin,Compatible,C
+Adrenaline,Alprostadil (PGE-1),No information,NI
+Adrenaline,Amphotericin (Conventional),No information,NI
+Adrenaline,Amikacin,No information,NI
+Adrenaline,Ampicillin,No information,NI
+Adrenaline,Ampi-sulbac,No information,NI
+Adrenaline,Azithromycin,No information,NI
+Adrenaline,Caffeine citrate,No information,NI
+Adrenaline,Calcium Gluconate,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+Adrenaline,Cefazolin,No information,NI
+Adrenaline,Cefepime,No information,NI
+Adrenaline,Cefotaxime,No information,NI
+Adrenaline,Ceftazidime,No information,NI
+Adrenaline,Chlorpromazine,No information,NI
+Adrenaline,Clonidine,No information,NI
+Adrenaline,Cloxacillin,No information,NI
+Adrenaline,Co-trimoxazole,No information,NI
+Adrenaline,Dexamethasone,No information,NI
+Adrenaline,Dexmedetomidine,No information,NI
+Adrenaline,Dobutamine,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+Adrenaline,Dopamine,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+Adrenaline,Erythromycin,No information,NI
+Adrenaline,Fentanyl,Compatible,C
+Adrenaline,Fluconazole,No information,NI
+Adrenaline,Frusemide,No information,NI
+Adrenaline,Gentamicin,No information,NI
+Adrenaline,Heparin </= 1unit/mL,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+Adrenaline,Hydrocortisone,No information,NI
+Adrenaline,Indomethacin,No information,NI
+Adrenaline,"Insulin, Regular",No information,NI
+Adrenaline,Ketamine,No information,NI
+Adrenaline,Magnesium Sulphate,No information,NI
+Adrenaline,Meropenem,No information,NI
+Adrenaline,Metronidazole,No information,NI
+Adrenaline,Midazolam,No information,NI
+Adrenaline,Milrinone,No information,NI
+Adrenaline,Morphine,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+Adrenaline,Noradrenaline,No information,NI
+Adrenaline,Paracetamol,No information,NI
+Adrenaline,Penicllin G Sodium,No information,NI
+Adrenaline,Phenobarbitone,No information,NI
+Adrenaline,Phenytoin,No information,NI
+Adrenaline,Phytomenadione (Vitamin K),No information,NI
+Adrenaline,Piperacillin-tazobactam,No information,NI
+Adrenaline,Rocuronium,No information,NI
+Adrenaline,Sodium Acetate,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+Adrenaline,Sodium bicarbonate,No information,NI
+Adrenaline,Vancomycin,No information,NI
+Adrenaline,Vasopressin,Compatible based on Neonatology Dept consensus (refer information in chart box),Cf
+Alprostadil (PGE-1),Amphotericin (Conventional),No information,NI
+Alprostadil (PGE-1),Amikacin,No information,NI
+Alprostadil (PGE-1),Ampicillin,Compatible,C
+Alprostadil (PGE-1),Ampi-sulbac,No information,NI
+Alprostadil (PGE-1),Azithromycin,No information,NI
+Alprostadil (PGE-1),Caffeine citrate,Compatible,C
+Alprostadil (PGE-1),Calcium Gluconate,No information,NI
+Alprostadil (PGE-1),Cefazolin,Compatible,C
+Alprostadil (PGE-1),Cefepime,No information,NI
+Alprostadil (PGE-1),Cefotaxime,Compatible,C
+Alprostadil (PGE-1),Ceftazidime,No information,NI
+Alprostadil (PGE-1),Chlorpromazine,No information,NI
+Alprostadil (PGE-1),Clonidine,No information,NI
+Alprostadil (PGE-1),Cloxacillin,No information,NI
+Alprostadil (PGE-1),Co-trimoxazole,No information,NI
+Alprostadil (PGE-1),Dexamethasone,No information,NI
+Alprostadil (PGE-1),Dexmedetomidine,No information,NI
+Alprostadil (PGE-1),Dobutamine,Compatible,C
+Alprostadil (PGE-1),Dopamine,Compatible,C
+Alprostadil (PGE-1),Erythromycin,No information,NI
+Alprostadil (PGE-1),Fentanyl,Compatible,C
+Alprostadil (PGE-1),Fluconazole,No information,NI
+Alprostadil (PGE-1),Frusemide,Compatible,C
+Alprostadil (PGE-1),Gentamicin,Compatible,C
+Alprostadil (PGE-1),Heparin </= 1unit/mL,Compatible,C
+Alprostadil (PGE-1),Hydrocortisone,No information,NI
+Alprostadil (PGE-1),Indomethacin,No information,NI
+Alprostadil (PGE-1),"Insulin, Regular",Not compatible,X
+Alprostadil (PGE-1),Ketamine,Compatible,C
+Alprostadil (PGE-1),Magnesium Sulphate,No information,NI
+Alprostadil (PGE-1),Meropenem,No information,NI
+Alprostadil (PGE-1),Metronidazole,No information,NI
+Alprostadil (PGE-1),Midazolam,Compatible,C
+Alprostadil (PGE-1),Milrinone,No information,NI
+Alprostadil (PGE-1),Morphine,Compatible,C
+Alprostadil (PGE-1),Noradrenaline,No information,NI
+Alprostadil (PGE-1),Paracetamol,No information,NI
+Alprostadil (PGE-1),Penicllin G Sodium,No information,NI
+Alprostadil (PGE-1),Phenobarbitone,No information,NI
+Alprostadil (PGE-1),Phenytoin,No information,NI
+Alprostadil (PGE-1),Phytomenadione (Vitamin K),No information,NI
+Alprostadil (PGE-1),Piperacillin-tazobactam,No information,NI
+Alprostadil (PGE-1),Rocuronium,No information,NI
+Alprostadil (PGE-1),Sodium Acetate,No information,NI
+Alprostadil (PGE-1),Sodium bicarbonate,No information,NI
+Alprostadil (PGE-1),Vancomycin,Compatible,C
+Alprostadil (PGE-1),Vasopressin,No information,NI
+Amphotericin (Conventional),Amikacin,Not compatible,X
+Amphotericin (Conventional),Ampicillin,Not compatible,X
+Amphotericin (Conventional),Ampi-sulbac,Not compatible,X
+Amphotericin (Conventional),Azithromycin,Not compatible,X
+Amphotericin (Conventional),Caffeine citrate,No information,NI
+Amphotericin (Conventional),Calcium Gluconate,Not compatible,X
+Amphotericin (Conventional),Cefazolin,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Cefepime,Not compatible,X
+Amphotericin (Conventional),Cefotaxime,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Ceftazidime,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Chlorpromazine,Not compatible,X
+Amphotericin (Conventional),Clonidine,No information,NI
+Amphotericin (Conventional),Cloxacillin,No information,NI
+Amphotericin (Conventional),Co-trimoxazole,Not compatible,X
+Amphotericin (Conventional),Dexamethasone,Not compatible,X
+Amphotericin (Conventional),Dexmedetomidine,Not compatible,X
+Amphotericin (Conventional),Dobutamine,Not compatible,X
+Amphotericin (Conventional),Dopamine,Not compatible,X
+Amphotericin (Conventional),Erythromycin,Not compatible,X
+Amphotericin (Conventional),Fentanyl,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Fluconazole,Not compatible,X
+Amphotericin (Conventional),Frusemide,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Gentamicin,Not compatible,X
+Amphotericin (Conventional),Heparin </= 1unit/mL,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Hydrocortisone,Not compatible,X
+Amphotericin (Conventional),Indomethacin,Not compatible,X
+Amphotericin (Conventional),"Insulin, Regular",Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Ketamine,No information,NI
+Amphotericin (Conventional),Magnesium Sulphate,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Meropenem,Not compatible,X
+Amphotericin (Conventional),Metronidazole,Not compatible,X
+Amphotericin (Conventional),Midazolam,Not compatible,X
+Amphotericin (Conventional),Milrinone,Not compatible,X
+Amphotericin (Conventional),Morphine,Not compatible,X
+Amphotericin (Conventional),Noradrenaline,Not compatible,X
+Amphotericin (Conventional),Paracetamol,No information,NI
+Amphotericin (Conventional),Penicllin G Sodium,Not compatible,X
+Amphotericin (Conventional),Phenobarbitone,Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Phenytoin,Not compatible,X
+Amphotericin (Conventional),Phytomenadione (Vitamin K),Compatible if both dissolve in D5%,Cb
+Amphotericin (Conventional),Piperacillin-tazobactam,Not compatible,X
+Amphotericin (Conventional),Rocuronium,Not compatible,X
+Amphotericin (Conventional),Sodium Acetate,Not compatible,X
+Amphotericin (Conventional),Sodium bicarbonate,Not compatible,X
+Amphotericin (Conventional),Vancomycin,Not compatible,X
+Amphotericin (Conventional),Vasopressin,Not compatible,X
+Amikacin,Ampicillin,Compatible if in NS or WFI,Ca
+Amikacin,Ampi-sulbac,Compatible if in NS or WFI,Ca
+Amikacin,Azithromycin,Compatible if both dissolve in D5%,Cb
+Amikacin,Caffeine citrate,Compatible,C
+Amikacin,Calcium Gluconate,Compatible,C
+Amikacin,Cefazolin,Compatible,C
+Amikacin,Cefepime,Compatible,C
+Amikacin,Cefotaxime,Compatible,C
+Amikacin,Ceftazidime,Compatible,C
+Amikacin,Chlorpromazine,Compatible,C
+Amikacin,Clonidine,No information,NI
+Amikacin,Cloxacillin,Not compatible,X
+Amikacin,Co-trimoxazole,Not compatible,X
+Amikacin,Dexamethasone,Compatible,C
+Amikacin,Dexmedetomidine,Compatible,C
+Amikacin,Dobutamine,Compatible,C
+Amikacin,Dopamine,Compatible,C
+Amikacin,Erythromycin,Compatible,C
+Amikacin,Fentanyl,Compatible,C
+Amikacin,Fluconazole,Compatible,C
+Amikacin,Frusemide,Compatible,C
+Amikacin,Gentamicin,Compatible,C
+Amikacin,Heparin </= 1unit/mL,Not compatible,X
+Amikacin,Hydrocortisone,Compatible,C
+Amikacin,Indomethacin,Not compatible,X
+Amikacin,"Insulin, Regular",Compatible,C
+Amikacin,Ketamine,Compatible,C
+Amikacin,Magnesium Sulphate,Compatible,C
+Amikacin,Meropenem,Compatible,C
+Amikacin,Metronidazole,Compatible,C
+Amikacin,Midazolam,Compatible,C
+Amikacin,Milrinone,Compatible,C
+Amikacin,Morphine,Compatible,C
+Amikacin,Noradrenaline,Compatible,C
+Amikacin,Paracetamol,No information,NI
+Amikacin,Penicllin G Sodium,Compatible,C
+Amikacin,Phenobarbitone,Compatible,C
+Amikacin,Phenytoin,Not compatible,X
+Amikacin,Phytomenadione (Vitamin K),Compatible,C
+Amikacin,Piperacillin-tazobactam,Compatible,C
+Amikacin,Rocuronium,Compatible,C
+Amikacin,Sodium Acetate,Compatible,C
+Amikacin,Sodium bicarbonate,Compatible,C
+Amikacin,Vancomycin,Compatible,C
+Amikacin,Vasopressin,Compatible,C
+Ampicillin,Ampi-sulbac,No information,NI
+Ampicillin,Azithromycin,Compatible if in NS or WFI,Ca
+Ampicillin,Caffeine citrate,Compatible if in NS or WFI,Ca
+Ampicillin,Calcium Gluconate,Compatible if in NS or WFI,Ca
+Ampicillin,Cefazolin,Compatible if in NS or WFI,Ca
+Ampicillin,Cefepime,Compatible,C
+Ampicillin,Cefotaxime,Compatible if in NS or WFI,Ca
+Ampicillin,Ceftazidime,Compatible if in NS or WFI,Ca
+Ampicillin,Chlorpromazine,Not compatible,X
+Ampicillin,Clonidine,No information,NI
+Ampicillin,Cloxacillin,Compatible if in NS or WFI,Ca
+Ampicillin,Co-trimoxazole,Not compatible,X
+Ampicillin,Dexamethasone,Compatible if in NS or WFI,Ca
+Ampicillin,Dexmedetomidine,Compatible,C
+Ampicillin,Dobutamine,Not compatible,X
+Ampicillin,Dopamine,Not compatible,X
+Ampicillin,Erythromycin,Compatible if in NS or WFI,Ca
+Ampicillin,Fentanyl,Compatible if in NS or WFI,Ca
+Ampicillin,Fluconazole,Not compatible,X
+Ampicillin,Frusemide,Compatible if in NS or WFI,Ca
+Ampicillin,Gentamicin,Compatible if in NS or WFI,Ca
+Ampicillin,Heparin </= 1unit/mL,Compatible if in NS or WFI,Ca
+Ampicillin,Hydrocortisone,Not compatible,X
+Ampicillin,Indomethacin,Compatible,C
+Ampicillin,"Insulin, Regular",Compatible if in NS or WFI,Ca
+Ampicillin,Ketamine,Not compatible,X
+Ampicillin,Magnesium Sulphate,Compatible if in NS or WFI,Ca
+Ampicillin,Meropenem,Compatible,C
+Ampicillin,Metronidazole,Compatible,C
+Ampicillin,Midazolam,Not compatible,X
+Ampicillin,Milrinone,Compatible,C
+Ampicillin,Morphine,Compatible if in NS or WFI,Ca
+Ampicillin,Noradrenaline,Compatible if in NS or WFI,Ca
+Ampicillin,Paracetamol,No information,NI
+Ampicillin,Penicllin G Sodium,Compatible if in NS or WFI,Ca
+Ampicillin,Phenobarbitone,Compatible if in NS or WFI,Ca
+Ampicillin,Phenytoin,Not compatible,X
+Ampicillin,Phytomenadione (Vitamin K),Compatible if in NS or WFI,Ca
+Ampicillin,Piperacillin-tazobactam,No information,NI
+Ampicillin,Rocuronium,Compatible,C
+Ampicillin,Sodium Acetate,Compatible,C
+Ampicillin,Sodium bicarbonate,Compatible if in NS or WFI,Ca
+Ampicillin,Vancomycin,Compatible if in NS or WFI,Ca
+Ampicillin,Vasopressin,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Azithromycin,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Caffeine citrate,No information,NI
+Ampi-sulbac,Calcium Gluconate,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Cefazolin,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Cefepime,Compatible,C
+Ampi-sulbac,Cefotaxime,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Ceftazidime,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Chlorpromazine,Not compatible,X
+Ampi-sulbac,Clonidine,No information,NI
+Ampi-sulbac,Cloxacillin,No information,NI
+Ampi-sulbac,Co-trimoxazole,Not compatible,X
+Ampi-sulbac,Dexamethasone,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Dexmedetomidine,Compatible,C
+Ampi-sulbac,Dobutamine,Not compatible,X
+Ampi-sulbac,Dopamine,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Erythromycin,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Fentanyl,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Fluconazole,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Frusemide,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Gentamicin,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Heparin </= 1unit/mL,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Hydrocortisone,Not compatible,X
+Ampi-sulbac,Indomethacin,Compatible if in NS or WFI,Ca
+Ampi-sulbac,"Insulin, Regular",Compatible if in NS or WFI,Ca
+Ampi-sulbac,Ketamine,No information,NI
+Ampi-sulbac,Magnesium Sulphate,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Meropenem,No information,NI
+Ampi-sulbac,Metronidazole,Compatible,C
+Ampi-sulbac,Midazolam,Not compatible,X
+Ampi-sulbac,Milrinone,Compatible,C
+Ampi-sulbac,Morphine,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Noradrenaline,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Paracetamol,No information,NI
+Ampi-sulbac,Penicllin G Sodium,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Phenobarbitone,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Phenytoin,Not compatible,X
+Ampi-sulbac,Phytomenadione (Vitamin K),Compatible if in NS or WFI,Ca
+Ampi-sulbac,Piperacillin-tazobactam,No information,NI
+Ampi-sulbac,Rocuronium,Compatible,C
+Ampi-sulbac,Sodium Acetate,Compatible,C
+Ampi-sulbac,Sodium bicarbonate,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Vancomycin,Compatible if in NS or WFI,Ca
+Ampi-sulbac,Vasopressin,Compatible if in NS or WFI,Ca
+Azithromycin,Caffeine citrate,Compatible,C
+Azithromycin,Calcium Gluconate,Compatible,C
+Azithromycin,Cefazolin,Compatible,C
+Azithromycin,Cefepime,Compatible,C
+Azithromycin,Cefotaxime,Not compatible,X
+Azithromycin,Ceftazidime,Not compatible,X
+Azithromycin,Chlorpromazine,Not compatible,X
+Azithromycin,Clonidine,No information,NI
+Azithromycin,Cloxacillin,Not compatible,X
+Azithromycin,Co-trimoxazole,Compatible,C
+Azithromycin,Dexamethasone,Compatible,C
+Azithromycin,Dexmedetomidine,Compatible,C
+Azithromycin,Dobutamine,Compatible,C
+Azithromycin,Dopamine,Compatible,C
+Azithromycin,Erythromycin,No information,NI
+Azithromycin,Fentanyl,Compatible if both dissolve in D5%,Cb
+Azithromycin,Fluconazole,Compatible,C
+Azithromycin,Frusemide,Not compatible,X
+Azithromycin,Gentamicin,Compatible if both dissolve in D5%,Cb
+Azithromycin,Heparin </= 1unit/mL,Compatible,C
+Azithromycin,Hydrocortisone,Compatible,C
+Azithromycin,Indomethacin,No information,NI
+Azithromycin,"Insulin, Regular",No information,NI
+Azithromycin,Ketamine,No information,NI
+Azithromycin,Magnesium Sulphate,Compatible,C
+Azithromycin,Meropenem,Compatible,C
+Azithromycin,Metronidazole,Compatible,C
+Azithromycin,Midazolam,Not compatible,X
+Azithromycin,Milrinone,Compatible,C
+Azithromycin,Morphine,Not compatible,X
+Azithromycin,Noradrenaline,No information,NI
+Azithromycin,Paracetamol,No information,NI
+Azithromycin,Penicllin G Sodium,No information,NI
+Azithromycin,Phenobarbitone,Compatible,C
+Azithromycin,Phenytoin,Not compatible,X
+Azithromycin,Phytomenadione (Vitamin K),No information,NI
+Azithromycin,Piperacillin-tazobactam,Compatible if both dissolve in D5%,Cb
+Azithromycin,Rocuronium,Compatible,C
+Azithromycin,Sodium Acetate,Compatible,C
+Azithromycin,Sodium bicarbonate,Compatible,C
+Azithromycin,Vancomycin,Compatible,C
+Azithromycin,Vasopressin,Compatible,C
+Caffeine citrate,Calcium Gluconate,Compatible,C
+Caffeine citrate,Cefazolin,Compatible,C
+Caffeine citrate,Cefepime,No information,NI
+Caffeine citrate,Cefotaxime,Compatible,C
+Caffeine citrate,Ceftazidime,Compatible,C
+Caffeine citrate,Chlorpromazine,Compatible,C
+Caffeine citrate,Clonidine,No information,NI
+Caffeine citrate,Cloxacillin,Compatible,C
+Caffeine citrate,Co-trimoxazole,Compatible,C
+Caffeine citrate,Dexamethasone,Compatible,C
+Caffeine citrate,Dexmedetomidine,Compatible,C
+Caffeine citrate,Dobutamine,Not compatible,X
+Caffeine citrate,Dopamine,Compatible,C
+Caffeine citrate,Erythromycin,Not compatible,X
+Caffeine citrate,Fentanyl,Compatible,C
+Caffeine citrate,Fluconazole,Compatible,C
+Caffeine citrate,Frusemide,Not compatible,X
+Caffeine citrate,Gentamicin,Compatible,C
+Caffeine citrate,Heparin </= 1unit/mL,Compatible,C
+Caffeine citrate,Hydrocortisone,Compatible,C
+Caffeine citrate,Indomethacin,No information,NI
+Caffeine citrate,"Insulin, Regular",Compatible,C
+Caffeine citrate,Ketamine,Compatible,C
+Caffeine citrate,Magnesium Sulphate,Compatible,C
+Caffeine citrate,Meropenem,Compatible,C
+Caffeine citrate,Metronidazole,Compatible,C
+Caffeine citrate,Midazolam,Not compatible,X
+Caffeine citrate,Milrinone,Compatible,C
+Caffeine citrate,Morphine,Compatible,C
+Caffeine citrate,Noradrenaline,Compatible,C
+Caffeine citrate,Paracetamol,No information,NI
+Caffeine citrate,Penicllin G Sodium,Compatible,C
+Caffeine citrate,Phenobarbitone,Compatible,C
+Caffeine citrate,Phenytoin,Compatible,C
+Caffeine citrate,Phytomenadione (Vitamin K),No information,NI
+Caffeine citrate,Piperacillin-tazobactam,Compatible,C
+Caffeine citrate,Rocuronium,Compatible,C
+Caffeine citrate,Sodium Acetate,No information,NI
+Caffeine citrate,Sodium bicarbonate,Compatible,C
+Caffeine citrate,Vancomycin,Not compatible,X
+Caffeine citrate,Vasopressin,No information,NI
+Calcium Gluconate,Cefazolin,Compatible,C
+Calcium Gluconate,Cefepime,Compatible,C
+Calcium Gluconate,Cefotaxime,Compatible,C
+Calcium Gluconate,Ceftazidime,Compatible,C
+Calcium Gluconate,Chlorpromazine,Compatible,C
+Calcium Gluconate,Clonidine,No information,NI
+Calcium Gluconate,Cloxacillin,Compatible,C
+Calcium Gluconate,Co-trimoxazole,Not compatible,X
+Calcium Gluconate,Dexamethasone,Not compatible,X
+Calcium Gluconate,Dexmedetomidine,Compatible,C
+Calcium Gluconate,Dobutamine,Compatible,C
+Calcium Gluconate,Dopamine,Compatible,C
+Calcium Gluconate,Erythromycin,Compatible,C
+Calcium Gluconate,Fentanyl,Compatible,C
+Calcium Gluconate,Fluconazole,Compatible,C
+Calcium Gluconate,Frusemide,Compatible,C
+Calcium Gluconate,Gentamicin,Compatible,C
+Calcium Gluconate,Heparin </= 1unit/mL,Compatible,C
+Calcium Gluconate,Hydrocortisone,Not compatible,X
+Calcium Gluconate,Indomethacin,Not compatible,X
+Calcium Gluconate,"Insulin, Regular",Compatible,C
+Calcium Gluconate,Ketamine,Compatible,C
+Calcium Gluconate,Magnesium Sulphate,Compatible,C
+Calcium Gluconate,Meropenem,Not compatible,X
+Calcium Gluconate,Metronidazole,Compatible,C
+Calcium Gluconate,Midazolam,Compatible,C
+Calcium Gluconate,Milrinone,Compatible,C
+Calcium Gluconate,Morphine,Compatible,C
+Calcium Gluconate,Noradrenaline,Compatible,C
+Calcium Gluconate,Paracetamol,No information,NI
+Calcium Gluconate,Penicllin G Sodium,Compatible,C
+Calcium Gluconate,Phenobarbitone,Compatible,C
+Calcium Gluconate,Phenytoin,Not compatible,X
+Calcium Gluconate,Phytomenadione (Vitamin K),Compatible,C
+Calcium Gluconate,Piperacillin-tazobactam,Compatible,C
+Calcium Gluconate,Rocuronium,Compatible,C
+Calcium Gluconate,Sodium Acetate,Compatible,C
+Calcium Gluconate,Sodium bicarbonate,Not compatible,X
+Calcium Gluconate,Vancomycin,Compatible,C
+Calcium Gluconate,Vasopressin,Compatible,C
+Cefazolin,Cefepime,No information,NI
+Cefazolin,Cefotaxime,Not compatible,X
+Cefazolin,Ceftazidime,Compatible,C
+Cefazolin,Chlorpromazine,Not compatible,X
+Cefazolin,Clonidine,No information,NI
+Cefazolin,Cloxacillin,Compatible,C
+Cefazolin,Co-trimoxazole,Not compatible,X
+Cefazolin,Dexamethasone,Compatible,C
+Cefazolin,Dexmedetomidine,Compatible,C
+Cefazolin,Dobutamine,Not compatible,X
+Cefazolin,Dopamine,Not compatible,X
+Cefazolin,Erythromycin,Not compatible,X
+Cefazolin,Fentanyl,Compatible,C
+Cefazolin,Fluconazole,Compatible,C
+Cefazolin,Frusemide,Compatible,C
+Cefazolin,Gentamicin,Compatible,C
+Cefazolin,Heparin </= 1unit/mL,Compatible,C
+Cefazolin,Hydrocortisone,Compatible,C
+Cefazolin,Indomethacin,Compatible,C
+Cefazolin,"Insulin, Regular",Compatible,C
+Cefazolin,Ketamine,Compatible,C
+Cefazolin,Magnesium Sulphate,Not compatible,X
+Cefazolin,Meropenem,Compatible,C
+Cefazolin,Metronidazole,Compatible,C
+Cefazolin,Midazolam,Compatible,C
+Cefazolin,Milrinone,Compatible,C
+Cefazolin,Morphine,Compatible,C
+Cefazolin,Noradrenaline,Compatible,C
+Cefazolin,Paracetamol,Compatible,C
+Cefazolin,Penicllin G Sodium,Compatible,C
+Cefazolin,Phenobarbitone,Compatible,C
+Cefazolin,Phenytoin,Not compatible,X
+Cefazolin,Phytomenadione (Vitamin K),Compatible,C
+Cefazolin,Piperacillin-tazobactam,No information,NI
+Cefazolin,Rocuronium,Compatible if rocuronium concentration <= 1 mg/mL and both drugs diluted in D5%,Cg
+Cefazolin,Sodium Acetate,Compatible,C
+Cefazolin,Sodium bicarbonate,Compatible,C
+Cefazolin,Vancomycin,Not compatible,X
+Cefazolin,Vasopressin,Compatible,C
+Cefepime,Cefotaxime,No information,NI
+Cefepime,Ceftazidime,No information,NI
+Cefepime,Chlorpromazine,Not compatible,X
+Cefepime,Clonidine,No information,NI
+Cefepime,Cloxacillin,No information,NI
+Cefepime,Co-trimoxazole,Compatible,C
+Cefepime,Dexamethasone,Compatible,C
+Cefepime,Dexmedetomidine,Compatible,C
+Cefepime,Dobutamine,Not compatible,X
+Cefepime,Dopamine,Not compatible,X
+Cefepime,Erythromycin,Not compatible,X
+Cefepime,Fentanyl,No information,NI
+Cefepime,Fluconazole,Compatible,C
+Cefepime,Frusemide,Compatible,C
+Cefepime,Gentamicin,Compatible,C
+Cefepime,Heparin </= 1unit/mL,Compatible,C
+Cefepime,Hydrocortisone,Compatible,C
+Cefepime,Indomethacin,No information,NI
+Cefepime,"Insulin, Regular",Compatible,C
+Cefepime,Ketamine,Compatible,C
+Cefepime,Magnesium Sulphate,Not compatible,X
+Cefepime,Meropenem,No information,NI
+Cefepime,Metronidazole,Compatible,C
+Cefepime,Midazolam,Not compatible,X
+Cefepime,Milrinone,Compatible,C
+Cefepime,Morphine,Not compatible,X
+Cefepime,Noradrenaline,No information,NI
+Cefepime,Paracetamol,No information,NI
+Cefepime,Penicllin G Sodium,No information,NI
+Cefepime,Phenobarbitone,No information,NI
+Cefepime,Phenytoin,Not compatible,X
+Cefepime,Phytomenadione (Vitamin K),No information,NI
+Cefepime,Piperacillin-tazobactam,Compatible,C
+Cefepime,Rocuronium,Compatible,C
+Cefepime,Sodium Acetate,Compatible,C
+Cefepime,Sodium bicarbonate,Compatible,C
+Cefepime,Vancomycin,Compatible,C
+Cefepime,Vasopressin,Compatible,C
+Cefotaxime,Ceftazidime,Not compatible,X
+Cefotaxime,Chlorpromazine,Not compatible,X
+Cefotaxime,Clonidine,No information,NI
+Cefotaxime,Cloxacillin,Compatible,C
+Cefotaxime,Co-trimoxazole,Not compatible,X
+Cefotaxime,Dexamethasone,Compatible,C
+Cefotaxime,Dexmedetomidine,Compatible,C
+Cefotaxime,Dobutamine,Not compatible,X
+Cefotaxime,Dopamine,Compatible,C
+Cefotaxime,Erythromycin,Compatible,C
+Cefotaxime,Fentanyl,Compatible,C
+Cefotaxime,Fluconazole,Not compatible,X
+Cefotaxime,Frusemide,Compatible,C
+Cefotaxime,Gentamicin,Compatible,C
+Cefotaxime,Heparin </= 1unit/mL,Compatible,C
+Cefotaxime,Hydrocortisone,Compatible,C
+Cefotaxime,Indomethacin,Compatible,C
+Cefotaxime,"Insulin, Regular",Compatible,C
+Cefotaxime,Ketamine,Compatible,C
+Cefotaxime,Magnesium Sulphate,Compatible,C
+Cefotaxime,Meropenem,Compatible,C
+Cefotaxime,Metronidazole,Compatible,C
+Cefotaxime,Midazolam,Compatible,C
+Cefotaxime,Milrinone,Compatible,C
+Cefotaxime,Morphine,Compatible,C
+Cefotaxime,Noradrenaline,Compatible,C
+Cefotaxime,Paracetamol,No information,NI
+Cefotaxime,Penicllin G Sodium,Compatible,C
+Cefotaxime,Phenobarbitone,Not compatible,X
+Cefotaxime,Phenytoin,Not compatible,X
+Cefotaxime,Phytomenadione (Vitamin K),Compatible,C
+Cefotaxime,Piperacillin-tazobactam,No information,NI
+Cefotaxime,Rocuronium,Compatible,C
+Cefotaxime,Sodium Acetate,Compatible,C
+Cefotaxime,Sodium bicarbonate,Not compatible,X
+Cefotaxime,Vancomycin,Not compatible,X
+Cefotaxime,Vasopressin,Compatible,C
+Ceftazidime,Chlorpromazine,Not compatible,X
+Ceftazidime,Clonidine,No information,NI
+Ceftazidime,Cloxacillin,Compatible,C
+Ceftazidime,Co-trimoxazole,Not compatible,X
+Ceftazidime,Dexamethasone,Compatible,C
+Ceftazidime,Dexmedetomidine,Compatible,C
+Ceftazidime,Dobutamine,Not compatible,X
+Ceftazidime,Dopamine,Compatible,C
+Ceftazidime,Erythromycin,Not compatible,X
+Ceftazidime,Fentanyl,Compatible,C
+Ceftazidime,Fluconazole,Not compatible,X
+Ceftazidime,Frusemide,Compatible,C
+Ceftazidime,Gentamicin,Compatible,C
+Ceftazidime,Heparin </= 1unit/mL,Compatible,C
+Ceftazidime,Hydrocortisone,Compatible,C
+Ceftazidime,Indomethacin,Compatible,C
+Ceftazidime,"Insulin, Regular",Compatible,C
+Ceftazidime,Ketamine,Compatible,C
+Ceftazidime,Magnesium Sulphate,Compatible,C
+Ceftazidime,Meropenem,Compatible,C
+Ceftazidime,Metronidazole,Compatible,C
+Ceftazidime,Midazolam,Not compatible,X
+Ceftazidime,Milrinone,Compatible,C
+Ceftazidime,Morphine,Compatible,C
+Ceftazidime,Noradrenaline,Compatible,C
+Ceftazidime,Paracetamol,No information,NI
+Ceftazidime,Penicllin G Sodium,Compatible,C
+Ceftazidime,Phenobarbitone,Compatible,C
+Ceftazidime,Phenytoin,Not compatible,X
+Ceftazidime,Phytomenadione (Vitamin K),Compatible,C
+Ceftazidime,Piperacillin-tazobactam,No information,NI
+Ceftazidime,Rocuronium,Compatible,C
+Ceftazidime,Sodium Acetate,Compatible,C
+Ceftazidime,Sodium bicarbonate,Compatible,C
+Ceftazidime,Vancomycin,Not compatible,X
+Ceftazidime,Vasopressin,Compatible,C
+Chlorpromazine,Clonidine,No information,NI
+Chlorpromazine,Cloxacillin,Not compatible,X
+Chlorpromazine,Co-trimoxazole,Not compatible,X
+Chlorpromazine,Dexamethasone,Not compatible,X
+Chlorpromazine,Dexmedetomidine,Compatible,C
+Chlorpromazine,Dobutamine,Compatible,C
+Chlorpromazine,Dopamine,Compatible,C
+Chlorpromazine,Erythromycin,Compatible,C
+Chlorpromazine,Fentanyl,Compatible,C
+Chlorpromazine,Fluconazole,Compatible,C
+Chlorpromazine,Frusemide,Not compatible,X
+Chlorpromazine,Gentamicin,Compatible,C
+Chlorpromazine,Heparin </= 1unit/mL,Compatible,C
+Chlorpromazine,Hydrocortisone,Compatible,C
+Chlorpromazine,Indomethacin,Not compatible,X
+Chlorpromazine,"Insulin, Regular",Not compatible,X
+Chlorpromazine,Ketamine,Compatible,C
+Chlorpromazine,Magnesium Sulphate,Compatible,C
+Chlorpromazine,Meropenem,No information,NI
+Chlorpromazine,Metronidazole,Compatible,C
+Chlorpromazine,Midazolam,Compatible,C
+Chlorpromazine,Milrinone,Compatible,C
+Chlorpromazine,Morphine,Compatible,C
+Chlorpromazine,Noradrenaline,Compatible,C
+Chlorpromazine,Paracetamol,Not compatible,X
+Chlorpromazine,Penicllin G Sodium,Not compatible,X
+Chlorpromazine,Phenobarbitone,Not compatible,X
+Chlorpromazine,Phenytoin,Not compatible,X
+Chlorpromazine,Phytomenadione (Vitamin K),Compatible,C
+Chlorpromazine,Piperacillin-tazobactam,Not compatible,X
+Chlorpromazine,Rocuronium,Compatible,C
+Chlorpromazine,Sodium Acetate,Compatible,C
+Chlorpromazine,Sodium bicarbonate,Not compatible,X
+Chlorpromazine,Vancomycin,Compatible,C
+Chlorpromazine,Vasopressin,Compatible,C
+Clonidine,Cloxacillin,No information,NI
+Clonidine,Co-trimoxazole,No information,NI
+Clonidine,Dexamethasone,No information,NI
+Clonidine,Dexmedetomidine,No information,NI
+Clonidine,Dobutamine,Compatible,C
+Clonidine,Dopamine,Compatible,C
+Clonidine,Erythromycin,No information,NI
+Clonidine,Fentanyl,Compatible,C
+Clonidine,Fluconazole,No information,NI
+Clonidine,Frusemide,Compatible,C
+Clonidine,Gentamicin,No information,NI
+Clonidine,Heparin </= 1unit/mL,Compatible,C
+Clonidine,Hydrocortisone,No information,NI
+Clonidine,Indomethacin,No information,NI
+Clonidine,"Insulin, Regular",Compatible,C
+Clonidine,Ketamine,Compatible,C
+Clonidine,Magnesium Sulphate,Compatible,C
+Clonidine,Meropenem,No information,NI
+Clonidine,Metronidazole,No information,NI
+Clonidine,Midazolam,Compatible,C
+Clonidine,Milrinone,No information,NI
+Clonidine,Morphine,Compatible,C
+Clonidine,Noradrenaline,Compatible,C
+Clonidine,Paracetamol,No information,NI
+Clonidine,Penicllin G Sodium,No information,NI
+Clonidine,Phenobarbitone,No information,NI
+Clonidine,Phenytoin,No information,NI
+Clonidine,Phytomenadione (Vitamin K),No information,NI
+Clonidine,Piperacillin-tazobactam,No information,NI
+Clonidine,Rocuronium,No information,NI
+Clonidine,Sodium Acetate,No information,NI
+Clonidine,Sodium bicarbonate,No information,NI
+Clonidine,Vancomycin,No information,NI
+Clonidine,Vasopressin,No information,NI
+Cloxacillin,Co-trimoxazole,Not compatible,X
+Cloxacillin,Dexamethasone,Compatible,C
+Cloxacillin,Dexmedetomidine,No information,NI
+Cloxacillin,Dobutamine,Not compatible,X
+Cloxacillin,Dopamine,Compatible,C
+Cloxacillin,Erythromycin,Not compatible,X
+Cloxacillin,Fentanyl,Compatible,C
+Cloxacillin,Fluconazole,Compatible,C
+Cloxacillin,Frusemide,Compatible,C
+Cloxacillin,Gentamicin,Not compatible,X
+Cloxacillin,Heparin </= 1unit/mL,Compatible,C
+Cloxacillin,Hydrocortisone,Compatible,C
+Cloxacillin,Indomethacin,No information,NI
+Cloxacillin,"Insulin, Regular",Compatible,C
+Cloxacillin,Ketamine,Compatible,C
+Cloxacillin,Magnesium Sulphate,Compatible,C
+Cloxacillin,Meropenem,Compatible,C
+Cloxacillin,Metronidazole,Compatible,C
+Cloxacillin,Midazolam,Not compatible,X
+Cloxacillin,Milrinone,Compatible,C
+Cloxacillin,Morphine,Not compatible,X
+Cloxacillin,Noradrenaline,Compatible,C
+Cloxacillin,Paracetamol,No information,NI
+Cloxacillin,Penicllin G Sodium,Compatible,C
+Cloxacillin,Phenobarbitone,Compatible,C
+Cloxacillin,Phenytoin,Not compatible,X
+Cloxacillin,Phytomenadione (Vitamin K),No information,NI
+Cloxacillin,Piperacillin-tazobactam,Compatible,C
+Cloxacillin,Rocuronium,Not compatible,X
+Cloxacillin,Sodium Acetate,No information,NI
+Cloxacillin,Sodium bicarbonate,Compatible,C
+Cloxacillin,Vancomycin,Not compatible,X
+Cloxacillin,Vasopressin,No information,NI
+Co-trimoxazole,Dexamethasone,Not compatible,X
+Co-trimoxazole,Dexmedetomidine,Compatible,C
+Co-trimoxazole,Dobutamine,Not compatible,X
+Co-trimoxazole,Dopamine,Not compatible,X
+Co-trimoxazole,Erythromycin,Not compatible,X
+Co-trimoxazole,Fentanyl,Not compatible,X
+Co-trimoxazole,Fluconazole,Not compatible,X
+Co-trimoxazole,Frusemide,Not compatible,X
+Co-trimoxazole,Gentamicin,Not compatible,X
+Co-trimoxazole,Heparin </= 1unit/mL,Compatible,C
+Co-trimoxazole,Hydrocortisone,Not compatible,X
+Co-trimoxazole,Indomethacin,Not compatible,X
+Co-trimoxazole,"Insulin, Regular",Not compatible,X
+Co-trimoxazole,Ketamine,Not compatible,X
+Co-trimoxazole,Magnesium Sulphate,Not compatible,X
+Co-trimoxazole,Meropenem,Compatible,C
+Co-trimoxazole,Metronidazole,Compatible,C
+Co-trimoxazole,Midazolam,Not compatible,X
+Co-trimoxazole,Milrinone,Compatible,C
+Co-trimoxazole,Morphine,Not compatible,X
+Co-trimoxazole,Noradrenaline,Not compatible,X
+Co-trimoxazole,Paracetamol,No information,NI
+Co-trimoxazole,Penicllin G Sodium,Not compatible,X
+Co-trimoxazole,Phenobarbitone,Not compatible,X
+Co-trimoxazole,Phenytoin,Not compatible,X
+Co-trimoxazole,Phytomenadione (Vitamin K),Not compatible,X
+Co-trimoxazole,Piperacillin-tazobactam,Compatible,C
+Co-trimoxazole,Rocuronium,Compatible if rocuronium concentration <= 1 mg/mL and both drugs diluted in D5%,Cg
+Co-trimoxazole,Sodium Acetate,Compatible,C
+Co-trimoxazole,Sodium bicarbonate,Not compatible,X
+Co-trimoxazole,Vancomycin,Not compatible,X
+Co-trimoxazole,Vasopressin,Not compatible,X
+Dexamethasone,Dexmedetomidine,Compatible,C
+Dexamethasone,Dobutamine,Not compatible,X
+Dexamethasone,Dopamine,Compatible,C
+Dexamethasone,Erythromycin,Not compatible,X
+Dexamethasone,Fentanyl,Compatible,C
+Dexamethasone,Fluconazole,Compatible,C
+Dexamethasone,Frusemide,Compatible,C
+Dexamethasone,Gentamicin,Not compatible,X
+Dexamethasone,Heparin </= 1unit/mL,Compatible,C
+Dexamethasone,Hydrocortisone,Compatible,C
+Dexamethasone,Indomethacin,Compatible,C
+Dexamethasone,"Insulin, Regular",Compatible,C
+Dexamethasone,Ketamine,Not compatible,X
+Dexamethasone,Magnesium Sulphate,Not compatible,X
+Dexamethasone,Meropenem,Compatible,C
+Dexamethasone,Metronidazole,Compatible,C
+Dexamethasone,Midazolam,Not compatible,X
+Dexamethasone,Milrinone,Compatible,C
+Dexamethasone,Morphine,Compatible,C
+Dexamethasone,Noradrenaline,Compatible,C
+Dexamethasone,Paracetamol,Compatible,C
+Dexamethasone,Penicllin G Sodium,Compatible,C
+Dexamethasone,Phenobarbitone,Compatible,C
+Dexamethasone,Phenytoin,Not compatible,X
+Dexamethasone,Phytomenadione (Vitamin K),Compatible,C
+Dexamethasone,Piperacillin-tazobactam,Compatible,C
+Dexamethasone,Rocuronium,Compatible if rocuronium concentration <= 1 mg/mL and both drugs diluted in D5%,Cg
+Dexamethasone,Sodium Acetate,Compatible,C
+Dexamethasone,Sodium bicarbonate,Compatible,C
+Dexamethasone,Vancomycin,Compatible,C
+Dexamethasone,Vasopressin,Compatible,C
+Dexmedetomidine,Dobutamine,Compatible,C
+Dexmedetomidine,Dopamine,Compatible,C
+Dexmedetomidine,Erythromycin,Compatible,C
+Dexmedetomidine,Fentanyl,Compatible,C
+Dexmedetomidine,Fluconazole,Compatible,C
+Dexmedetomidine,Frusemide,Compatible,C
+Dexmedetomidine,Gentamicin,Compatible,C
+Dexmedetomidine,Heparin </= 1unit/mL,Compatible,C
+Dexmedetomidine,Hydrocortisone,Compatible,C
+Dexmedetomidine,Indomethacin,No information,NI
+Dexmedetomidine,"Insulin, Regular",Compatible,C
+Dexmedetomidine,Ketamine,No information,NI
+Dexmedetomidine,Magnesium Sulphate,Compatible,C
+Dexmedetomidine,Meropenem,Compatible,C
+Dexmedetomidine,Metronidazole,Compatible,C
+Dexmedetomidine,Midazolam,Compatible,C
+Dexmedetomidine,Milrinone,Compatible,C
+Dexmedetomidine,Morphine,Compatible,C
+Dexmedetomidine,Noradrenaline,Compatible,C
+Dexmedetomidine,Paracetamol,Compatible,C
+Dexmedetomidine,Penicllin G Sodium,No information,NI
+Dexmedetomidine,Phenobarbitone,Compatible,C
+Dexmedetomidine,Phenytoin,Not compatible,X
+Dexmedetomidine,Phytomenadione (Vitamin K),No information,NI
+Dexmedetomidine,Piperacillin-tazobactam,Compatible,C
+Dexmedetomidine,Rocuronium,Compatible,C
+Dexmedetomidine,Sodium Acetate,Compatible,C
+Dexmedetomidine,Sodium bicarbonate,Compatible,C
+Dexmedetomidine,Vancomycin,Compatible,C
+Dexmedetomidine,Vasopressin,Compatible,C
+Dobutamine,Dopamine,Compatible,C
+Dobutamine,Erythromycin,Compatible,C
+Dobutamine,Fentanyl,Compatible,C
+Dobutamine,Fluconazole,Compatible,C
+Dobutamine,Frusemide,Not compatible,X
+Dobutamine,Gentamicin,Compatible,C
+Dobutamine,Heparin </= 1unit/mL,Compatible,C
+Dobutamine,Hydrocortisone,Not compatible,X
+Dobutamine,Indomethacin,Not compatible,X
+Dobutamine,"Insulin, Regular",Compatible,C
+Dobutamine,Ketamine,Compatible,C
+Dobutamine,Magnesium Sulphate,Compatible,C
+Dobutamine,Meropenem,Not compatible,X
+Dobutamine,Metronidazole,Compatible,C
+Dobutamine,Midazolam,Compatible,C
+Dobutamine,Milrinone,Compatible,C
+Dobutamine,Morphine,Compatible,C
+Dobutamine,Noradrenaline,Compatible,C
+Dobutamine,Paracetamol,No information,NI
+Dobutamine,Penicllin G Sodium,Not compatible,X
+Dobutamine,Phenobarbitone,Not compatible,X
+Dobutamine,Phenytoin,Not compatible,X
+Dobutamine,Phytomenadione (Vitamin K),Not compatible,X
+Dobutamine,Piperacillin-tazobactam,Not compatible,X
+Dobutamine,Rocuronium,Compatible,C
+Dobutamine,Sodium Acetate,Compatible,C
+Dobutamine,Sodium bicarbonate,Not compatible,X
+Dobutamine,Vancomycin,Compatible,C
+Dobutamine,Vasopressin,Compatible,C
+Dopamine,Erythromycin,Compatible,C
+Dopamine,Fentanyl,Compatible,C
+Dopamine,Fluconazole,Compatible,C
+Dopamine,Frusemide,Not compatible,X
+Dopamine,Gentamicin,Compatible,C
+Dopamine,Heparin </= 1unit/mL,Compatible,C
+Dopamine,Hydrocortisone,Compatible,C
+Dopamine,Indomethacin,Not compatible,X
+Dopamine,"Insulin, Regular",Compatible,C
+Dopamine,Ketamine,Compatible,C
+Dopamine,Magnesium Sulphate,Compatible,C
+Dopamine,Meropenem,Compatible,C
+Dopamine,Metronidazole,Compatible,C
+Dopamine,Midazolam,Compatible,C
+Dopamine,Milrinone,Compatible,C
+Dopamine,Morphine,Compatible,C
+Dopamine,Noradrenaline,Compatible,C
+Dopamine,Paracetamol,No information,NI
+Dopamine,Penicllin G Sodium,Compatible,C
+Dopamine,Phenobarbitone,Compatible,C
+Dopamine,Phenytoin,Not compatible,X
+Dopamine,Phytomenadione (Vitamin K),Compatible,C
+Dopamine,Piperacillin-tazobactam,Compatible,C
+Dopamine,Rocuronium,Compatible,C
+Dopamine,Sodium Acetate,Compatible,C
+Dopamine,Sodium bicarbonate,Not compatible,X
+Dopamine,Vancomycin,Compatible,C
+Dopamine,Vasopressin,Compatible,C
+Erythromycin,Fentanyl,Compatible,C
+Erythromycin,Fluconazole,Compatible,C
+Erythromycin,Frusemide,Not compatible,X
+Erythromycin,Gentamicin,Compatible,C
+Erythromycin,Heparin </= 1unit/mL,Not compatible,X
+Erythromycin,Hydrocortisone,Compatible,C
+Erythromycin,Indomethacin,Not compatible,X
+Erythromycin,"Insulin, Regular",Compatible,C
+Erythromycin,Ketamine,No information,NI
+Erythromycin,Magnesium Sulphate,Compatible,C
+Erythromycin,Meropenem,Compatible,C
+Erythromycin,Metronidazole,Compatible,C
+Erythromycin,Midazolam,Compatible,C
+Erythromycin,Milrinone,Compatible,C
+Erythromycin,Morphine,Compatible,C
+Erythromycin,Noradrenaline,Compatible,C
+Erythromycin,Paracetamol,No information,NI
+Erythromycin,Penicllin G Sodium,No information,NI
+Erythromycin,Phenobarbitone,No information,NI
+Erythromycin,Phenytoin,Not compatible,X
+Erythromycin,Phytomenadione (Vitamin K),Compatible,C
+Erythromycin,Piperacillin-tazobactam,Compatible,C
+Erythromycin,Rocuronium,Compatible if rocuronium concentration <= 1 mg/mL and both drugs diluted in D5%,Cg
+Erythromycin,Sodium Acetate,Compatible,C
+Erythromycin,Sodium bicarbonate,Compatible,C
+Erythromycin,Vancomycin,Compatible,C
+Erythromycin,Vasopressin,Compatible,C
+Fentanyl,Fluconazole,Compatible,C
+Fentanyl,Frusemide,Compatible,C
+Fentanyl,Gentamicin,Compatible,C
+Fentanyl,Heparin </= 1unit/mL,Compatible,C
+Fentanyl,Hydrocortisone,Compatible,C
+Fentanyl,Indomethacin,Compatible,C
+Fentanyl,"Insulin, Regular",Compatible,C
+Fentanyl,Ketamine,Compatible,C
+Fentanyl,Magnesium Sulphate,Compatible,C
+Fentanyl,Meropenem,Compatible,C
+Fentanyl,Metronidazole,Compatible,C
+Fentanyl,Midazolam,Compatible,C
+Fentanyl,Milrinone,Compatible,C
+Fentanyl,Morphine,Compatible,C
+Fentanyl,Noradrenaline,Compatible,C
+Fentanyl,Paracetamol,Compatible,C
+Fentanyl,Penicllin G Sodium,Compatible,C
+Fentanyl,Phenobarbitone,Compatible,C
+Fentanyl,Phenytoin,Not compatible,X
+Fentanyl,Phytomenadione (Vitamin K),Compatible,C
+Fentanyl,Piperacillin-tazobactam,Compatible,C
+Fentanyl,Rocuronium,Compatible,C
+Fentanyl,Sodium Acetate,Compatible,C
+Fentanyl,Sodium bicarbonate,Compatible,C
+Fentanyl,Vancomycin,Compatible,C
+Fentanyl,Vasopressin,Compatible,C
+Fluconazole,Frusemide,Not compatible,X
+Fluconazole,Gentamicin,Compatible,C
+Fluconazole,Heparin </= 1unit/mL,Compatible,C
+Fluconazole,Hydrocortisone,Compatible,C
+Fluconazole,Indomethacin,Compatible,C
+Fluconazole,"Insulin, Regular",Compatible,C
+Fluconazole,Ketamine,No information,NI
+Fluconazole,Magnesium Sulphate,Compatible,C
+Fluconazole,Meropenem,Compatible,C
+Fluconazole,Metronidazole,Compatible,C
+Fluconazole,Midazolam,Compatible,C
+Fluconazole,Milrinone,Compatible,C
+Fluconazole,Morphine,Compatible,C
+Fluconazole,Noradrenaline,Compatible,C
+Fluconazole,Paracetamol,No information,NI
+Fluconazole,Penicllin G Sodium,Compatible,C
+Fluconazole,Phenobarbitone,Compatible,C
+Fluconazole,Phenytoin,Not compatible,X
+Fluconazole,Phytomenadione (Vitamin K),Compatible,C
+Fluconazole,Piperacillin-tazobactam,Compatible,C
+Fluconazole,Rocuronium,Compatible,C
+Fluconazole,Sodium Acetate,Compatible,C
+Fluconazole,Sodium bicarbonate,Compatible,C
+Fluconazole,Vancomycin,Compatible,C
+Fluconazole,Vasopressin,Compatible,C
+Frusemide,Gentamicin,Not compatible,X
+Frusemide,Heparin </= 1unit/mL,Compatible,C
+Frusemide,Hydrocortisone,Compatible,C
+Frusemide,Indomethacin,Compatible,C
+Frusemide,"Insulin, Regular",Compatible,C
+Frusemide,Ketamine,Not compatible,X
+Frusemide,Magnesium Sulphate,Not compatible,X
+Frusemide,Meropenem,Compatible,C
+Frusemide,Metronidazole,Compatible,C
+Frusemide,Midazolam,Not compatible,X
+Frusemide,Milrinone,Not compatible,X
+Frusemide,Morphine,Not compatible,X
+Frusemide,Noradrenaline,Not compatible,X
+Frusemide,Paracetamol,No information,NI
+Frusemide,Penicllin G Sodium,Compatible,C
+Frusemide,Phenobarbitone,Compatible,C
+Frusemide,Phenytoin,Not compatible,X
+Frusemide,Phytomenadione (Vitamin K),Compatible,C
+Frusemide,Piperacillin-tazobactam,Compatible,C
+Frusemide,Rocuronium,Not compatible,X
+Frusemide,Sodium Acetate,Compatible,C
+Frusemide,Sodium bicarbonate,Compatible,C
+Frusemide,Vancomycin,Not compatible,X
+Frusemide,Vasopressin,Not compatible,X
+Gentamicin,Heparin </= 1unit/mL,Not compatible,X
+Gentamicin,Hydrocortisone,Not compatible,X
+Gentamicin,Indomethacin,Not compatible,X
+Gentamicin,"Insulin, Regular",Not compatible,X
+Gentamicin,Ketamine,Compatible,C
+Gentamicin,Magnesium Sulphate,Compatible,C
+Gentamicin,Meropenem,Compatible,C
+Gentamicin,Metronidazole,Compatible,C
+Gentamicin,Midazolam,Compatible,C
+Gentamicin,Milrinone,Compatible,C
+Gentamicin,Morphine,Compatible,C
+Gentamicin,Noradrenaline,Compatible,C
+Gentamicin,Paracetamol,Compatible,C
+Gentamicin,Penicllin G Sodium,Compatible,C
+Gentamicin,Phenobarbitone,Compatible,C
+Gentamicin,Phenytoin,Not compatible,X
+Gentamicin,Phytomenadione (Vitamin K),Compatible,C
+Gentamicin,Piperacillin-tazobactam,Not compatible,X
+Gentamicin,Rocuronium,Compatible,C
+Gentamicin,Sodium Acetate,Compatible,C
+Gentamicin,Sodium bicarbonate,Compatible,C
+Gentamicin,Vancomycin,Compatible,C
+Gentamicin,Vasopressin,Compatible,C
+Heparin </= 1unit/mL,Hydrocortisone,Compatible,C
+Heparin </= 1unit/mL,Indomethacin,Compatible,C
+Heparin </= 1unit/mL,"Insulin, Regular",Compatible,C
+Heparin </= 1unit/mL,Ketamine,Not compatible,X
+Heparin </= 1unit/mL,Magnesium Sulphate,Compatible,C
+Heparin </= 1unit/mL,Meropenem,Compatible,C
+Heparin </= 1unit/mL,Metronidazole,Compatible,C
+Heparin </= 1unit/mL,Midazolam,Compatible,C
+Heparin </= 1unit/mL,Milrinone,Compatible,C
+Heparin </= 1unit/mL,Morphine,Compatible,C
+Heparin </= 1unit/mL,Noradrenaline,Compatible,C
+Heparin </= 1unit/mL,Paracetamol,Compatible,C
+Heparin </= 1unit/mL,Penicllin G Sodium,Compatible,C
+Heparin </= 1unit/mL,Phenobarbitone,Compatible,C
+Heparin </= 1unit/mL,Phenytoin,Not compatible,X
+Heparin </= 1unit/mL,Phytomenadione (Vitamin K),Compatible,C
+Heparin </= 1unit/mL,Piperacillin-tazobactam,Compatible,C
+Heparin </= 1unit/mL,Rocuronium,Compatible,C
+Heparin </= 1unit/mL,Sodium Acetate,Compatible,C
+Heparin </= 1unit/mL,Sodium bicarbonate,Compatible,C
+Heparin </= 1unit/mL,Vancomycin,Not compatible,X
+Heparin </= 1unit/mL,Vasopressin,Compatible,C
+Hydrocortisone,Indomethacin,Compatible,C
+Hydrocortisone,"Insulin, Regular",Compatible,C
+Hydrocortisone,Ketamine,Compatible,C
+Hydrocortisone,Magnesium Sulphate,Not compatible,X
+Hydrocortisone,Meropenem,Compatible,C
+Hydrocortisone,Metronidazole,Compatible,C
+Hydrocortisone,Midazolam,Not compatible,X
+Hydrocortisone,Milrinone,Compatible,C
+Hydrocortisone,Morphine,Compatible,C
+Hydrocortisone,Noradrenaline,Compatible,C
+Hydrocortisone,Paracetamol,Compatible,C
+Hydrocortisone,Penicllin G Sodium,Compatible,C
+Hydrocortisone,Phenobarbitone,Compatible,C
+Hydrocortisone,Phenytoin,Not compatible,X
+Hydrocortisone,Phytomenadione (Vitamin K),Compatible,C
+Hydrocortisone,Piperacillin-tazobactam,Compatible,C
+Hydrocortisone,Rocuronium,Not compatible,X
+Hydrocortisone,Sodium Acetate,Compatible,C
+Hydrocortisone,Sodium bicarbonate,Compatible,C
+Hydrocortisone,Vancomycin,Compatible if both dissolve in D5%,Cb
+Hydrocortisone,Vasopressin,Compatible,C
+Indomethacin,"Insulin, Regular",Compatible,C
+Indomethacin,Ketamine,No information,NI
+Indomethacin,Magnesium Sulphate,Not compatible,X
+Indomethacin,Meropenem,No information,NI
+Indomethacin,Metronidazole,No information,NI
+Indomethacin,Midazolam,Not compatible,X
+Indomethacin,Milrinone,No information,NI
+Indomethacin,Morphine,Not compatible,X
+Indomethacin,Noradrenaline,Not compatible,X
+Indomethacin,Paracetamol,No information,NI
+Indomethacin,Penicllin G Sodium,Compatible,C
+Indomethacin,Phenobarbitone,Compatible,C
+Indomethacin,Phenytoin,Not compatible,X
+Indomethacin,Phytomenadione (Vitamin K),Compatible,C
+Indomethacin,Piperacillin-tazobactam,No information,NI
+Indomethacin,Rocuronium,No information,NI
+Indomethacin,Sodium Acetate,No information,NI
+Indomethacin,Sodium bicarbonate,Compatible,C
+Indomethacin,Vancomycin,Not compatible,X
+Indomethacin,Vasopressin,Not compatible,X
+"Insulin, Regular",Ketamine,Not compatible,X
+"Insulin, Regular",Magnesium Sulphate,Compatible,C
+"Insulin, Regular",Meropenem,Compatible,C
+"Insulin, Regular",Metronidazole,Compatible,C
+"Insulin, Regular",Midazolam,Compatible if both dissolve in D5%,Cb
+"Insulin, Regular",Milrinone,Compatible,C
+"Insulin, Regular",Morphine,Compatible if insulin concentration <= 0.2 unit/mL,Ch
+"Insulin, Regular",Noradrenaline,Not compatible,X
+"Insulin, Regular",Paracetamol,No information,NI
+"Insulin, Regular",Penicllin G Sodium,Compatible,C
+"Insulin, Regular",Phenobarbitone,Compatible,C
+"Insulin, Regular",Phenytoin,Not compatible,X
+"Insulin, Regular",Phytomenadione (Vitamin K),Compatible,C
+"Insulin, Regular",Piperacillin-tazobactam,Not compatible,X
+"Insulin, Regular",Rocuronium,Not compatible,X
+"Insulin, Regular",Sodium Acetate,No information,NI
+"Insulin, Regular",Sodium bicarbonate,Compatible,C
+"Insulin, Regular",Vancomycin,Compatible,C
+"Insulin, Regular",Vasopressin,Not compatible,X
+Ketamine,Magnesium Sulphate,Compatible,C
+Ketamine,Meropenem,Not compatible,X
+Ketamine,Metronidazole,Compatible,C
+Ketamine,Midazolam,Compatible,C
+Ketamine,Milrinone,Compatible,C
+Ketamine,Morphine,Compatible,C
+Ketamine,Noradrenaline,No information,NI
+Ketamine,Paracetamol,Compatible,C
+Ketamine,Penicllin G Sodium,Compatible,C
+Ketamine,Phenobarbitone,No information,NI
+Ketamine,Phenytoin,Not compatible,X
+Ketamine,Phytomenadione (Vitamin K),No information,NI
+Ketamine,Piperacillin-tazobactam,Compatible,C
+Ketamine,Rocuronium,Compatible if in NS or WFI,Ca
+Ketamine,Sodium Acetate,No information,NI
+Ketamine,Sodium bicarbonate,Not compatible,X
+Ketamine,Vancomycin,No information,NI
+Ketamine,Vasopressin,No information,NI
+Magnesium Sulphate,Meropenem,Compatible,C
+Magnesium Sulphate,Metronidazole,Compatible,C
+Magnesium Sulphate,Midazolam,Compatible,C
+Magnesium Sulphate,Milrinone,Compatible,C
+Magnesium Sulphate,Morphine,Compatible,C
+Magnesium Sulphate,Noradrenaline,Compatible,C
+Magnesium Sulphate,Paracetamol,Compatible,C
+Magnesium Sulphate,Penicllin G Sodium,Compatible,C
+Magnesium Sulphate,Phenobarbitone,Compatible,C
+Magnesium Sulphate,Phenytoin,Not compatible,X
+Magnesium Sulphate,Phytomenadione (Vitamin K),Not compatible,X
+Magnesium Sulphate,Piperacillin-tazobactam,Compatible,C
+Magnesium Sulphate,Rocuronium,Compatible,C
+Magnesium Sulphate,Sodium Acetate,Compatible,C
+Magnesium Sulphate,Sodium bicarbonate,Compatible,C
+Magnesium Sulphate,Vancomycin,Compatible,C
+Magnesium Sulphate,Vasopressin,Compatible,C
+Meropenem,Metronidazole,Not compatible,X
+Meropenem,Midazolam,Not compatible,X
+Meropenem,Milrinone,Compatible,C
+Meropenem,Morphine,Compatible,C
+Meropenem,Noradrenaline,Compatible,C
+Meropenem,Paracetamol,No information,NI
+Meropenem,Penicllin G Sodium,Compatible,C
+Meropenem,Phenobarbitone,Compatible,C
+Meropenem,Phenytoin,Not compatible,X
+Meropenem,Phytomenadione (Vitamin K),No information,NI
+Meropenem,Piperacillin-tazobactam,Compatible,C
+Meropenem,Rocuronium,Compatible,C
+Meropenem,Sodium Acetate,No information,NI
+Meropenem,Sodium bicarbonate,Compatible,C
+Meropenem,Vancomycin,Compatible if in NS or WFI,Ca
+Meropenem,Vasopressin,Compatible,C
+Metronidazole,Midazolam,Compatible,C
+Metronidazole,Milrinone,Compatible,C
+Metronidazole,Morphine,Compatible,C
+Metronidazole,Noradrenaline,Compatible,C
+Metronidazole,Paracetamol,Not compatible,X
+Metronidazole,Penicllin G Sodium,No information,NI
+Metronidazole,Phenobarbitone,Compatible,C
+Metronidazole,Phenytoin,Not compatible,X
+Metronidazole,Phytomenadione (Vitamin K),No information,NI
+Metronidazole,Piperacillin-tazobactam,Compatible,C
+Metronidazole,Rocuronium,Compatible,C
+Metronidazole,Sodium Acetate,Compatible,C
+Metronidazole,Sodium bicarbonate,Compatible,C
+Metronidazole,Vancomycin,Compatible,C
+Metronidazole,Vasopressin,Compatible,C
+Midazolam,Milrinone,Compatible,C
+Midazolam,Morphine,Compatible,C
+Midazolam,Noradrenaline,Compatible,C
+Midazolam,Paracetamol,Compatible,C
+Midazolam,Penicllin G Sodium,Compatible,C
+Midazolam,Phenobarbitone,Not compatible,X
+Midazolam,Phenytoin,Not compatible,X
+Midazolam,Phytomenadione (Vitamin K),Compatible,C
+Midazolam,Piperacillin-tazobactam,Not compatible,X
+Midazolam,Rocuronium,Compatible,C
+Midazolam,Sodium Acetate,Not compatible,X
+Midazolam,Sodium bicarbonate,Not compatible,X
+Midazolam,Vancomycin,Compatible,C
+Midazolam,Vasopressin,Compatible,C
+Milrinone,Morphine,Compatible,C
+Milrinone,Noradrenaline,Compatible,C
+Milrinone,Paracetamol,No information,NI
+Milrinone,Penicllin G Sodium,No information,NI
+Milrinone,Phenobarbitone,Compatible,C
+Milrinone,Phenytoin,Not compatible,X
+Milrinone,Phytomenadione (Vitamin K),No information,NI
+Milrinone,Piperacillin-tazobactam,Compatible,C
+Milrinone,Rocuronium,Compatible,C
+Milrinone,Sodium Acetate,Compatible,C
+Milrinone,Sodium bicarbonate,Compatible,C
+Milrinone,Vancomycin,Compatible,C
+Milrinone,Vasopressin,Compatible,C
+Morphine,Noradrenaline,Compatible,C
+Morphine,Paracetamol,Compatible,C
+Morphine,Penicllin G Sodium,Compatible,C
+Morphine,Phenobarbitone,Compatible,C
+Morphine,Phenytoin,Not compatible,X
+Morphine,Phytomenadione (Vitamin K),Compatible,C
+Morphine,Piperacillin-tazobactam,Compatible,C
+Morphine,Rocuronium,Compatible,C
+Morphine,Sodium Acetate,Compatible,C
+Morphine,Sodium bicarbonate,Compatible,C
+Morphine,Vancomycin,Compatible,C
+Morphine,Vasopressin,Compatible,C
+Noradrenaline,Paracetamol,No information,NI
+Noradrenaline,Penicllin G Sodium,Compatible,C
+Noradrenaline,Phenobarbitone,Not compatible,X
+Noradrenaline,Phenytoin,Not compatible,X
+Noradrenaline,Phytomenadione (Vitamin K),Compatible,C
+Noradrenaline,Piperacillin-tazobactam,Compatible,C
+Noradrenaline,Rocuronium,No information,NI
+Noradrenaline,Sodium Acetate,No information,NI
+Noradrenaline,Sodium bicarbonate,Not compatible,X
+Noradrenaline,Vancomycin,Compatible,C
+Noradrenaline,Vasopressin,Compatible,C
+Paracetamol,Penicllin G Sodium,No information,NI
+Paracetamol,Phenobarbitone,Not compatible,X
+Paracetamol,Phenytoin,Not compatible,X
+Paracetamol,Phytomenadione (Vitamin K),No information,NI
+Paracetamol,Piperacillin-tazobactam,Compatible,C
+Paracetamol,Rocuronium,Compatible,C
+Paracetamol,Sodium Acetate,No information,NI
+Paracetamol,Sodium bicarbonate,No information,NI
+Paracetamol,Vancomycin,Compatible,C
+Paracetamol,Vasopressin,No information,NI
+Penicllin G Sodium,Phenobarbitone,Not compatible,X
+Penicllin G Sodium,Phenytoin,Not compatible,X
+Penicllin G Sodium,Phytomenadione (Vitamin K),Compatible,C
+Penicllin G Sodium,Piperacillin-tazobactam,No information,NI
+Penicllin G Sodium,Rocuronium,No information,NI
+Penicllin G Sodium,Sodium Acetate,No information,NI
+Penicllin G Sodium,Sodium bicarbonate,Compatible,C
+Penicllin G Sodium,Vancomycin,Compatible,C
+Penicllin G Sodium,Vasopressin,Compatible,C
+Phenobarbitone,Phenytoin,Not compatible,X
+Phenobarbitone,Phytomenadione (Vitamin K),Compatible,C
+Phenobarbitone,Piperacillin-tazobactam,Compatible,C
+Phenobarbitone,Rocuronium,Compatible,C
+Phenobarbitone,Sodium Acetate,Compatible,C
+Phenobarbitone,Sodium bicarbonate,Compatible,C
+Phenobarbitone,Vancomycin,Compatible,C
+Phenobarbitone,Vasopressin,Compatible,C
+Phenytoin,Phytomenadione (Vitamin K),Not compatible,X
+Phenytoin,Piperacillin-tazobactam,Not compatible,X
+Phenytoin,Rocuronium,Not compatible,X
+Phenytoin,Sodium Acetate,Not compatible,X
+Phenytoin,Sodium bicarbonate,Not compatible,X
+Phenytoin,Vancomycin,Not compatible,X
+Phenytoin,Vasopressin,Not compatible,X
+Phytomenadione (Vitamin K),Piperacillin-tazobactam,No information,NI
+Phytomenadione (Vitamin K),Rocuronium,No information,NI
+Phytomenadione (Vitamin K),Sodium Acetate,No information,NI
+Phytomenadione (Vitamin K),Sodium bicarbonate,Compatible,C
+Phytomenadione (Vitamin K),Vancomycin,Compatible,C
+Phytomenadione (Vitamin K),Vasopressin,Compatible,C
+Piperacillin-tazobactam,Rocuronium,Not compatible,X
+Piperacillin-tazobactam,Sodium Acetate,Compatible,C
+Piperacillin-tazobactam,Sodium bicarbonate,Compatible,C
+Piperacillin-tazobactam,Vancomycin,Not compatible,X
+Piperacillin-tazobactam,Vasopressin,Compatible,C
+Rocuronium,Sodium Acetate,Compatible,C
+Rocuronium,Sodium bicarbonate,Compatible,C
+Rocuronium,Vancomycin,Compatible if rocuronium concentration <= 1 mg/mL and both drugs diluted in D5%,Cg
+Rocuronium,Vasopressin,Compatible,C
+Sodium Acetate,Sodium bicarbonate,Compatible,C
+Sodium Acetate,Vancomycin,Compatible,C
+Sodium Acetate,Vasopressin,Compatible,C
+Sodium bicarbonate,Vancomycin,Compatible,C
+Sodium bicarbonate,Vasopressin,Compatible,C
+Vancomycin,Vasopressin,Compatible,C

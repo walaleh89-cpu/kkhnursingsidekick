@@ -44,7 +44,7 @@ def show_home():
 
     calculators = [
         ("💊 Dosage Verification / Dispensing", "dosage_dispensing"),
-        ("💊 Paediatric Medication Order Assistant", "medication_order"),
+        ("🚧💊 Medication Dosage Calculator (In Construction)", "medication_order"),
         ("🧒 Pediatric Fluids Requirement", "fluids"),
         ("⚖️ BMI", "bmi"),
         ("🌞 Neonatal Jaundice", "jaundice"),

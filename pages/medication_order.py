@@ -221,7 +221,7 @@ def run_medication_order_page():
     with col2:
 
         months = st.number_input(
-            "Additional months",
+            "Months",
             min_value=0,
             max_value=11,
             value=0,

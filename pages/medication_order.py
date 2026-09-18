@@ -1,26 +1,45 @@
 import streamlit as st
 import pandas as pd
+
 from pathlib import Path
 from decimal import Decimal, InvalidOperation
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_FILE = BASE_DIR / "data" / "medication_database_v2.csv"
+# ==========================================
+# DATABASE LOCATION
+# ==========================================
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATA_FILE = (
+    BASE_DIR / "data" / "medication_database_v2.csv"
+)
+
+
+# ==========================================
+# LOAD MEDICATION DATABASE
+# ==========================================
 
 def load_database():
+
     if not DATA_FILE.exists():
-        st.error("Medication database not found.")
+
+        st.error(
+            "Medication database not found. "
+            "Please check data/medication_database_v2.csv"
+        )
+
         return pd.DataFrame()
 
     try:
+
         df = pd.read_csv(
             DATA_FILE,
             dtype=str,
             keep_default_na=False
         )
 
-        required = [
+        required_columns = [
             "medication",
             "indication",
             "route",
@@ -30,136 +49,237 @@ def load_database():
             "max_dose_mg_per_kg",
             "dose_basis",
             "frequency_options",
-            "max_doses_per_day",
             "max_single_dose_mg",
             "max_daily_dose_mg",
             "max_daily_dose_mg_per_kg",
             "formulation",
-            "concentration_mg_per_ml",
             "remarks",
             "source",
             "version",
         ]
 
         missing = [
-            column for column in required
-            if column not in df.columns
+            col for col in required_columns
+            if col not in df.columns
         ]
 
         if missing:
+
             st.error(
                 "Missing database columns: "
                 + ", ".join(missing)
             )
+
             return pd.DataFrame()
 
-        return df[
+        df = df[
             df["medication"].str.strip() != ""
         ].copy()
 
+        return df
+
     except Exception as e:
-        st.error(f"Database error: {e}")
+
+        st.error(
+            f"Unable to load medication database: {e}"
+        )
+
         return pd.DataFrame()
 
 
-def parse_decimal(value):
+# ==========================================
+# HELPER FUNCTIONS
+# ==========================================
+
+def to_decimal(value):
+
     try:
+
         number = Decimal(str(value).strip())
+
         if not number.is_finite():
             return None
+
         return number
+
     except (InvalidOperation, ValueError, TypeError):
+
         return None
 
 
-def display_number(value):
+def format_mg(value):
+
     return f"{value:,.2f}"
 
 
+def check_age(row, age_months):
+
+    min_age = to_decimal(
+        row["min_age_months"]
+    )
+
+    max_age = to_decimal(
+        row["max_age_months"]
+    )
+
+    if min_age is not None:
+
+        if age_months < min_age:
+
+            st.error(
+                "Patient is below the minimum age "
+                "specified in the medication database."
+            )
+
+            return False
+
+    if max_age is not None:
+
+        if age_months > max_age:
+
+            st.error(
+                "Patient exceeds the maximum age "
+                "specified in the medication database."
+            )
+
+            return False
+
+    if min_age is None or max_age is None:
+
+        st.warning(
+            "Age eligibility is not fully specified "
+            "in the database. The calculated range "
+            "does not establish suitability for this age."
+        )
+
+    return True
+
+
+# ==========================================
+# MAIN CALCULATOR
+# ==========================================
+
 def run_medication_order_page():
 
-    st.header("💊 Paediatric Medication Dose Calculator")
+    st.header(
+        "💊 Paediatric Medication Dosage Calculator"
+    )
 
-    if st.button("🏠 Back to Home"):
+    # Back button
+
+    if st.button(
+        "🏠 Back to Home",
+        key="medication_back_home"
+    ):
+
         st.session_state.page = "home"
+
         st.rerun()
 
+    # Safety warning
+
     st.warning(
-        "DEMONSTRATION ONLY — Medication reference data "
-        "have not been clinically validated. Calculations "
-        "must not be used for prescribing or administration."
+        "DEMONSTRATION ONLY — Medication reference "
+        "data have not been clinically validated. "
+        "Do not use these calculations for prescribing "
+        "or medication administration."
     )
+
+    # Load database
 
     df = load_database()
 
     if df.empty:
-        st.info("No medications available.")
+
+        st.info(
+            "No medication records are available."
+        )
+
         return
 
-    # =====================================
+    # ======================================
     # 1. PATIENT INFORMATION
-    # =====================================
+    # ======================================
 
-    st.subheader("1. Patient Information")
+    st.subheader(
+        "1. Patient Information"
+    )
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
+
         years = st.number_input(
             "Age (years)",
             min_value=0,
             max_value=18,
             value=3,
-            step=1
+            step=1,
+            key="med_age_years"
         )
 
     with col2:
+
         months = st.number_input(
             "Additional months",
             min_value=0,
             max_value=11,
             value=0,
-            step=1
+            step=1,
+            key="med_age_months"
         )
 
     with col3:
+
         weight_input = st.number_input(
             "Weight (kg)",
             min_value=0.0,
             max_value=150.0,
             value=0.0,
             step=0.1,
-            format="%.2f"
+            format="%.2f",
+            key="med_weight"
         )
 
     age_months = years * 12 + months
 
     if weight_input <= 0:
-        st.info("Enter the patient's weight to continue.")
+
+        st.info(
+            "Please enter the patient's weight."
+        )
+
         return
 
-    weight = Decimal(str(weight_input))
+    weight = Decimal(
+        str(weight_input)
+    )
 
     st.divider()
 
-    # =====================================
+    # ======================================
     # 2. MEDICATION SELECTION
-    # =====================================
+    # ======================================
 
-    st.subheader("2. Medication Selection")
+    st.subheader(
+        "2. Medication Selection"
+    )
 
     medication = st.selectbox(
         "Medication",
         sorted(df["medication"].unique()),
         index=None,
         placeholder="Select medication",
-        key="medication_choice"
+        key="medication_selection"
     )
 
     if medication is None:
+
         return
 
-    med_df = df[df["medication"] == medication]
+    med_df = df[
+        df["medication"] == medication
+    ]
 
     indication = st.selectbox(
         "Indication",
@@ -170,6 +290,7 @@ def run_medication_order_page():
     )
 
     if indication is None:
+
         return
 
     indication_df = med_df[
@@ -185,6 +306,7 @@ def run_medication_order_page():
     )
 
     if route is None:
+
         return
 
     selected_df = indication_df[
@@ -192,27 +314,31 @@ def run_medication_order_page():
     ]
 
     if len(selected_df) != 1:
+
         st.error(
-            "Medication selection does not correspond "
-            "to exactly one database record."
+            "Medication selection does not match "
+            "exactly one database record."
         )
+
         return
 
     row = selected_df.iloc[0]
 
+    # ======================================
+    # 3. REFERENCE INFORMATION
+    # ======================================
+
     st.divider()
 
-    # =====================================
-    # 3. REFERENCE INFORMATION
-    # =====================================
+    st.subheader(
+        "3. Medication Reference"
+    )
 
-    st.subheader("3. Reference Information")
-
-    minimum = parse_decimal(
+    minimum = to_decimal(
         row["min_dose_mg_per_kg"]
     )
 
-    maximum = parse_decimal(
+    maximum = to_decimal(
         row["max_dose_mg_per_kg"]
     )
 
@@ -222,22 +348,25 @@ def run_medication_order_page():
         or minimum <= 0
         or maximum < minimum
     ):
+
         st.error(
-            "Dose range is missing or invalid. "
-            "Calculation is unavailable."
+            "The reference dose range is missing "
+            "or invalid. Calculation cannot proceed."
         )
+
         return
 
     dose_basis = row["dose_basis"].strip()
 
-    if dose_basis not in (
+    if dose_basis not in [
         "mg/kg/dose",
         "mg/kg/day"
-    ):
+    ]:
+
         st.error(
-            "Unsupported dose basis. "
-            "Calculation is unavailable."
+            "Unsupported dose basis."
         )
+
         return
 
     st.write(
@@ -262,44 +391,110 @@ def run_medication_order_page():
         f"Version: {row['version']}"
     )
 
-    # Age eligibility:
-    # A missing limit means age eligibility
-    # cannot be confirmed.
+    # Age check
 
-    min_age = parse_decimal(
-        row["min_age_months"]
-    )
+    if not check_age(
+        row,
+        age_months
+    ):
 
-    max_age = parse_decimal(
-        row["max_age_months"]
-    )
-
-    if min_age is None or max_age is None:
-        st.warning(
-            "Age eligibility is incomplete in the "
-            "reference data. This calculation does "
-            "not establish suitability for this age."
-        )
-
-    elif not min_age <= age_months <= max_age:
-        st.error(
-            "Patient age is outside the configured "
-            "age range. Calculation is blocked."
-        )
         return
+
+    # ======================================
+    # 4. AUTOMATIC DOSE RANGE
+    # ======================================
 
     st.divider()
 
-    # =====================================
-    # 4. CLINICIAN-SELECTED DOSE
-    # =====================================
+    st.subheader(
+        "4. Weight-Based Dose Range"
+    )
 
-    st.subheader("4. Select Dose")
+    minimum_mg = weight * minimum
+
+    maximum_mg = weight * maximum
+
+    # Apply an available maximum single-dose
+    # ceiling only for per-dose calculations.
+    # Do not silently cap the displayed range.
+
+    max_single = to_decimal(
+        row["max_single_dose_mg"]
+    )
+
+    if dose_basis == "mg/kg/dose":
+
+        st.success(
+            f"Calculated reference range: "
+            f"{format_mg(minimum_mg)} – "
+            f"{format_mg(maximum_mg)} mg/dose"
+        )
+
+        st.caption(
+            f"Calculation: {weight} kg × "
+            f"{minimum}–{maximum} mg/kg/dose"
+        )
+
+        if max_single is not None:
+
+            st.info(
+                f"Maximum single dose recorded: "
+                f"{format_mg(max_single)} mg"
+            )
+
+            if minimum_mg > max_single:
+
+                st.error(
+                    "The entire weight-calculated "
+                    "range exceeds the recorded "
+                    "maximum single dose. "
+                    "Dose selection is blocked."
+                )
+
+                return
+
+            if maximum_mg > max_single:
+
+                st.warning(
+                    "The upper end of the calculated "
+                    "range exceeds the recorded "
+                    "maximum single dose. "
+                    "The reference range above is "
+                    "not a safe-dose recommendation."
+                )
+
+    else:
+
+        st.success(
+            f"Calculated daily reference range: "
+            f"{format_mg(minimum_mg)} – "
+            f"{format_mg(maximum_mg)} mg/day"
+        )
+
+        st.caption(
+            f"Calculation: {weight} kg × "
+            f"{minimum}–{maximum} mg/kg/day"
+        )
+
+        st.warning(
+            "This is a DAILY dose range, "
+            "not a single-dose range."
+        )
+
+    # ======================================
+    # 5. SELECT SPECIFIC DOSE
+    # ======================================
+
+    st.divider()
+
+    st.subheader(
+        "5. Select Dose"
+    )
 
     st.info(
-        "Select a dose within the displayed reference "
-        "range. The calculator will not automatically "
-        "choose a dose."
+        "Optional: Select a dose within the "
+        "reference range to calculate the "
+        "corresponding amount in mg."
     )
 
     selected_input = st.number_input(
@@ -309,48 +504,58 @@ def run_medication_order_page():
         value=None,
         step=0.1,
         format="%.2f",
-        placeholder="Enter selected dose",
+        placeholder="Enter dose",
         key=(
-            f"dose_{medication}_"
+            f"selected_{medication}_"
             f"{indication}_{route}"
         )
     )
 
     if selected_input is None:
+
+        st.caption(
+            "The calculated dose range is shown "
+            "above. Select a specific dose only "
+            "if you wish to calculate one."
+        )
+
         return
 
     selected_dose = Decimal(
         str(selected_input)
     )
 
-    # Independently validate the selected value.
-
     if not minimum <= selected_dose <= maximum:
+
         st.error(
-            "Selected dose is outside the "
-            "reference range."
+            "Selected dose is outside "
+            "the reference range."
         )
+
         return
+
+    # ======================================
+    # 6. CALCULATED SELECTED DOSE
+    # ======================================
 
     st.divider()
 
-    # =====================================
-    # 5. DOSE CALCULATION
-    # =====================================
+    st.subheader(
+        "6. Calculated Selected Dose"
+    )
 
-    st.subheader("5. Calculated Dose")
-
-    calculated_mg = weight * selected_dose
+    calculated_dose = (
+        weight * selected_dose
+    )
 
     if dose_basis == "mg/kg/dose":
 
         st.metric(
             "Calculated dose",
-            f"{display_number(calculated_mg)} mg/dose"
+            f"{format_mg(calculated_dose)} mg/dose"
         )
 
-        st.write(
-            "**Calculation:** "
+        st.caption(
             f"{weight} kg × "
             f"{selected_dose} mg/kg/dose"
         )
@@ -359,95 +564,141 @@ def run_medication_order_page():
 
         st.metric(
             "Calculated daily amount",
-            f"{display_number(calculated_mg)} mg/day"
+            f"{format_mg(calculated_dose)} mg/day"
         )
 
-        st.write(
-            "**Calculation:** "
+        st.caption(
             f"{weight} kg × "
             f"{selected_dose} mg/kg/day"
         )
 
         st.warning(
-            "This is a daily amount, NOT a single dose. "
-            "The app does not divide it into individual "
-            "doses or generate a dosing schedule."
+            "This is the total daily amount. "
+            "It has not been divided into "
+            "individual doses."
         )
 
-    # =====================================
-    # 6. AVAILABLE SAFETY LIMITS
-    # =====================================
+    # ======================================
+    # 7. AVAILABLE LIMIT CHECKS
+    # ======================================
 
     st.divider()
 
-    st.subheader("6. Reference Limit Checks")
+    st.subheader(
+        "7. Available Maximum-Dose Checks"
+    )
 
-    if dose_basis == "mg/kg/day":
-        st.info(
-            "Per-dose and frequency checks are not "
-            "supported for daily-dose records."
-        )
-        return
-
-    limits = {
-        "Maximum single dose": (
-            "max_single_dose_mg",
-            calculated_mg,
-            "mg"
-        ),
-    }
-
-    any_limit = False
     exceeded = False
 
-    for label, (field, amount, unit) in limits.items():
+    # Single-dose maximum
 
-        limit = parse_decimal(row[field])
+    if dose_basis == "mg/kg/dose":
 
-        if limit is None:
-            st.caption(
-                f"{label}: not specified in database."
-            )
-            continue
+        if max_single is not None:
 
-        any_limit = True
+            if calculated_dose > max_single:
 
-        if amount > limit:
-            exceeded = True
-            st.error(
-                f"{label} exceeded: "
-                f"{display_number(amount)} mg "
-                f"> {display_number(limit)} mg"
-            )
+                st.error(
+                    "Maximum single dose exceeded: "
+                    f"{format_mg(calculated_dose)} mg "
+                    f"> {format_mg(max_single)} mg"
+                )
+
+                exceeded = True
+
+            else:
+
+                st.write(
+                    "Calculated dose does not exceed "
+                    "the recorded maximum single dose "
+                    f"of {format_mg(max_single)} mg."
+                )
+
         else:
-            st.write(
-                f"{label}: calculated amount does "
-                f"not exceed {display_number(limit)} mg."
+
+            st.warning(
+                "Maximum single dose is not "
+                "specified in the database."
             )
 
-    if not any_limit:
-        st.warning(
-            "No maximum single-dose limit is configured. "
-            "The calculated dose has not been established "
-            "as safe."
+    # Daily-dose limits:
+    # These are displayed but not treated as
+    # fully checked without a validated schedule.
+
+    max_daily = to_decimal(
+        row["max_daily_dose_mg"]
+    )
+
+    max_daily_per_kg = to_decimal(
+        row["max_daily_dose_mg_per_kg"]
+    )
+
+    if max_daily is not None:
+
+        st.write(
+            f"**Recorded maximum daily dose:** "
+            f"{format_mg(max_daily)} mg/day"
         )
+
+        if (
+            dose_basis == "mg/kg/day"
+            and calculated_dose > max_daily
+        ):
+
+            st.error(
+                "Calculated daily amount exceeds "
+                "the recorded maximum daily dose."
+            )
+
+            exceeded = True
+
+    if max_daily_per_kg is not None:
+
+        st.write(
+            "**Recorded maximum daily "
+            "weight-based dose:** "
+            f"{format_mg(max_daily_per_kg)} "
+            "mg/kg/day"
+        )
+
+        if (
+            dose_basis == "mg/kg/day"
+            and selected_dose > max_daily_per_kg
+        ):
+
+            st.error(
+                "Selected daily dose exceeds "
+                "the recorded maximum daily "
+                "weight-based dose."
+            )
+
+            exceeded = True
 
     if exceeded:
+
         st.error(
-            "The selected dose exceeds a configured "
-            "reference limit. Do not use this result."
+            "A configured maximum-dose limit "
+            "has been exceeded. "
+            "Do not use this result."
         )
 
-    st.warning(
-        "Daily exposure has NOT been checked. "
-        "Frequency, maximum daily dose, formulation "
-        "rounding, contraindications and interactions "
-        "require independent verification."
-    )
+    else:
+
+        st.warning(
+            "This calculator does not confirm "
+            "that the dose is safe. Daily exposure, "
+            "frequency, formulation rounding and "
+            "patient-specific contraindications "
+            "have not been fully checked."
+        )
+
+    # ======================================
+    # END
+    # ======================================
 
     st.divider()
 
     st.caption(
-        "Calculation preview only. "
+        "Weight-based calculation preview only. "
         "No medication order is generated."
     )

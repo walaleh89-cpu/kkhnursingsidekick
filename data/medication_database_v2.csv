@@ -1,0 +1,11 @@
+medication,indication,route,min_age_months,max_age_months,min_dose_mg_per_kg,max_dose_mg_per_kg,dose_basis,frequency_options,max_doses_per_day,max_single_dose_mg,max_daily_dose_mg,max_daily_dose_mg_per_kg,formulation,concentration_mg_per_ml,remarks,source,version
+Aspirin,Analgesic,Oral,,,10,15,mg/kg/dose,4|6,4,,,,Tablet 100 mg,,Aspirin-specific restrictions require review.,Supplied General Paediatrics table,Unverified
+Aspirin,Kawasaki disease anti-inflammatory,Oral,,,25,25,mg/kg/dose,6,,,,,Tablet 100 mg,,Indication-specific restrictions and maximum dose require review.,Supplied General Paediatrics table,Unverified
+Aspirin,Antiplatelet,Oral,,,3,5,mg/kg/day,24,,,,,Tablet 100 mg,,Daily dose basis requires a separate calculation algorithm.,Supplied General Paediatrics table,Unverified
+Diclofenac,Analgesic,Oral,6,,0.3,1,mg/kg/dose,8|12,,50,,,EC tablet 25 mg,,Not recommended below 6 months.,Supplied General Paediatrics table,Unverified
+Diclofenac,Analgesic,Rectal,6,,0.3,1,mg/kg/dose,8|12,,50,,,Suppository 12.5 mg or 50 mg,,Not recommended below 6 months.,Supplied General Paediatrics table,Unverified
+Ibuprofen,Analgesic or antipyretic,Oral,6,,5,10,mg/kg/dose,6|8,,,,40,Syrup 100 mg/5 mL,20,Not recommended below 6 months.,Supplied General Paediatrics table,Unverified
+Indomethacin,Anti-inflammatory,Oral,,,0.5,1,mg/kg/dose,8,,,200,4,Formulation not specified,,Maximum 4 mg/kg/day or 200 mg/day whichever is less.,Supplied General Paediatrics table,Unverified
+Naproxen,Analgesic,Oral,24,,5,10,mg/kg/dose,8|12,,,1000,,Tablet 275 mg,,Age restriction requires clarification.,Supplied General Paediatrics table,Unverified
+Paracetamol,Analgesic or antipyretic,Oral,,,10,15,mg/kg/dose,4|6,4,,,,Syrup 120 mg/5 mL,24,Maximum 4 doses daily. Daily mg/kg limit requires confirmation.,Supplied General Paediatrics table,Unverified
+Paracetamol,Analgesic or antipyretic,Rectal,,,10,15,mg/kg/dose,4|6,4,,,,Suppository 125 mg or 325 mg or 650 mg,,Rectal dosing requires verification.,Supplied General Paediatrics table,Unverified

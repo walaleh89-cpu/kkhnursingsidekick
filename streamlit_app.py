@@ -12,6 +12,7 @@ from pages.vitals import run_vitals_page
 from pages.urine_output import run_urine_output_page
 from pages.community_nurse import run_community_nurse_page
 from pages.pews import run_pews_page
+from pages.medication_order import run_medication_order_page
 
 st.set_page_config(page_title="🩺 Nursing Calculator", page_icon="🩺", layout="wide")
 st.title("🩺 Nursing Calculator App")
@@ -43,6 +44,7 @@ def show_home():
 
     calculators = [
         ("💊 Dosage Verification / Dispensing", "dosage_dispensing"),
+        ("💊 Paediatric Medication Order Assistant", "medication_order"),
         ("🧒 Pediatric Fluids Requirement", "fluids"),
         ("⚖️ BMI", "bmi"),
         ("🌞 Neonatal Jaundice", "jaundice"),
@@ -136,3 +138,8 @@ elif st.session_state.page == "community_nurse":
 #----------------------------------------------
 elif st.session_state.page == "pews":
     run_pews_page()  
+
+# 13. Paediatric Medication Order Assistant
+# ------------------------------
+elif st.session_state.page == "medication_order":
+    run_medication_order_page()
